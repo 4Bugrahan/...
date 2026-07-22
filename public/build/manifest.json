@@ -1,0 +1,169 @@
+{
+  "_AppLayout-9w0ydnNv.js": {
+    "file": "assets/AppLayout-9w0ydnNv.js",
+    "name": "AppLayout",
+    "imports": [
+      "resources/js/app.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-B3SLQFD_.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/Pages/Contact/Index.vue": {
+    "file": "assets/Index-CMB95OXx.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Contact/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Error.vue": {
+    "file": "assets/Error-D0jRtaIc.js",
+    "name": "Error",
+    "src": "resources/js/Pages/Error.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Home.vue": {
+    "file": "assets/Home-BI1R7LdM.js",
+    "name": "Home",
+    "src": "resources/js/Pages/Home.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/Home-CdSVUeIC.css",
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Pages/About.vue": {
+    "file": "assets/About-DQPgRXHe.js",
+    "name": "About",
+    "src": "resources/js/Pages/Pages/About.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Pages/Kvkk.vue": {
+    "file": "assets/Kvkk-CV7rvUB1.js",
+    "name": "Kvkk",
+    "src": "resources/js/Pages/Pages/Kvkk.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AppLayout-9w0ydnNv.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Pages/References.vue": {
+    "file": "assets/References-DGxaQG5P.js",
+    "name": "References",
+    "src": "resources/js/Pages/Pages/References.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_AppLayout-9w0ydnNv.js",
+      "resources/js/app.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Products/Category.vue": {
+    "file": "assets/Category-CT5iYrW0.js",
+    "name": "Category",
+    "src": "resources/js/Pages/Products/Category.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Products/Index.vue": {
+    "file": "assets/Index-DLDdwBEe.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Products/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Products/Show.vue": {
+    "file": "assets/Show-Ca3toTvz.js",
+    "name": "Show",
+    "src": "resources/js/Pages/Products/Show.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/Pages/Projects/Index.vue": {
+    "file": "assets/Index-DKz6g9eX.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Projects/Index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.js",
+      "_AppLayout-9w0ydnNv.js"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BkCinIxw.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Contact/Index.vue",
+      "resources/js/Pages/Error.vue",
+      "resources/js/Pages/Home.vue",
+      "resources/js/Pages/Pages/About.vue",
+      "resources/js/Pages/Pages/Kvkk.vue",
+      "resources/js/Pages/Pages/References.vue",
+      "resources/js/Pages/Products/Category.vue",
+      "resources/js/Pages/Products/Index.vue",
+      "resources/js/Pages/Products/Show.vue",
+      "resources/js/Pages/Projects/Index.vue"
+    ],
+    "css": [
+      "assets/app-B3SLQFD_.css"
+    ]
+  }
+}

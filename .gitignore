@@ -1,0 +1,15 @@
+node_modules
+vendor
+.env
+.env.local
+.env.example
+storage/logs/*
+bootstrap/cache/*
+public/storage/.gitkeep
+.DS_Store
+*.log
+.vscode
+.idea
+.cursor
+Thumbs.db
+.vercel

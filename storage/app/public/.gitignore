@@ -1,0 +1,8 @@
+*
+!.gitignore
+!products/
+!products/**
+!sliders/
+!sliders/**
+!partners/
+!partners/**

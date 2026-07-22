@@ -1,0 +1,21 @@
+2024 KATALOG .pdf
+node_modules
+.git
+storage/logs
+storage/app/public
+storage/app/*.json
+scripts
+.DS_Store
+*.vsix
+vendor
+package.json
+package-lock.json
+vite.config.js
+public/hot
+bootstrap/cache/config.php
+bootstrap/cache/routes-v7.php
+bootstrap/cache/compiled.php
+tests
+phpunit.xml
+vercel_out*.log
+README.md
