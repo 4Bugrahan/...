@@ -36,9 +36,11 @@ trait HasTranslations
         $raw = $this->attributes['translations'] ?? null;
 
         if (is_string($raw)) {
-            return json_decode($raw, true) ?? [];
+            $decoded = json_decode($raw, true);
+        } else {
+            $decoded = $raw;
         }
 
-        return is_array($raw) ? $raw : [];
+        return is_array($decoded) ? $decoded : [];
     }
 }

@@ -120,18 +120,18 @@ class ProductController extends Controller
         return $paths;
     }
 
-    private function translationsPayload(Request $request, ?Product $product = null): ?string
+    private function translationsPayload(Request $request, ?Product $product = null): ?array
     {
         $translations = $product?->translations ?? [];
         foreach ((array) $request->input('translations', []) as $locale => $fields) {
             foreach ((array) $fields as $field => $value) {
-                if (in_array($field, ['name', 'description'], true)) {
+                if (in_array($field, ['name', 'description'], true) && filled($value)) {
                     $translations[$field][$locale] = $value;
                 }
             }
         }
 
-        return empty($translations) ? null : json_encode($translations);
+        return empty($translations) ? null : $translations;
     }
 
     private function uniqueSlug(string $name, ?int $ignoreId = null): string

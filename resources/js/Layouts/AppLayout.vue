@@ -7,15 +7,22 @@ const mobileOpen = ref(false)
 const kurumOpen  = ref(false)
 const urunOpen   = ref(false)
 const mobileUrunOpen = ref(false)
+const langOpen = ref(false)
 
 const { locale, trans, switchLocale } = useLocale()
 const languages = [
-  { code: 'tr', label: 'TR', name: 'Türkçe' },
-  { code: 'en', label: 'EN', name: 'English' },
-  { code: 'fr', label: 'FR', name: 'Français' },
-  { code: 'de', label: 'DE', name: 'Deutsch' },
-  { code: 'nl', label: 'NL', name: 'Nederlands' },
+  { code: 'tr', label: 'TR', name: 'Türkçe', flag: '🇹🇷' },
+  { code: 'en', label: 'EN', name: 'English', flag: '🇬🇧' },
+  { code: 'fr', label: 'FR', name: 'Français', flag: '🇫🇷' },
+  { code: 'de', label: 'DE', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'nl', label: 'NL', name: 'Nederlands', flag: '🇳🇱' },
 ]
+const currentLang = computed(() => languages.find(l => l.code === locale.value) || languages[0])
+
+function selectLocale(code) {
+  langOpen.value = false
+  switchLocale(code)
+}
 const page       = usePage()
 const categories = computed(() => page.props.navCategories || [])
 const seo        = computed(() => page.props.seo || {})
@@ -45,8 +52,19 @@ function handleScroll() {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
-onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
-onUnmounted(() => window.removeEventListener('scroll', handleScroll))
+function handleClickOutsideLang(e) {
+  if (langOpen.value && !e.target.closest('[data-lang-switcher]')) {
+    langOpen.value = false
+  }
+}
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  document.addEventListener('click', handleClickOutsideLang)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  document.removeEventListener('click', handleClickOutsideLang)
+})
 </script>
 
 <template>
@@ -87,17 +105,30 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           </a>
         </div>
         <!-- Language Switcher -->
-        <div class="flex items-center gap-1" role="group" aria-label="Dil seçimi">
+        <div class="relative" data-lang-switcher>
           <button
-            v-for="lang in languages"
-            :key="lang.code"
-            @click="switchLocale(lang.code)"
-            :aria-label="lang.name"
-            :aria-current="locale === lang.code ? 'true' : undefined"
-            :class="locale === lang.code ? 'bg-[#3DAFC4] text-white' : 'text-white/50 hover:text-white'"
-            class="text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200">
-            {{ lang.label }}
+            @click="langOpen = !langOpen"
+            aria-haspopup="listbox"
+            :aria-expanded="langOpen"
+            aria-label="Dil seçimi"
+            class="flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white px-2.5 py-1 rounded-md hover:bg-white/10 transition-all duration-200">
+            <span class="text-base leading-none">{{ currentLang.flag }}</span>
+            <span>{{ currentLang.label }}</span>
+            <svg class="w-3 h-3 transition-transform duration-200" :class="langOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
           </button>
+          <Transition enter-active-class="transition ease-out duration-150" enter-from-class="opacity-0 -translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100" leave-to-class="opacity-0">
+            <ul v-show="langOpen" role="listbox" class="absolute right-0 top-full mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 py-1.5 z-50">
+              <li v-for="lang in languages" :key="lang.code" role="option" :aria-selected="locale === lang.code">
+                <button
+                  @click="selectLocale(lang.code)"
+                  class="w-full flex items-center gap-2.5 px-3.5 py-2 text-sm text-left transition-colors"
+                  :class="locale === lang.code ? 'bg-[#F4F6F9] text-[#0E7A8C] font-bold' : 'text-gray-600 hover:bg-[#F4F6F9]'">
+                  <span class="text-base leading-none">{{ lang.flag }}</span>
+                  <span>{{ lang.name }}</span>
+                </button>
+              </li>
+            </ul>
+          </Transition>
         </div>
       </div>
     </div>
@@ -252,7 +283,9 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
               <span class="text-xs text-gray-500 font-semibold w-full">{{ trans('common.lang_label') }}</span>
               <button v-for="lang in languages" :key="lang.code" @click="switchLocale(lang.code)"
                 :class="locale === lang.code ? 'bg-[#1B3163] text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
-                class="text-xs font-bold px-3 py-1 rounded-lg transition-all">{{ lang.label }}</button>
+                class="flex items-center gap-1.5 text-xs font-bold px-3 py-1 rounded-lg transition-all">
+                <span class="text-sm leading-none">{{ lang.flag }}</span>{{ lang.label }}
+              </button>
             </div>
             <div class="pt-2 pb-1">
               <a :href="phone1Tel" class="flex items-center justify-center gap-2 w-full bg-[#0E7A8C] text-white py-3 rounded-xl text-sm font-bold">
