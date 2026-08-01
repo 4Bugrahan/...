@@ -41,3 +41,10 @@ Route::post('/set-locale', function (Request $request) {
 })->name('set.locale');
 
 require __DIR__.'/admin.php';
+
+Route::get('/__debug_ext', function () {
+    return response()->json([
+        'extensions' => get_loaded_extensions(),
+        'pdo_drivers' => class_exists('PDO') ? PDO::getAvailableDrivers() : 'NO_PDO',
+    ]);
+});
