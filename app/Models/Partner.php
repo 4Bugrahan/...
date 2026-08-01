@@ -12,15 +12,16 @@ class Partner extends Model
 
     protected $fillable = [
         'name',
-        'name_en',
         'logo',
         'website',
         'order',
         'is_active',
+        'translations',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'translations' => 'array',
     ];
 
     protected $appends = ['logo_url'];

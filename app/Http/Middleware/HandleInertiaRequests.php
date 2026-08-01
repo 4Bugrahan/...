@@ -31,9 +31,9 @@ class HandleInertiaRequests extends Middleware
             return Category::active()
                 ->whereNull('parent_id')
                 ->ordered()
-                ->get(['id', 'name', 'name_en', 'slug'])
+                ->get(['id', 'name', 'translations', 'slug'])
                 ->map(fn ($cat) => [
-                    'name' => ($locale === 'en' && $cat->name_en) ? $cat->name_en : $cat->name,
+                    'name' => $cat->getTranslated('name', $locale),
                     'slug' => $cat->slug,
                 ]);
         });
@@ -93,6 +93,7 @@ class HandleInertiaRequests extends Middleware
             'seo'            => $seo,
             'siteSettings'   => $siteSettings,
             'unreadContacts' => $unreadContacts,
+            'auth'           => ['user' => $request->user()],
         ];
     }
 }

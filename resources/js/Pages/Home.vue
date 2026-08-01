@@ -483,8 +483,8 @@ function getInitials(name) {
             class="group relative rounded-2xl overflow-hidden bg-white border border-gray-100 hover:border-[#3DAFC4]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <!-- Image / gradient bg -->
             <div class="aspect-[4/3] relative overflow-hidden bg-[#f4f5f6]">
-              <img v-if="project.images && project.images[0]"
-                :src="project.images[0]" :alt="field(project,'title') || project.title"
+              <img v-if="project.image_urls && project.image_urls[0]"
+                :src="project.image_urls[0]" :alt="field(project,'title') || project.title"
                 loading="lazy"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div v-else class="w-full h-full flex items-center justify-center"

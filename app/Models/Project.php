@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Project extends Model
 {
@@ -11,20 +12,21 @@ class Project extends Model
 
     protected $fillable = [
         'title',
-        'title_en',
         'slug',
         'description',
-        'description_en',
         'images',
         'location',
-        'location_en',
         'is_active',
+        'translations',
     ];
 
     protected $casts = [
         'images'    => 'array',
         'is_active' => 'boolean',
+        'translations' => 'array',
     ];
+
+    protected $appends = ['image_urls'];
 
     public function scopeActive($query)
     {
@@ -37,5 +39,17 @@ class Project extends Model
             return $this->images[0];
         }
         return null;
+    }
+
+    public function getImageUrlsAttribute(): array
+    {
+        if (! is_array($this->images)) {
+            return [];
+        }
+
+        return array_map(
+            fn (string $path) => str_starts_with($path, 'http') ? $path : Storage::disk('public')->url($path),
+            $this->images
+        );
     }
 }

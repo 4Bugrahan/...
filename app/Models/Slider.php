@@ -11,24 +11,21 @@ class Slider extends Model
 
     protected $fillable = [
         'subtitle',
-        'subtitle_en',
         'title',
-        'title_en',
         'description',
-        'description_en',
         'image',
         'btn1_text',
-        'btn1_text_en',
         'btn1_url',
         'btn2_text',
-        'btn2_text_en',
         'btn2_url',
         'order',
         'is_active',
+        'translations',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'translations' => 'array',
     ];
 
     public function scopeActive($query)

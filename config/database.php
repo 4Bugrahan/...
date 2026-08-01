@@ -34,7 +34,10 @@ return [
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            // Deliberately not env('DB_DATABASE', ...) — DB_DATABASE is the
+            // active pgsql connection's database name; this connection is
+            // only used as the source for the one-off Supabase data migration.
+            'database' => database_path('database.sqlite'),
             'prefix' => '',
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
             'busy_timeout' => null,

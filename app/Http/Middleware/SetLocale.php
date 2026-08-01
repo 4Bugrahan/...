@@ -11,7 +11,7 @@ class SetLocale
     {
         $locale = $request->cookie('locale');
 
-        if (!in_array($locale, ['tr', 'en'])) {
+        if (!in_array($locale, ['tr', 'en', 'fr', 'de', 'nl'])) {
             $locale = 'tr';
         }
 

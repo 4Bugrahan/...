@@ -2,10 +2,10 @@ node_modules
 vendor
 .env
 .env.local
-.env.example
 storage/logs/*
 bootstrap/cache/*
 public/storage/.gitkeep
+public/hot
 .DS_Store
 *.log
 .vscode
@@ -14,3 +14,4 @@ public/storage/.gitkeep
 Thumbs.db
 .vercel
 .env*
+!.env.example

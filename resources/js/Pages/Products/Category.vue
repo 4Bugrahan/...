@@ -6,8 +6,6 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 
 const { locale, trans, field } = useLocale()
 
-const imgUrl = (path) => !path ? '' : (path.startsWith('http') ? path : '/storage/' + path)
-
 const props = defineProps({
     category:        { type: Object, required: true },
     products:        { type: Array,  default: () => [] },
@@ -155,8 +153,8 @@ const localizedSidebarChildren = computed(() =>
                                 <!-- Product Image -->
                                 <div class="relative h-52 overflow-hidden bg-white border-b border-gray-100">
                                     <img
-                                        v-if="product.images && product.images[0]"
-                                        :src="imgUrl(product.images[0])"
+                                        v-if="product.image_urls && product.image_urls[0]"
+                                        :src="product.image_urls[0]"
                                         :alt="product.name"
                                         class="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-500"
                                     />

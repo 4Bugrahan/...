@@ -63,7 +63,7 @@ class PageController extends Controller
 
     public function references(): Response
     {
-        $partners = Partner::active()->ordered()->get(['id', 'name', 'name_en', 'logo', 'website', 'order']);
+        $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
 
         $seo = $this->pageSeo(
             'references',

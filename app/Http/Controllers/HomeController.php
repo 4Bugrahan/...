@@ -19,8 +19,8 @@ class HomeController extends Controller
         $locale = app()->getLocale();
 
         $sliders = Slider::active()->ordered()->get()->map(function ($slider) {
-            if ($slider->image && !str_starts_with($slider->image, 'http') && !str_starts_with($slider->image, '/')) {
-                $slider->image = '/storage/' . $slider->image;
+            if ($slider->image && !str_starts_with($slider->image, 'http')) {
+                $slider->image = Storage::disk('public')->url($slider->image);
             }
             return $slider;
         });
@@ -47,7 +47,7 @@ class HomeController extends Controller
             ->take(8)
             ->get();
 
-        $partners = Partner::active()->ordered()->get(['id', 'name', 'name_en', 'logo', 'website', 'order']);
+        $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
 
         $recentProjects = Project::where('is_active', true)->latest()->take(3)->get();
 
@@ -60,7 +60,7 @@ class HomeController extends Controller
         if ($imagePath && is_string($imagePath)) {
             $aboutImage = str_starts_with($imagePath, 'http')
                 ? $imagePath
-                : '/storage/' . ltrim($imagePath, '/');
+                : Storage::disk('public')->url(ltrim($imagePath, '/'));
         }
         if (empty($aboutImage)) {
             $aboutImage = '/images/katalog-kapak.png';

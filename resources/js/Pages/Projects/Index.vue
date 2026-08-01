@@ -31,7 +31,7 @@ const displayPartners = computed(() =>
     (props.partners.length ? props.partners : defaultPartners).map(p => ({
         ...p,
         name: field(p, 'name') || p.name,
-        logo_url: p.logo ? (p.logo.startsWith('http') ? p.logo : '/storage/' + p.logo) : (p.logo_url || null),
+        logo_url: p.logo_url || null,
     }))
 )
 
@@ -132,8 +132,8 @@ const sectors = computed(() => [
 
             <!-- Image -->
             <div class="relative h-60 overflow-hidden bg-[#1B3163]">
-              <img v-if="project.images && project.images[0]"
-                :src="project.images[0]" :alt="field(project,'title') || project.title"
+              <img v-if="project.image_urls && project.image_urls[0]"
+                :src="project.image_urls[0]" :alt="field(project,'title') || project.title"
                 loading="lazy"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
               <div v-else class="absolute inset-0 flex flex-col items-center justify-center"
@@ -193,8 +193,8 @@ const sectors = computed(() => [
           <div class="absolute inset-0 bg-[#0e1e3d]/80 backdrop-blur-sm" @click="closeModal"></div>
           <div class="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10">
             <div class="relative">
-              <img v-if="selectedProject.images && selectedProject.images[selectedImageIndex]"
-                :src="selectedProject.images[selectedImageIndex]"
+              <img v-if="selectedProject.image_urls && selectedProject.image_urls[selectedImageIndex]"
+                :src="selectedProject.image_urls[selectedImageIndex]"
                 :alt="field(selectedProject,'title') || selectedProject.title"
                 class="w-full h-72 object-cover rounded-t-2xl"/>
               <div v-else class="w-full h-72 rounded-t-2xl flex items-center justify-center"
@@ -203,9 +203,9 @@ const sectors = computed(() => [
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                 </svg>
               </div>
-              <div v-if="selectedProject.images && selectedProject.images.length > 1"
+              <div v-if="selectedProject.image_urls && selectedProject.image_urls.length > 1"
                 class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
-                <button v-for="(_,i) in selectedProject.images" :key="i" @click="selectedImageIndex = i"
+                <button v-for="(_,i) in selectedProject.image_urls" :key="i" @click="selectedImageIndex = i"
                   class="h-2 rounded-full transition-all"
                   :class="i === selectedImageIndex ? 'w-5 bg-[#3DAFC4]' : 'w-2 bg-white/50'">
                 </button>

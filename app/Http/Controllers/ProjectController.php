@@ -15,7 +15,7 @@ class ProjectController extends Controller
         $locale = app()->getLocale();
 
         $projects = Project::active()->latest()->get();
-        $partners = Partner::active()->ordered()->get(['id', 'name', 'name_en', 'logo', 'website', 'order']);
+        $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
 
         $pageContent = [
             'proj_hero_badge'  => Setting::getValue('proj_hero_badge',  'Referans Projeler', $locale),

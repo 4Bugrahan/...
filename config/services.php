@@ -32,6 +32,11 @@ return [
         'key' => env('ANTHROPIC_API_KEY'),
     ],
 
+    'deepl' => [
+        'key' => env('DEEPL_API_KEY'),
+        'free' => env('DEEPL_API_FREE', true),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

@@ -59,7 +59,17 @@
     "CACHE_DRIVER": "array",
     "SESSION_DRIVER": "cookie",
     "QUEUE_CONNECTION": "sync",
-    "DB_CONNECTION": "sqlite",
-    "DB_DATABASE": "/tmp/database.sqlite"
+    "DB_CONNECTION": "pgsql",
+    "DB_HOST": "aws-0-eu-central-1.pooler.supabase.com",
+    "DB_PORT": "6543",
+    "DB_DATABASE": "postgres",
+    "DB_USERNAME": "postgres.oaruhqbjuqgcnocxiopt",
+    "DB_SSLMODE": "require",
+    "PUBLIC_DISK": "s3",
+    "AWS_DEFAULT_REGION": "eu-central-1",
+    "AWS_BUCKET": "4bgrup-media",
+    "AWS_URL": "https://oaruhqbjuqgcnocxiopt.supabase.co/storage/v1/object/public/4bgrup-media",
+    "AWS_ENDPOINT": "https://oaruhqbjuqgcnocxiopt.storage.supabase.co/storage/v1/s3",
+    "AWS_USE_PATH_STYLE_ENDPOINT": "true"
   }
 }

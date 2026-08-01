@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -12,22 +13,24 @@ class Product extends Model
 
     protected $fillable = [
         'name',
-        'name_en',
         'slug',
         'description',
-        'description_en',
         'category_id',
         'images',
         'featured',
         'is_active',
         'order',
+        'translations',
     ];
 
     protected $casts = [
         'images'    => 'array',
         'featured'  => 'boolean',
         'is_active' => 'boolean',
+        'translations' => 'array',
     ];
+
+    protected $appends = ['image_urls'];
 
     public function category(): BelongsTo
     {
@@ -55,5 +58,17 @@ class Product extends Model
             return $this->images[0];
         }
         return null;
+    }
+
+    public function getImageUrlsAttribute(): array
+    {
+        if (!is_array($this->images)) {
+            return [];
+        }
+
+        return array_map(
+            fn (string $path) => str_starts_with($path, 'http') ? $path : Storage::disk('public')->url($path),
+            $this->images
+        );
     }
 }

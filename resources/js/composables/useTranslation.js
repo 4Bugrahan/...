@@ -1,108 +1,63 @@
 import { ref } from 'vue'
 
+const TARGET_LOCALES = ['en', 'fr', 'de', 'nl']
+
 /**
- * Anthropic API ile otomatik çeviri composable'ı.
- * Admin formlarında kullanılır.
+ * DeepL destekli otomatik çeviri composable'ı. Admin formlarında kullanılır.
+ * Form üzerinde `translations: { en: {field: ''}, fr: {...}, de: {...}, nl: {...} }`
+ * yapısını doldurur.
  */
 export function useTranslation() {
-    const translating = ref({})       // { fieldKey: true/false }
+    const translating = ref(false)
     const translateError = ref(null)
 
     /**
-     * Tek bir alanı çevir.
+     * TR alanlarını toplu olarak EN/FR/DE/NL'e çevirip form.translations'ı doldurur.
      *
-     * @param {Object} form       — Inertia useForm nesnesi
-     * @param {string} trKey      — Türkçe alan adı (ör: 'name', 'description')
-     * @param {string} enKey      — İngilizce alan adı (ör: 'name_en', 'description__en')
+     * @param {Object} form   — Inertia useForm nesnesi (translations alanı olmalı)
+     * @param {Array}  fields — çevrilecek TR alan adları, ör: ['name', 'description']
      */
-    async function translateField(form, trKey, enKey) {
-        const text = form[trKey]
-        if (!text || !text.trim()) {
-            translateError.value = 'Çevrilecek Türkçe metin boş.'
-            return
-        }
-
-        translating.value[trKey] = true
-        translateError.value = null
-
-        try {
-            const response = await window.axios.post('/admin/translate', { text })
-            form[enKey] = response.data.translated_text
-        } catch (err) {
-            translateError.value = err.response?.data?.error || 'Çeviri başarısız oldu.'
-        } finally {
-            translating.value[trKey] = false
-        }
-    }
-
-    /**
-     * Formdaki tüm boş EN alanlarını toplu çevir.
-     *
-     * @param {Object} form       — Inertia useForm nesnesi
-     * @param {Array}  fieldPairs — [{ tr: 'name', en: 'name_en' }, ...]
-     */
-    async function translateAll(form, fieldPairs) {
-        // Sadece EN alanı boş olanları topla
+    async function translateAll(form, fields) {
         const toTranslate = {}
-        for (const pair of fieldPairs) {
-            const trText = form[pair.tr]
-            const enText = form[pair.en]
-            if (trText && trText.trim() && (!enText || !enText.trim())) {
-                toTranslate[pair.tr] = trText
+        for (const field of fields) {
+            const text = form[field]
+            if (text && String(text).trim()) {
+                toTranslate[field] = text
             }
         }
 
         if (Object.keys(toTranslate).length === 0) {
-            translateError.value = 'Çevrilecek boş İngilizce alan bulunamadı.'
+            translateError.value = 'Çevrilecek Türkçe metin bulunamadı.'
             return
         }
 
-        // Hepsini loading yap
-        for (const key of Object.keys(toTranslate)) {
-            translating.value[key] = true
-        }
+        translating.value = true
         translateError.value = null
 
         try {
             const response = await window.axios.post('/admin/translate-batch', {
-                texts: toTranslate,
+                fields: toTranslate,
             })
 
-            const translations = response.data.translations
-            for (const pair of fieldPairs) {
-                if (translations[pair.tr]) {
-                    form[pair.en] = translations[pair.tr]
+            for (const locale of TARGET_LOCALES) {
+                if (!form.translations[locale]) form.translations[locale] = {}
+                const localeResult = response.data[locale] || {}
+                for (const field of Object.keys(toTranslate)) {
+                    if (localeResult[field]) {
+                        form.translations[locale][field] = localeResult[field]
+                    }
                 }
             }
         } catch (err) {
-            translateError.value = err.response?.data?.error || 'Toplu çeviri başarısız oldu.'
+            translateError.value = err.response?.data?.message || 'Çeviri başarısız oldu.'
         } finally {
-            for (const key of Object.keys(toTranslate)) {
-                translating.value[key] = false
-            }
+            translating.value = false
         }
-    }
-
-    /**
-     * Belirli bir alan çeviri yapılıyor mu?
-     */
-    function isTranslating(key) {
-        return !!translating.value[key]
-    }
-
-    /**
-     * Herhangi bir çeviri devam ediyor mu?
-     */
-    function isAnyTranslating() {
-        return Object.values(translating.value).some(Boolean)
     }
 
     return {
         translating,
         translateError,
-        translateField,
         translateAll,
-        isTranslating,
-        isAnyTranslating,
     }
 }

@@ -12,7 +12,11 @@ class Setting extends Model
     protected $fillable = [
         'key',
         'value',
-        'value_en',
+        'translations',
+    ];
+
+    protected $casts = [
+        'translations' => 'array',
     ];
 
     private static ?object $requestCache = null;
@@ -31,8 +35,11 @@ class Setting extends Model
             return $default;
         }
 
-        if ($locale === 'en' && !empty($setting->value_en)) {
-            return $setting->value_en;
+        if ($locale !== 'tr') {
+            $translated = $setting->getTranslated('value', $locale);
+            if (!empty($translated)) {
+                return $translated;
+            }
         }
 
         return $setting->value ?? $default;

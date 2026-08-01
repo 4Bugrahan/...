@@ -4,28 +4,15 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Partner;
-use App\Models\Product;
 use App\Models\Project;
 use App\Models\Setting;
 use App\Models\Slider;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Admin User
-        User::firstOrCreate(
-            ['email' => 'admin@4bgrup.com'],
-            [
-                'name'     => '4B Grup Admin',
-                'password' => Hash::make('4bgrup2024!'),
-            ]
-        );
-
         // Settings
         $settings = [
             ['key' => 'site_name',    'value' => '4B Grup Endüstriyel Ticaret'],

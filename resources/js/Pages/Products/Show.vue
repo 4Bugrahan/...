@@ -24,9 +24,9 @@ const st = computed(() => usePage().props.siteSettings || {})
 const phone1Tel = computed(() => st.value.phone1 ? st.value.phone1.replace(/\s/g, '') : '+903462250000')
 const whatsappLink = computed(() => `https://wa.me/${st.value.whatsapp || '905356600060'}`)
 const activeImage = ref(0)
-const images = props.product.images && props.product.images.length > 0 ? props.product.images : []
+const images = props.product.image_urls && props.product.image_urls.length > 0 ? props.product.image_urls : []
 
-const imgUrl = (path) => !path ? '' : (path.startsWith('http') ? path : '/storage/' + path)
+const imgUrl = (path) => path || ''
 
 const localizedProduct = computed(() => ({
     ...props.product,
@@ -154,8 +154,8 @@ const localizedRelated = computed(() =>
                     >
                         <div class="relative h-44 bg-gray-100 overflow-hidden">
                             <img
-                                v-if="related.images && related.images[0]"
-                                :src="imgUrl(related.images[0])"
+                                v-if="related.image_urls && related.image_urls[0]"
+                                :src="related.image_urls[0]"
                                 :alt="related.name"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />

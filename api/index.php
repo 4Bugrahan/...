@@ -41,20 +41,12 @@ if (!file_exists($markerFile) || file_get_contents($markerFile) !== $deployMarke
             @unlink($path);
         }
     };
-    $rm('/tmp/database.sqlite');
     $rm('/tmp/storage');
     $rm('/tmp/bootstrap');
     if (function_exists('opcache_reset')) {
         opcache_reset();
     }
     file_put_contents($markerFile, $deployMarker);
-}
-
-$dbPath = __DIR__ . '/../database/database.sqlite';
-$tmpDbPath = '/tmp/database.sqlite';
-
-if (file_exists($dbPath) && !file_exists($tmpDbPath)) {
-    copy($dbPath, $tmpDbPath);
 }
 
 $dirs = [

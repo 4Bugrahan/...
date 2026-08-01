@@ -6,6 +6,7 @@ use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Storage;
 
 class Category extends Model
 {
@@ -13,19 +14,30 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'name_en',
         'slug',
         'parent_id',
         'image',
         'description',
-        'description_en',
         'order',
         'is_active',
+        'translations',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'translations' => 'array',
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (! $this->image) {
+            return null;
+        }
+
+        return str_starts_with($this->image, 'http') ? $this->image : Storage::disk('public')->url($this->image);
+    }
 
     public function products(): HasMany
     {

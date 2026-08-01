@@ -13,9 +13,9 @@ export function useLocale() {
 
     function field(obj, fieldName) {
         if (!obj) return ''
-        if (locale.value === 'en') {
-            const enVal = obj[fieldName + '_en']
-            if (enVal && String(enVal).trim() !== '') return enVal
+        if (locale.value !== 'tr') {
+            const translated = obj.translations?.[fieldName]?.[locale.value]
+            if (translated && String(translated).trim() !== '') return translated
         }
         return obj[fieldName] || ''
     }

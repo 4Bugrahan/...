@@ -31,7 +31,7 @@ Route::get('/kvkk', [PageController::class, 'kvkk'])->name('kvkk');
 Route::post('/set-locale', function (Request $request) {
     $locale = $request->input('locale', 'tr');
 
-    if (! in_array($locale, ['tr', 'en'])) {
+    if (! in_array($locale, ['tr', 'en', 'fr', 'de', 'nl'])) {
         $locale = 'tr';
     }
 
@@ -39,3 +39,5 @@ Route::post('/set-locale', function (Request $request) {
         cookie()->forever('locale', $locale, '/', null, false, false)
     );
 })->name('set.locale');
+
+require __DIR__.'/admin.php';
