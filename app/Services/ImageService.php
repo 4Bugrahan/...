@@ -5,22 +5,21 @@ namespace App\Services;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Laravel\Facades\Image;
 
 class ImageService
 {
-    private const MAX_PX = 2500;
-
-    private const QUALITY = 82;
-
+    /**
+     * Stores the upload as-is (no resize/re-encode) — the vercel-php runtime
+     * doesn't have the gd or imagick extension, so Intervention Image can't
+     * run there. Client-side <input accept="image/*"> plus the max:5120 (KB)
+     * validation rule keep uploads reasonably sized without server processing.
+     */
     public static function store(UploadedFile $file, string $folder = 'uploads'): string
     {
-        $path = trim($folder, '/').'/'.Str::uuid()->toString().'.jpg';
+        $extension = strtolower($file->getClientOriginalExtension()) ?: 'jpg';
+        $path = trim($folder, '/').'/'.Str::uuid()->toString().'.'.$extension;
 
-        $image = Image::read($file->getRealPath());
-        $image->scaleDown(width: self::MAX_PX, height: self::MAX_PX);
-
-        Storage::disk('public')->put($path, (string) $image->toJpeg(self::QUALITY));
+        Storage::disk('public')->put($path, file_get_contents($file->getRealPath()));
 
         return $path;
     }
