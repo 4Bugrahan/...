@@ -53,7 +53,7 @@
   "env": {
     "APP_URL": "https://4bgrup.vercel.app",
     "APP_ENV": "production",
-    "APP_DEBUG": "false",
+    "APP_DEBUG": "true",
     "APP_KEY": "base64:fDtrYFxeJ5UJ0IP5ankwSUO+7IJi4vQgMytk7LdGCG0=",
     "CACHE_STORE": "array",
     "CACHE_DRIVER": "array",
