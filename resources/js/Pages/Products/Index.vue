@@ -76,7 +76,7 @@ const getCoverImage = (slug) => `/images/categories-transparent/${slug}.png?v=2`
                         <div class="px-4 py-3" style="border-top:1px solid #f0f1f3">
                             <h3 class="font-bold text-sm leading-snug truncate" style="color:#1B3163">{{ category.name }}</h3>
                             <span class="text-xs font-medium" style="color:#8b93a3">
-                                {{ category.total_products_count ?? category.products_count ?? 0 }} ürün
+                                {{ category.total_products_count ?? category.products_count ?? 0 }} {{ trans('common.product_unit') }}
                             </span>
                         </div>
                     </Link>

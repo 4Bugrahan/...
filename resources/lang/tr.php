@@ -353,4 +353,46 @@ return [
     'common.see_all'         => 'Tümünü Görüntüle',
     'common.contact_us'      => 'İletişime Geç',
     'common.lang_label'      => 'Dil / Language:',
+
+    // Common — Accessibility & misc (added for full locale coverage)
+    'common.lang_switcher_aria' => 'Dil seçimi',
+    'common.menu_close'         => 'Menüyü kapat',
+    'common.menu_open'          => 'Menüyü aç',
+    'common.mobile_nav_aria'    => 'Mobil menü',
+    'common.whatsapp_aria'      => 'WhatsApp ile iletişime geçin',
+    'common.call_us_aria'       => 'Bizi arayın',
+    'common.call_us'            => 'Bizi Arayın',
+    'common.back_to_top_aria'   => 'Sayfanın başına dön',
+    'common.product_unit'       => 'ürün',
+    'common.explore'            => 'İncele',
+
+    // Projects — additional
+    'projects.completed_label' => 'Tamamlanan Projeler',
+    'projects.default_desc'    => 'Otel ve resort tesislerinden hastane merkezi mutfaklarına, catering üretim tesislerinden kurumsal yemekhanelere — farklı sektör ve ölçeklerde tamamlanan endüstriyel mutfak projeleri.',
+
+    // About — additional
+    'about.profile_label' => 'Kurumsal Profil',
+    'about.default_text1' => '4B Grup Endüstriyel Ticaret olarak 2009 yılından bu yana Türkiye genelinde otel, restoran, hastane, eğitim kurumu ve toplu yemek tesislerine endüstriyel mutfak ekipmanları tedariki ve anahtar teslim proje hizmetleri sunuyoruz.',
+    'about.default_text2' => 'Deneyimli proje mühendislerimiz ve ürün portföyümüzle; yerinde ihtiyaç analizinden mimari planlama, CE belgeli ekipman temini, profesyonel montaj ve devreye almadan satış sonrası teknik servise kadar tüm süreci yönetiyoruz.',
+    'about.default_text3' => "50'yi aşkın küresel markanın yetkili satış ve servis ortağı olarak orijinal ekipman, üretici garantisi ve öncelikli teknik servis güvencesiyle bireysel ve kurumsal projelere hizmet veriyoruz.",
+
+    // References page
+    'references.title'            => 'Referanslarımız',
+    'references.hero_desc'        => 'Endüstriyel mutfak ekipmanları alanında yetkili satış ve servis ortağı olduğumuz markalar ile güvenle hizmet verdiğimiz referans müşterilerimiz.',
+    'references.partners_label'   => 'İş Ortaklarımız',
+    'references.partners_heading' => 'Yetkili Satış ve Servis Ortağı Olduğumuz Markalar',
+    'references.clients_label'    => 'Referanslarımız',
+    'references.clients_heading'  => 'Hizmet Verdiğimiz Kurum ve İşletmeler',
+
+    // Error pages
+    'error.title_403'   => 'Erişim Engellendi',
+    'error.title_404'   => 'Sayfa Bulunamadı',
+    'error.title_500'   => 'Sunucu Hatası',
+    'error.title_503'   => 'Bakım Modu',
+    'error.title_generic' => 'Hata',
+    'error.desc_403'    => 'Bu sayfaya erişim yetkiniz bulunmamaktadır.',
+    'error.desc_404'    => 'Aradığınız sayfa taşınmış veya kaldırılmış olabilir.',
+    'error.desc_500'    => 'Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.',
+    'error.desc_503'    => 'Sitemiz şu an bakım modundadır. Kısa süre içinde geri döneceğiz.',
+    'error.desc_generic' => 'Beklenmeyen bir hata oluştu.',
 ];

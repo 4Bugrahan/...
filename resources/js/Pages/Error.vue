@@ -1,26 +1,30 @@
 <script setup>
+import { computed } from 'vue'
 import { Head, Link } from '@inertiajs/vue3'
+import { useLocale } from '@/composables/useLocale.js'
 
 const props = defineProps({
   status: { type: Number, default: 404 },
 })
 
-const titles = {
-  403: 'Erişim Engellendi',
-  404: 'Sayfa Bulunamadı',
-  500: 'Sunucu Hatası',
-  503: 'Bakım Modu',
+const { trans } = useLocale()
+
+const titleKeys = {
+  403: 'error.title_403',
+  404: 'error.title_404',
+  500: 'error.title_500',
+  503: 'error.title_503',
 }
 
-const descriptions = {
-  403: 'Bu sayfaya erişim yetkiniz bulunmamaktadır.',
-  404: 'Aradığınız sayfa taşınmış veya kaldırılmış olabilir.',
-  500: 'Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.',
-  503: 'Sitemiz şu an bakım modundadır. Kısa süre içinde geri döneceğiz.',
+const descKeys = {
+  403: 'error.desc_403',
+  404: 'error.desc_404',
+  500: 'error.desc_500',
+  503: 'error.desc_503',
 }
 
-const title = titles[props.status] || 'Hata'
-const description = descriptions[props.status] || 'Beklenmeyen bir hata oluştu.'
+const title = computed(() => trans(titleKeys[props.status] || 'error.title_generic'))
+const description = computed(() => trans(descKeys[props.status] || 'error.desc_generic'))
 </script>
 
 <template>
@@ -62,7 +66,7 @@ const description = descriptions[props.status] || 'Beklenmeyen bir hata oluştu.
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1" />
           </svg>
-          Ana Sayfa
+          {{ trans('common.home') }}
         </Link>
 
         <Link
@@ -72,7 +76,7 @@ const description = descriptions[props.status] || 'Beklenmeyen bir hata oluştu.
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          İletişim
+          {{ trans('nav.contact') }}
         </Link>
       </div>
     </div>

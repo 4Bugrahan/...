@@ -378,7 +378,7 @@ function getInitials(name) {
             <div class="px-4 py-3" style="border-top:1px solid #f0f1f3">
               <h3 class="font-bold text-sm leading-snug truncate" style="color:#1B3163">{{ cat.name }}</h3>
               <span class="text-xs font-medium" style="color:#8b93a3">
-                {{ cat.total_products_count ?? cat.products_count ?? 0 }} ürün
+                {{ cat.total_products_count ?? cat.products_count ?? 0 }} {{ trans('common.product_unit') }}
               </span>
             </div>
           </Link>

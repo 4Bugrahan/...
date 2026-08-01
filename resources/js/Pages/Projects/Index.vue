@@ -119,10 +119,10 @@ const sectors = computed(() => [
       <div class="max-w-7xl mx-auto px-6">
 
         <div class="text-center mb-14">
-          <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Tamamlanan Projeler</p>
+          <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('projects.completed_label') }}</p>
           <h2 class="text-4xl font-extrabold text-[#0e1e3d]">{{ c('proj_grid_title', 'Projeler') }}</h2>
           <p v-if="c('proj_grid_desc')" class="text-gray-500 mt-4 text-[15px]">{{ c('proj_grid_desc') }}</p>
-          <p v-else class="text-gray-500 mt-4 text-[15px]">Otel ve resort tesislerinden hastane merkezi mutfaklarına, catering üretim tesislerinden kurumsal yemekhanelere — farklı sektör ve ölçeklerde tamamlanan endüstriyel mutfak projeleri.</p>
+          <p v-else class="text-gray-500 mt-4 text-[15px]">{{ trans('projects.default_desc') }}</p>
         </div>
 
         <div v-if="displayProjects.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

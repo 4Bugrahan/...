@@ -110,7 +110,7 @@ onUnmounted(() => {
             @click="langOpen = !langOpen"
             aria-haspopup="listbox"
             :aria-expanded="langOpen"
-            aria-label="Dil seçimi"
+            :aria-label="trans('common.lang_switcher_aria')"
             class="flex items-center gap-1.5 text-xs font-bold text-white/80 hover:text-white px-2.5 py-1 rounded-md hover:bg-white/10 transition-all duration-200">
             <span class="text-base leading-none">{{ currentLang.flag }}</span>
             <span>{{ currentLang.label }}</span>
@@ -225,7 +225,7 @@ onUnmounted(() => {
               </div>
             </a>
             <button @click="mobileOpen = !mobileOpen"
-              :aria-label="mobileOpen ? 'Menüyü kapat' : 'Menüyü aç'"
+              :aria-label="mobileOpen ? trans('common.menu_close') : trans('common.menu_open')"
               :aria-expanded="mobileOpen"
               aria-controls="mobile-menu"
               class="lg:hidden p-2 text-gray-600 hover:text-[#1B3163] transition-colors">
@@ -241,7 +241,7 @@ onUnmounted(() => {
 
       <!-- MOBILE MENU -->
       <Transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0 -translate-y-2">
-        <div v-show="mobileOpen" id="mobile-menu" role="navigation" aria-label="Mobil menü" class="lg:hidden border-t border-gray-100 bg-white shadow-xl">
+        <div v-show="mobileOpen" id="mobile-menu" role="navigation" :aria-label="trans('common.mobile_nav_aria')" class="lg:hidden border-t border-gray-100 bg-white shadow-xl">
           <div class="px-4 py-3 space-y-0.5">
             <Link href="/" class="flex items-center gap-3 py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
               <svg class="w-4 h-4 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
@@ -314,7 +314,7 @@ onUnmounted(() => {
     >
       <div v-show="showBackToTop" class="fixed left-0 bottom-6 z-50 flex flex-col items-start gap-2.5">
         <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
-          aria-label="WhatsApp ile iletişime geçin"
+          :aria-label="trans('common.whatsapp_aria')"
           class="flex items-center gap-2.5 bg-[#1B3163] hover:bg-[#0E7A8C] hover:pl-5 hover:translate-x-1 text-white pl-4 pr-1.5 py-1.5 rounded-r-full shadow-lg shadow-black/10 transition-all duration-300">
           <span class="text-sm font-bold whitespace-nowrap">WhatsApp</span>
           <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
@@ -324,9 +324,9 @@ onUnmounted(() => {
           </span>
         </a>
         <a :href="phone1Tel"
-          aria-label="Bizi arayın"
+          :aria-label="trans('common.call_us_aria')"
           class="flex items-center gap-2.5 bg-[#1B3163] hover:bg-[#0E7A8C] hover:pl-5 hover:translate-x-1 text-white pl-4 pr-1.5 py-1.5 rounded-r-full shadow-lg shadow-black/10 transition-all duration-300">
-          <span class="text-sm font-bold whitespace-nowrap">Bizi Arayın</span>
+          <span class="text-sm font-bold whitespace-nowrap">{{ trans('common.call_us') }}</span>
           <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
           </span>
@@ -346,7 +346,7 @@ onUnmounted(() => {
       <button
         v-show="showBackToTop"
         @click="scrollToTop"
-        aria-label="Sayfanın başına dön"
+        :aria-label="trans('common.back_to_top_aria')"
         class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#1B3163] hover:bg-[#0E7A8C] text-white shadow-lg shadow-[#1B3163]/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -7,7 +7,7 @@ const props = defineProps({
     partners: { type: Array, default: () => [] },
 })
 
-const { field } = useLocale()
+const { field, trans } = useLocale()
 
 const displayPartners = computed(() =>
     props.partners.map(p => ({ ...p, name: field(p, 'name') || p.name }))
@@ -39,10 +39,10 @@ const references = [
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-3xl">
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
-                        Referanslarımız
+                        {{ trans('references.title') }}
                     </h1>
                     <p class="text-white/70 text-lg leading-relaxed">
-                        Endüstriyel mutfak ekipmanları alanında yetkili satış ve servis ortağı olduğumuz markalar ile güvenle hizmet verdiğimiz referans müşterilerimiz.
+                        {{ trans('references.hero_desc') }}
                     </p>
                 </div>
             </div>
@@ -52,8 +52,8 @@ const references = [
         <section class="bg-white py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-12">
-                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">İş Ortaklarımız</p>
-                    <h2 class="text-3xl sm:text-4xl font-black text-[#0e1e3d]">Yetkili Satış ve Servis Ortağı Olduğumuz Markalar</h2>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('references.partners_label') }}</p>
+                    <h2 class="text-3xl sm:text-4xl font-black text-[#0e1e3d]">{{ trans('references.partners_heading') }}</h2>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -83,8 +83,8 @@ const references = [
         <section class="bg-[#f4f5f6] py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-12">
-                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Referanslarımız</p>
-                    <h2 class="text-3xl sm:text-4xl font-black text-[#0e1e3d]">Hizmet Verdiğimiz Kurum ve İşletmeler</h2>
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('references.clients_label') }}</p>
+                    <h2 class="text-3xl sm:text-4xl font-black text-[#0e1e3d]">{{ trans('references.clients_heading') }}</h2>
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

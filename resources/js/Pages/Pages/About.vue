@@ -58,17 +58,17 @@ const steps = computed(() => [
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div>
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">Kurumsal Profil</p>
+                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('about.profile_label') }}</p>
                         <h2 class="text-3xl sm:text-4xl font-black text-[#1B3163] mb-6 leading-tight">
                             {{ c('about_profile_title', '15 Yıllık Sektör Deneyimi, Anahtar Teslim Mutfak Projeleri') }}
                         </h2>
                         <div class="space-y-4 text-[#666] leading-relaxed">
                             <p v-if="c('about_profile_text1')">{{ c('about_profile_text1') }}</p>
-                            <p v-else>4B Grup Endüstriyel Ticaret olarak 2009 yılından bu yana Türkiye genelinde otel, restoran, hastane, eğitim kurumu ve toplu yemek tesislerine endüstriyel mutfak ekipmanları tedariki ve anahtar teslim proje hizmetleri sunuyoruz.</p>
+                            <p v-else>{{ trans('about.default_text1') }}</p>
                             <p v-if="c('about_profile_text2')">{{ c('about_profile_text2') }}</p>
-                            <p v-else>Deneyimli proje mühendislerimiz ve ürün portföyümüzle; yerinde ihtiyaç analizinden mimari planlama, CE belgeli ekipman temini, profesyonel montaj ve devreye almadan satış sonrası teknik servise kadar tüm süreci yönetiyoruz.</p>
+                            <p v-else>{{ trans('about.default_text2') }}</p>
                             <p v-if="c('about_profile_text3')">{{ c('about_profile_text3') }}</p>
-                            <p v-else>50'yi aşkın küresel markanın yetkili satış ve servis ortağı olarak orijinal ekipman, üretici garantisi ve öncelikli teknik servis güvencesiyle bireysel ve kurumsal projelere hizmet veriyoruz.</p>
+                            <p v-else>{{ trans('about.default_text3') }}</p>
                         </div>
                         <Link href="/iletisim" class="inline-flex items-center gap-2 mt-8 bg-[#0E7A8C] hover:bg-[#0B6575] text-white font-bold px-6 py-3 rounded-lg transition-colors">
                             {{ c('about_profile_btn', 'Proje Teklifi Alın') }}

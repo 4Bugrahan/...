@@ -122,9 +122,9 @@ const localizedSidebarChildren = computed(() =>
                                     <div class="p-5 flex items-center justify-between">
                                         <p class="text-sm text-gray-500 flex-1 mr-3">{{ sub.description }}</p>
                                         <div class="flex flex-col items-end gap-1 flex-shrink-0">
-                                            <span class="text-xs font-bold text-[#1B3163]">{{ sub.products_count }} ürün</span>
+                                            <span class="text-xs font-bold text-[#1B3163]">{{ sub.products_count }} {{ trans('common.product_unit') }}</span>
                                             <span class="text-xs font-bold text-[#0E7A8C] flex items-center gap-1 group-hover:gap-2 transition-all">
-                                                İncele
+                                                {{ trans('common.explore') }}
                                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
                                                 </svg>
