@@ -1,5 +1,15 @@
 <?php
 
+if (($_GET['__ext_check'] ?? '') === '1') {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'extensions' => get_loaded_extensions(),
+        'pdo_drivers' => class_exists('PDO') ? PDO::getAvailableDrivers() : 'NO_PDO',
+        'php_version' => PHP_VERSION,
+    ]);
+    exit;
+}
+
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
