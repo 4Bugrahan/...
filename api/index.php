@@ -1,39 +1,5 @@
 <?php
 
-if (($_GET['__ext_check'] ?? '') === '1') {
-    header('Content-Type: application/json');
-    echo json_encode([
-        'extensions' => get_loaded_extensions(),
-        'pdo_drivers' => class_exists('PDO') ? PDO::getAvailableDrivers() : 'NO_PDO',
-        'php_version' => PHP_VERSION,
-        'services_cache_exists' => file_exists(__DIR__.'/../bootstrap/cache/services.php'),
-        'packages_cache_exists' => file_exists(__DIR__.'/../bootstrap/cache/packages.php'),
-        'env_db_connection' => getenv('DB_CONNECTION'),
-        'env_db_host' => getenv('DB_HOST'),
-        'env_db_password_set' => getenv('DB_PASSWORD') !== false && getenv('DB_PASSWORD') !== '',
-    ]);
-    exit;
-}
-
-if (($_GET['__boot_check'] ?? '') === '1') {
-    header('Content-Type: text/plain');
-    try {
-        require __DIR__.'/../vendor/autoload.php';
-        $app = require __DIR__.'/../bootstrap/app.php';
-        $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
-        $kernel->bootstrap();
-        echo "BOOT OK\n";
-        echo "default connection: " . config('database.default') . "\n";
-        echo "db host: " . config('database.connections.pgsql.host') . "\n";
-        $pdo = $app->make('db')->connection()->getPdo();
-        echo "PDO connected: " . get_class($pdo) . "\n";
-    } catch (\Throwable $e) {
-        echo "ERROR: " . get_class($e) . ": " . $e->getMessage() . "\n";
-        echo $e->getTraceAsString();
-    }
-    exit;
-}
-
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
