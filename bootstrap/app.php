@@ -24,6 +24,23 @@ $app = Application::configure(basePath: dirname(__DIR__))
             $status = $response->getStatusCode();
 
             if (! app()->environment(['local', 'testing']) && in_array($status, [403, 404, 500, 503])) {
+                // Exceptions thrown early (e.g. route-model-binding 404 from
+                // SubstituteBindings, or no route matched at all) happen before
+                // HandleInertiaRequests's middleware ever runs, so the usual
+                // shared props (locale/translations) are missing. Backfill the
+                // minimum needed to render the Error page in the right language.
+                if (! \Inertia\Inertia::getShared('locale')) {
+                    $locale = $request->cookie('locale');
+                    if (! in_array($locale, ['tr', 'en', 'fr', 'de', 'nl'])) {
+                        $locale = 'tr';
+                    }
+                    app()->setLocale($locale);
+                    $translations = file_exists(resource_path("lang/{$locale}.php"))
+                        ? require resource_path("lang/{$locale}.php")
+                        : require resource_path('lang/tr.php');
+                    \Inertia\Inertia::share(['locale' => $locale, 't' => $translations]);
+                }
+
                 return \Inertia\Inertia::render('Error', ['status' => $status])
                     ->toResponse($request)
                     ->setStatusCode($status);
