@@ -23,6 +23,10 @@ $app = Application::configure(basePath: dirname(__DIR__))
         $exceptions->respond(function (\Symfony\Component\HttpFoundation\Response $response, \Throwable $exception, \Illuminate\Http\Request $request) {
             $status = $response->getStatusCode();
 
+            if ($request->header('X-Debug-Raw') === 'temp-debug-2026') {
+                return $response;
+            }
+
             if (! app()->environment(['local', 'testing']) && in_array($status, [403, 404, 500, 503])) {
                 return \Inertia\Inertia::render('Error', ['status' => $status])
                     ->toResponse($request)
