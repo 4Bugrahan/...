@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /set-locale
 Allow: /
 
-Sitemap: https://4bgrup.vercel.app/sitemap.xml
+Sitemap: https://4-bgrup.vercel.app/sitemap.xml
