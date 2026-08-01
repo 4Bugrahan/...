@@ -13,3 +13,4 @@ public/storage/.gitkeep
 .cursor
 Thumbs.db
 .vercel
+.env*
