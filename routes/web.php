@@ -41,3 +41,8 @@ Route::post('/set-locale', function (Request $request) {
 })->name('set.locale');
 
 require __DIR__.'/admin.php';
+
+// Routes it entirely outside the 'web' group (no matching pattern at all)
+// still get one so SetLocale/HandleInertiaRequests run before the 404 fires,
+// keeping the Error page's language correct instead of falling back to Turkish.
+Route::fallback(fn () => abort(404));
