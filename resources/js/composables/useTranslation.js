@@ -38,15 +38,20 @@ export function useTranslation() {
             const response = await window.axios.post('/admin/translate-batch', {
                 fields: toTranslate,
             })
+            const { translations = {}, failed = [] } = response.data
 
             for (const locale of TARGET_LOCALES) {
                 if (!form.translations[locale]) form.translations[locale] = {}
-                const localeResult = response.data[locale] || {}
+                const localeResult = translations[locale] || {}
                 for (const field of Object.keys(toTranslate)) {
                     if (localeResult[field]) {
                         form.translations[locale][field] = localeResult[field]
                     }
                 }
+            }
+
+            if (failed.length > 0) {
+                translateError.value = `Şu diller çevrilemedi, tekrar dener misin: ${failed.join(', ').toUpperCase()}`
             }
         } catch (err) {
             translateError.value = err.response?.data?.message || 'Çeviri başarısız oldu.'
