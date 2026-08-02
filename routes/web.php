@@ -21,6 +21,8 @@ Route::get('/urunler/{category:slug}/{product:slug}', [ProductController::class,
 
 Route::get('/projeler', [ProjectController::class, 'index'])->name('projects.index');
 
+Route::get('/uretim', [PageController::class, 'production'])->name('production');
+
 Route::get('/iletisim', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/iletisim', [ContactController::class, 'store'])->middleware('throttle:5,10')->name('contact.store');
 

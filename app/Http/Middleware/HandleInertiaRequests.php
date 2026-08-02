@@ -46,6 +46,7 @@ class HandleInertiaRequests extends Middleware
             'products.category' => 'products',
             'products.show'     => 'products',
             'projects.index'    => 'projects',
+            'production'        => 'production',
             'about'             => 'about',
             'contact.index'     => 'contact',
             'kvkk'              => 'kvkk',

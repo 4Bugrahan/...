@@ -61,6 +61,18 @@ class PageController extends Controller
         return Inertia::render('Pages/Kvkk', compact('pageContent', 'seo'));
     }
 
+    public function production(): Response
+    {
+        $seo = $this->pageSeo(
+            'production',
+            'Üretim | 4B Grup Endüstriyel Ticaret',
+            '4B Grup üretim sürecimiz: lazer kesim, tasarım, imalat ve büküm aşamalarıyla kaliteli ve dayanıklı endüstriyel mutfak ekipmanları üretiyoruz.',
+            '4b grup üretim, lazer kesim, büküm, imalat süreci, endüstriyel mutfak ekipmanı üretimi'
+        );
+
+        return Inertia::render('Pages/Production', compact('seo'));
+    }
+
     public function references(): Response
     {
         $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);

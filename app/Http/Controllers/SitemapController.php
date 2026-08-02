@@ -21,6 +21,7 @@ class SitemapController extends Controller
             ['loc' => $baseUrl . '/',           'priority' => '1.0',  'changefreq' => 'weekly'],
             ['loc' => $baseUrl . '/urunler',     'priority' => '0.9',  'changefreq' => 'weekly'],
             ['loc' => $baseUrl . '/projeler',    'priority' => '0.8',  'changefreq' => 'weekly'],
+            ['loc' => $baseUrl . '/uretim',      'priority' => '0.7',  'changefreq' => 'monthly'],
             ['loc' => $baseUrl . '/kurumsal',    'priority' => '0.7',  'changefreq' => 'monthly'],
             ['loc' => $baseUrl . '/referanslar', 'priority' => '0.6',  'changefreq' => 'monthly'],
             ['loc' => $baseUrl . '/iletisim',    'priority' => '0.6',  'changefreq' => 'monthly'],

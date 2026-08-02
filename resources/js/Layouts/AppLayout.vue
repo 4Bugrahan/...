@@ -204,6 +204,9 @@ onUnmounted(() => {
             <Link href="/projeler" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-colors">
               {{ trans('nav.projects') }}
             </Link>
+            <Link href="/uretim" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-colors">
+              {{ trans('nav.production') }}
+            </Link>
             <Link href="/iletisim" class="px-3 py-2 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-colors">
               {{ trans('nav.contact') }}
             </Link>
@@ -273,6 +276,10 @@ onUnmounted(() => {
             <Link href="/projeler" class="flex items-center gap-3 py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
               <svg class="w-4 h-4 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
               {{ trans('nav.projects') }}
+            </Link>
+            <Link href="/uretim" class="flex items-center gap-3 py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
+              <svg class="w-4 h-4 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25m0-9v9l-9-5.25m0 0v-9l9 5.25M3 7.5l9 5.25"/></svg>
+              {{ trans('nav.production') }}
             </Link>
             <Link href="/iletisim" class="flex items-center gap-3 py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
               <svg class="w-4 h-4 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -411,6 +418,12 @@ onUnmounted(() => {
               <Link href="/projeler" class="flex items-center gap-2.5 text-sm text-white/45 hover:text-white transition-all group">
                 <span class="w-0 h-px bg-[#3DAFC4] group-hover:w-3 transition-all duration-300"></span>
                 {{ trans('nav.projects') }}
+              </Link>
+            </li>
+            <li>
+              <Link href="/uretim" class="flex items-center gap-2.5 text-sm text-white/45 hover:text-white transition-all group">
+                <span class="w-0 h-px bg-[#3DAFC4] group-hover:w-3 transition-all duration-300"></span>
+                {{ trans('nav.production') }}
               </Link>
             </li>
             <li>
