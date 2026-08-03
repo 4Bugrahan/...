@@ -40,10 +40,6 @@ const localizedOthers = computed(() =>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                     {{ trans('common.back') }}
                 </Link>
-                <span v-if="localizedProject.location" class="flex items-center gap-1.5 w-fit bg-white/10 backdrop-blur-sm border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
-                    <svg class="w-3.5 h-3.5 text-[#3DAFC4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    {{ localizedProject.location }}
-                </span>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight max-w-4xl">
                     {{ localizedProject.title }}
                 </h1>
@@ -58,6 +54,10 @@ const localizedOthers = computed(() =>
                 <div class="grid lg:grid-cols-3 gap-12">
                     <!-- Açıklama + galeri -->
                     <div class="lg:col-span-2">
+                        <span v-if="localizedProject.location" class="flex items-center gap-1.5 w-fit bg-[#F4F6F9] text-[#1B3163] px-3 py-1.5 rounded-full text-xs font-semibold mb-5">
+                            <svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            {{ localizedProject.location }}
+                        </span>
                         <div v-if="localizedProject.description" class="prose prose-gray max-w-none mb-10">
                             <p class="text-[#666] leading-relaxed text-base whitespace-pre-line">{{ localizedProject.description }}</p>
                         </div>
