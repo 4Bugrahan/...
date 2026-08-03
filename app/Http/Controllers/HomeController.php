@@ -29,6 +29,7 @@ class HomeController extends Controller
             ->whereNull('parent_id')
             ->ordered()
             ->withCount('products')
+            ->take(6)
             ->get()
             ->map(function ($cat) {
                 // Alt kategorilerdeki ürünleri de say

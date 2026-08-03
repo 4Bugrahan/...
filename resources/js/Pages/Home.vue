@@ -372,6 +372,7 @@ function getInitials(name) {
               <img :src="FRAME_IMAGE" alt="" draggable="false"
                    class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
               <img :src="getCoverImage(cat.slug)" :alt="cat.name" draggable="false"
+                   @error="$event.target.style.display = 'none'"
                    class="absolute inset-[7%] w-[86%] h-[86%] object-contain outline-none transition-transform duration-500 group-hover:scale-105" />
             </div>
             <!-- İçerik -->
