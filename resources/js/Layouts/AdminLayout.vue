@@ -26,6 +26,9 @@ function logout() {
         <Link href="/admin/projects" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
           Projeler
         </Link>
+        <Link href="/admin/partners" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
+          Markalar / Tedarikçiler
+        </Link>
       </nav>
       <div class="px-5 py-4 border-t border-white/10 text-xs text-white/60">
         <div class="mb-2">{{ user?.name }}</div>

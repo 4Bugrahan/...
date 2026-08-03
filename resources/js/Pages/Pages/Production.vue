@@ -5,24 +5,24 @@ import { useLocale } from '@/composables/useLocale.js'
 
 const { trans } = useLocale()
 
-// ── Medya yer tutucuları ──────────────────────────────────────────────────
-// Görsel/gif hazır olduğunda ilgili `image`/`video` alanına dosya yolunu
-// yazmanız yeterli (örn. '/images/production/lazer-kesim.gif') — placeholder
-// otomatik olarak kaybolur, başka bir değişiklik gerekmez.
-
-const laserMedia = ref({ image: null, video: null })
-const bendMedia = ref({ image: null, video: null })
+const laserMedia = ref({ image: null, video: '/videos/production/laser-cutting.mp4' })
+const bendMedia = ref({ image: null, video: '/videos/production/bending-machine.mp4' })
 
 const productionCards = [
-    { key: 1, titleKey: 'production.card1_title', descKey: 'production.card1_desc', image: null, icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125' },
-    { key: 2, titleKey: 'production.card2_title', descKey: 'production.card2_desc', image: null, icon: 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085' },
-    { key: 3, titleKey: 'production.card3_title', descKey: 'production.card3_desc', image: null, icon: 'M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z' },
+    { key: 1, titleKey: 'production.card1_title', descKey: 'production.card1_desc', image: '/images/production/card1-design.jpg', icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125' },
+    { key: 2, titleKey: 'production.card2_title', descKey: 'production.card2_desc', image: '/images/production/card2-manufacturing.jpg', icon: 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085' },
+    { key: 3, titleKey: 'production.card3_title', descKey: 'production.card3_desc', image: '/images/production/card3-final.jpg', icon: 'M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z' },
 ]
 
-// Kayan galeri (marquee) — görsel eklendiğinde `image` alanına dosya yolunu yazın.
+// Kayan galeri (marquee)
 const gallerySlides = ref([
-    { image: null }, { image: null }, { image: null }, { image: null },
-    { image: null }, { image: null }, { image: null },
+    { image: '/images/production/gallery-1.jpg' },
+    { image: '/images/production/gallery-2.jpg' },
+    { image: '/images/production/gallery-3.jpg' },
+    { image: '/images/production/gallery-4.jpg' },
+    { image: '/images/production/gallery-5.jpg' },
+    { image: '/images/production/gallery-6.jpg' },
+    { image: '/images/production/gallery-7.jpg' },
 ])
 </script>
 
