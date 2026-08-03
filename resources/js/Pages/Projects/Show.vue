@@ -32,22 +32,20 @@ const localizedOthers = computed(() =>
 <template>
     <AppLayout>
         <!-- ═══════════════════════════════════════
-             HERO — ana proje görseli
+             HERO — görsel varsa büyük banner, yoksa kompakt başlık
         ═══════════════════════════════════════ -->
-        <section class="relative bg-[#0e1e3d] overflow-hidden">
+        <section v-if="images.length > 0" class="relative bg-[#0e1e3d] overflow-hidden">
             <div class="relative h-[42vh] min-h-[320px] max-h-[520px]">
-                <img v-if="images.length > 0" :src="images[0]" :alt="localizedProject.title"
-                    class="absolute inset-0 w-full h-full object-cover"/>
-                <div v-else class="absolute inset-0" style="background: linear-gradient(135deg,#0e1e3d 0%,#1B3163 60%,#1e3a72 100%)"></div>
+                <img :src="images[0]" :alt="localizedProject.title" class="absolute inset-0 w-full h-full object-cover"/>
                 <div class="absolute inset-0 bg-gradient-to-t from-[#0e1e3d] via-[#0e1e3d]/50 to-[#0e1e3d]/10"></div>
 
                 <div class="absolute inset-0 flex flex-col justify-end">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pb-10">
-                        <Link href="/projeler" class="inline-flex items-center gap-1.5 text-white/70 hover:text-white text-sm font-semibold mb-5 transition-colors">
+                        <Link href="/projeler" class="flex items-center gap-1.5 w-fit text-white/70 hover:text-white text-sm font-semibold mb-5 transition-colors">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                             {{ trans('common.back') }}
                         </Link>
-                        <span v-if="localizedProject.location" class="inline-flex items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+                        <span v-if="localizedProject.location" class="flex items-center gap-1.5 w-fit bg-white/10 backdrop-blur-sm border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
                             <svg class="w-3.5 h-3.5 text-[#3DAFC4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                             {{ localizedProject.location }}
                         </span>
@@ -56,6 +54,23 @@ const localizedOthers = computed(() =>
                         </h1>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Görsel yoksa: kompakt, sıkışık görünmeyen başlık -->
+        <section v-else class="bg-gradient-to-br from-[#1B3163] to-[#0e1e3d] py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Link href="/projeler" class="flex items-center gap-1.5 w-fit text-white/70 hover:text-white text-sm font-semibold mb-6 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    {{ trans('common.back') }}
+                </Link>
+                <span v-if="localizedProject.location" class="flex items-center gap-1.5 w-fit bg-white/10 backdrop-blur-sm border border-white/20 text-white px-3 py-1.5 rounded-full text-xs font-semibold mb-4">
+                    <svg class="w-3.5 h-3.5 text-[#3DAFC4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    {{ localizedProject.location }}
+                </span>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight max-w-4xl">
+                    {{ localizedProject.title }}
+                </h1>
             </div>
         </section>
 
