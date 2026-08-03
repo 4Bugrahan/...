@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
@@ -26,7 +27,10 @@ class Setting extends Model
         $locale = $locale ?? app()->getLocale();
 
         if (static::$requestCache === null) {
-            static::$requestCache = static::all()->keyBy('key');
+            // İstek-içi statik önbellek + 1 saatlik paylaşımlı önbellek: aynı
+            // istek boyunca tekrar tekrar okunsa da yalnızca bir sorgu çalışır,
+            // ayrıca sonraki isteklerde de veritabanına gitmeye gerek kalmaz.
+            static::$requestCache = Cache::remember('settings_all', 3600, fn () => static::all()->keyBy('key'));
         }
 
         $setting = static::$requestCache->get($key);
@@ -48,6 +52,7 @@ class Setting extends Model
     public static function clearCache(): void
     {
         static::$requestCache = null;
+        Cache::forget('settings_all');
     }
 
     public static function setValue(string $key, mixed $value): static

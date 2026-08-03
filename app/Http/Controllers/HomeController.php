@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Project;
 use App\Models\Setting;
 use App\Models\Slider;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,25 +18,33 @@ class HomeController extends Controller
     {
         $locale = app()->getLocale();
 
-        $sliders = Slider::active()->ordered()->get()->map(function ($slider) {
-            if ($slider->image && !str_starts_with($slider->image, 'http')) {
-                $slider->image = Storage::disk('public')->url($slider->image);
-            }
-            return $slider;
+        $sliders = Cache::remember('home_sliders', 3600, function () {
+            return Slider::active()->ordered()->get()->map(function ($slider) {
+                if ($slider->image && !str_starts_with($slider->image, 'http')) {
+                    $slider->image = Storage::disk('public')->url($slider->image);
+                }
+                return $slider;
+            });
         });
 
         $categories = $this->topLevelCategoriesWithCounts()->take(6)->values();
 
-        $featuredProducts = Product::active()
-            ->featured()
-            ->with('category')
-            ->ordered()
-            ->take(8)
-            ->get();
+        $featuredProducts = Cache::remember('home_featured_products', 3600, function () {
+            return Product::active()
+                ->featured()
+                ->with('category')
+                ->ordered()
+                ->take(8)
+                ->get();
+        });
 
-        $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
+        $partners = Cache::remember('home_partners', 3600, function () {
+            return Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
+        });
 
-        $recentProjects = Project::where('is_active', true)->latest()->take(3)->get();
+        $recentProjects = Cache::remember('home_recent_projects', 3600, function () {
+            return Project::where('is_active', true)->latest()->take(3)->get();
+        });
 
         // Hakkımızda görseli — relative URL (aynı siteden yüklensin); yoksa placeholder
         $imagePath = Setting::getValue('home_about_image', null);
