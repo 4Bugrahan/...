@@ -14,20 +14,7 @@ class ProductController extends Controller
     {
         $locale = app()->getLocale();
 
-        $categories = Category::active()
-            ->whereNull('parent_id')
-            ->ordered()
-            ->withCount('products')
-            ->get()
-            ->map(function ($cat) {
-                // Alt kategorilerdeki ürünleri de say
-                $childIds   = Category::where('parent_id', $cat->id)->pluck('id');
-                $totalCount = $childIds->isEmpty()
-                    ? $cat->products_count
-                    : Product::active()->whereIn('category_id', $childIds)->count();
-                $cat->total_products_count = $totalCount;
-                return $cat;
-            });
+        $categories = $this->topLevelCategoriesWithCounts();
 
         $pageContent = [
             'prod_page_title'  => Setting::getValue('prod_page_title',  'ÜRÜNLER', $locale),
@@ -62,27 +49,28 @@ class ProductController extends Controller
     public function category(Category $category): Response|\Illuminate\Http\RedirectResponse
     {
         $category->load('parent');
-        $allCategories = Category::active()->whereNull('parent_id')->ordered()->get();
+        $allCategories = $this->sidebarCategories(null);
 
         // Sidebar için aktif ana kategorinin alt kategorilerini bul
         $activeParentId = $category->parent_id ?? $category->id;
-        $sidebarChildren = Category::active()
-            ->where('parent_id', $activeParentId)
-            ->ordered()
-            ->get();
+        $sidebarChildren = $this->sidebarCategories($activeParentId);
+
+        // Sidebar/ilgili sayfalarda sadece id/slug/parent_id kullanılıyor —
+        // isim ve açıklama çevirileriyle birlikte tüm kolonları göndermeye gerek yok.
+        $categoryPayload = [
+            'id'        => $category->id,
+            'slug'      => $category->slug,
+            'parent_id' => $category->parent_id,
+        ];
 
         // Ana kategori ise alt kategorilerini göster
         if ($category->parent_id === null) {
             $children = $sidebarChildren;
 
             if ($children->isEmpty()) {
-                $products = Product::active()
-                    ->where('category_id', $category->id)
-                    ->ordered()->get();
-
                 return Inertia::render('Products/Category', [
-                    'category'        => $category,
-                    'products'        => $products,
+                    'category'        => $categoryPayload,
+                    'products'        => $this->paginatedProducts($category->id),
                     'subcategories'   => [],
                     'sidebarChildren' => [],
                     'categories'      => $allCategories,
@@ -95,18 +83,48 @@ class ProductController extends Controller
         }
 
         // Alt kategori ise ürünleri göster
-        $products = Product::active()
-            ->where('category_id', $category->id)
-            ->ordered()->get();
-
         return Inertia::render('Products/Category', [
-            'category'        => $category,
-            'products'        => $products,
+            'category'        => $categoryPayload,
+            'products'        => $this->paginatedProducts($category->id),
             'subcategories'   => [],
             'sidebarChildren' => $sidebarChildren,
             'categories'      => $allCategories,
             'seo'             => $this->categorySeo($category),
         ]);
+    }
+
+    /**
+     * Sidebar/alt kategori listeleri için sadece isim çevirisiyle sınırlı,
+     * hafif kategori koleksiyonu (açıklama hiçbir yerde gösterilmiyor).
+     */
+    private function sidebarCategories(?int $parentId)
+    {
+        $query = Category::active()->ordered();
+        $query = $parentId === null ? $query->whereNull('parent_id') : $query->where('parent_id', $parentId);
+
+        return $query->get(['id', 'name', 'slug', 'parent_id', 'translations'])
+            ->map(function ($cat) {
+                $cat->translations = ['name' => $cat->translations['name'] ?? []];
+                return $cat;
+            });
+    }
+
+    /**
+     * Kategori ürün listesi — sayfalanmış, sadece kart görünümünde
+     * kullanılan kolonlarla ve çeviri verisi isimle sınırlandırılmış.
+     */
+    private function paginatedProducts(int $categoryId)
+    {
+        return Product::active()
+            ->where('category_id', $categoryId)
+            ->ordered()
+            ->select(['id', 'name', 'slug', 'images', 'featured', 'translations'])
+            ->paginate(24)
+            ->withQueryString()
+            ->through(function ($product) {
+                $product->translations = ['name' => $product->translations['name'] ?? []];
+                return $product;
+            });
     }
 
     private function categorySeo(Category $category): array
@@ -137,7 +155,13 @@ class ProductController extends Controller
         $relatedProducts = Product::active()
             ->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)
-            ->ordered()->take(4)->get();
+            ->ordered()
+            ->select(['id', 'name', 'slug', 'images', 'translations'])
+            ->take(4)->get()
+            ->map(function ($p) {
+                $p->translations = ['name' => $p->translations['name'] ?? []];
+                return $p;
+            });
 
         $name = $product->getTranslated('name') ?: $product->name;
         $desc = $product->getTranslated('description') ?: $product->description;

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Project;
@@ -25,21 +24,7 @@ class HomeController extends Controller
             return $slider;
         });
 
-        $categories = Category::active()
-            ->whereNull('parent_id')
-            ->ordered()
-            ->withCount('products')
-            ->take(6)
-            ->get()
-            ->map(function ($cat) {
-                // Alt kategorilerdeki ürünleri de say
-                $childIds   = Category::where('parent_id', $cat->id)->pluck('id');
-                $totalCount = $childIds->isEmpty()
-                    ? $cat->products_count
-                    : Product::active()->whereIn('category_id', $childIds)->count();
-                $cat->total_products_count = $totalCount;
-                return $cat;
-            });
+        $categories = $this->topLevelCategoriesWithCounts()->take(6)->values();
 
         $featuredProducts = Product::active()
             ->featured()

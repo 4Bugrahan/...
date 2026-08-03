@@ -8,17 +8,16 @@ const { locale, trans, field } = useLocale()
 
 const props = defineProps({
     category:        { type: Object, required: true },
-    products:        { type: Array,  default: () => [] },
+    products:        { type: Object,  default: () => ({ data: [], links: [], total: 0 }) },
     subcategories:   { type: Array,  default: () => [] },
     sidebarChildren: { type: Array,  default: () => [] },
     categories:      { type: Array,  default: () => [] },
 })
 
 const localizedProducts = computed(() =>
-    props.products.map(p => ({
+    props.products.data.map(p => ({
         ...p,
         name: field(p, 'name') || p.name,
-        description: field(p, 'description') || p.description,
     }))
 )
 
@@ -139,7 +138,7 @@ const localizedSidebarChildren = computed(() =>
                         <template v-else>
                         <div class="flex items-center justify-between mb-6">
                             <p class="text-[#666] text-sm">
-                                <span class="font-bold text-[#1B3163]">{{ localizedProducts.length }}</span> {{ trans('products.product_count') }}
+                                <span class="font-bold text-[#1B3163]">{{ products.total ?? localizedProducts.length }}</span> {{ trans('products.product_count') }}
                             </p>
                         </div>
 
@@ -180,6 +179,15 @@ const localizedSidebarChildren = computed(() =>
                                     </div>
                                 </div>
                             </Link>
+                        </div>
+
+                        <!-- Sayfalama -->
+                        <div v-if="products.links && products.links.length > 3" class="flex flex-wrap gap-1.5 mt-10 justify-center">
+                            <Link v-for="(link, i) in products.links" :key="i" :href="link.url || ''"
+                                v-html="link.label"
+                                preserve-scroll
+                                class="px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors"
+                                :class="link.active ? 'bg-[#1B3163] text-white' : link.url ? 'bg-white text-[#1B3163] border border-gray-200 hover:border-[#0E7A8C]/50 hover:text-[#0E7A8C]' : 'text-gray-300 cursor-default pointer-events-none'" />
                         </div>
 
                         <!-- Empty State -->
