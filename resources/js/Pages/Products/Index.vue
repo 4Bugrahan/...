@@ -65,7 +65,7 @@ const getCoverImage = (slug) => `/images/categories-transparent/${slug}.png?v=2`
                         style="border: 1px solid #ececec; outline: none; -webkit-tap-highlight-color: transparent;"
                     >
                         <!-- Kapak görseli: sabit çerçeve + üzerinde büyüyen ürün görseli -->
-                        <div class="relative overflow-hidden aspect-[4/3]">
+                        <div class="relative overflow-hidden aspect-square">
                             <img :src="FRAME_IMAGE" alt="" draggable="false"
                                  class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
                             <img :src="getCoverImage(category.slug)" :alt="category.name" draggable="false"

@@ -368,7 +368,7 @@ function getInitials(name) {
             class="group cursor-pointer block rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_1px_3px_rgba(15,23,42,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(27,49,99,0.25)]"
             style="border: 1px solid #ececec; outline: none; -webkit-tap-highlight-color: transparent;">
             <!-- Kapak görseli: sabit çerçeve + üzerinde büyüyen ürün görseli -->
-            <div class="relative overflow-hidden aspect-[4/3]">
+            <div class="relative overflow-hidden aspect-square">
               <img :src="FRAME_IMAGE" alt="" draggable="false"
                    class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
               <img :src="getCoverImage(cat.slug)" :alt="cat.name" draggable="false"
