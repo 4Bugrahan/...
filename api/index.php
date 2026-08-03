@@ -66,4 +66,24 @@ putenv('APP_STORAGE=/tmp/storage');
 $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 
+// bootstrap/cache/*.php (services/packages/config/routes manifest'leri) normalde
+// Vercel'in build container'ında `composer install`'ın tetiklediği
+// `artisan package:discover` adımıyla üretilip salt-okunur fonksiyon paketine
+// gömülüyor. Bu adım build ortamında ara sıra eksik/tutarsız üretilebiliyor ve
+// çalışma zamanında düzeltilemiyor (dosya salt-okunur), bu da "view" gibi temel
+// servislerin container'a hiç kaydolmamasına ve tüm sitenin 500 vermesine yol
+// açıyordu. Bu cache dosyalarını /tmp'e yönlendirerek Laravel'in her soğuk
+// başlangıçta bunları gerçek vendor/composer durumundan canlı ve doğru şekilde
+// yeniden üretmesini sağlıyoruz.
+foreach ([
+    'APP_SERVICES_CACHE' => '/tmp/bootstrap/cache/services.php',
+    'APP_PACKAGES_CACHE' => '/tmp/bootstrap/cache/packages.php',
+    'APP_CONFIG_CACHE'   => '/tmp/bootstrap/cache/config.php',
+    'APP_ROUTES_CACHE'   => '/tmp/bootstrap/cache/routes-v7.php',
+    'APP_EVENTS_CACHE'   => '/tmp/bootstrap/cache/events.php',
+] as $key => $path) {
+    $_ENV[$key] = $path;
+    putenv("{$key}={$path}");
+}
+
 require __DIR__ . '/../public/index.php';
