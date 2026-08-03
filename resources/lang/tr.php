@@ -111,6 +111,7 @@ return [
     'projects.close'         => 'Kapat',
     'projects.other_projects' => 'Diğer Projeler',
     'projects.gallery'        => 'Proje Galerisi',
+    'projects.no_image'       => 'Görsel mevcut değil',
     'projects.location'      => 'Proje Lokasyonu',
     'projects.cta_h'         => 'Yeni Bir Proje mi Planlanıyor?',
     'projects.cta_p'         => 'İhtiyaca özel teknik proje hazırlanır; ekipman seçiminden kuruluma kadar tüm süreç yönetilir. Proje görüşmesi için iletişime geçin.',

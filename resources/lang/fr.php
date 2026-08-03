@@ -92,6 +92,7 @@ return array (
   'projects.close' => 'Fermer',
   'projects.other_projects' => 'Autres Projets',
   'projects.gallery' => 'Galerie du Projet',
+  'projects.no_image' => 'Aucune image disponible',
   'projects.location' => 'Lieu du projet',
   'projects.cta_h' => 'Vous envisagez de lancer un nouveau projet ?',
   'projects.cta_p' => 'Nous élaborons des plans techniques sur mesure en fonction de vos besoins spécifiques et prenons en charge l\'ensemble du processus, du choix des équipements à leur installation. N\'hésitez pas à nous contacter pour discuter de votre projet.',

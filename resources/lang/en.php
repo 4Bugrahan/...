@@ -111,6 +111,7 @@ return [
     'projects.close'         => 'Close',
     'projects.other_projects' => 'Other Projects',
     'projects.gallery'        => 'Project Gallery',
+    'projects.no_image'       => 'No image available',
     'projects.location'      => 'Project Location',
     'projects.cta_h'         => 'Planning a New Project?',
     'projects.cta_p'         => 'Custom technical project plans are prepared based on specific requirements; the entire process from equipment selection to installation is managed. Contact us to discuss your project.',
