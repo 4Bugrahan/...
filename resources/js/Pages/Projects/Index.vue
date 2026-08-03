@@ -41,15 +41,6 @@ function getInitials(name) {
 
 const c = (key, fallback = '') => props.pageContent[key] || fallback
 
-const selectedProject = ref(null)
-const selectedImageIndex = ref(0)
-
-function openProject(project) {
-    selectedProject.value = project
-    selectedImageIndex.value = 0
-}
-function closeModal() { selectedProject.value = null }
-
 const defaultProjects = [
     { id: 1, title: '5 Yıldızlı Otel — Merkez Mutfak Donanımı', description: '800 m² ana mutfak alanı için eksiksiz proje yönetimi. Pişirme grupları, endüstriyel soğutma, bulaşıkhane sistemleri ve paslanmaz mutfak ekipmanları anahtar teslim olarak kuruldu.', location: 'Sivas', images: null },
     { id: 2, title: 'Üniversite Hastanesi — Merkezi Mutfak Projesi', description: 'Günlük 1.200 porsiyon kapasiteli merkezi mutfak kurulumu. Sıcak yemek hatları, soğuk depo sistemleri ve HACCP uyumlu hazırlık ekipmanları komple devreye alındı.', location: 'Ankara', images: null },
@@ -126,8 +117,8 @@ const sectors = computed(() => [
         </div>
 
         <div v-if="displayProjects.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div v-for="project in displayProjects" :key="project.id"
-            @click="openProject(project)"
+          <component :is="project.slug ? Link : 'div'" v-for="project in displayProjects" :key="project.id"
+            :href="project.slug ? `/projeler/${project.slug}` : undefined"
             class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 cursor-pointer border border-transparent hover:border-[#3DAFC4]/20">
 
             <!-- Image -->
@@ -168,7 +159,7 @@ const sectors = computed(() => [
                 <svg class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
               </div>
             </div>
-          </div>
+          </component>
         </div>
 
         <div v-else class="text-center py-24">
@@ -182,64 +173,6 @@ const sectors = computed(() => [
         </div>
       </div>
     </section>
-
-    <!-- ═══════════════════════════════════════
-         MODAL
-    ═══════════════════════════════════════ -->
-    <Teleport to="body">
-      <Transition enter-active-class="transition duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100"
-        leave-active-class="transition duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0">
-        <div v-if="selectedProject" class="fixed inset-0 z-50 flex items-center justify-center p-4" @click.self="closeModal">
-          <div class="absolute inset-0 bg-[#0e1e3d]/80 backdrop-blur-sm" @click="closeModal"></div>
-          <div class="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto z-10">
-            <div class="relative">
-              <img v-if="selectedProject.image_urls && selectedProject.image_urls[selectedImageIndex]"
-                :src="selectedProject.image_urls[selectedImageIndex]"
-                :alt="field(selectedProject,'title') || selectedProject.title"
-                class="w-full h-72 object-cover rounded-t-2xl"/>
-              <div v-else class="w-full h-72 rounded-t-2xl flex items-center justify-center"
-                style="background:linear-gradient(135deg,#0e1e3d 0%,#1B3163 100%)">
-                <svg class="w-20 h-20 text-[#3DAFC4]/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-                </svg>
-              </div>
-              <div v-if="selectedProject.image_urls && selectedProject.image_urls.length > 1"
-                class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
-                <button v-for="(_,i) in selectedProject.image_urls" :key="i" @click="selectedImageIndex = i"
-                  class="h-2 rounded-full transition-all"
-                  :class="i === selectedImageIndex ? 'w-5 bg-[#3DAFC4]' : 'w-2 bg-white/50'">
-                </button>
-              </div>
-              <button @click="closeModal"
-                class="absolute top-4 right-4 w-9 h-9 bg-[#0e1e3d]/60 hover:bg-[#0e1e3d] text-white rounded-full flex items-center justify-center transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-              </button>
-            </div>
-            <div class="p-7">
-              <div class="flex items-start justify-between gap-4 mb-4">
-                <h2 class="text-2xl font-extrabold text-[#0e1e3d] leading-tight">{{ field(selectedProject,'title') || selectedProject.title }}</h2>
-                <span v-if="selectedProject.location" class="flex items-center gap-1.5 text-sm text-gray-500 bg-[#f4f5f6] px-3 py-1.5 rounded-full flex-shrink-0 font-semibold">
-                  <svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  {{ field(selectedProject,'location') || selectedProject.location }}
-                </span>
-              </div>
-              <p v-if="field(selectedProject,'description') || selectedProject.description"
-                class="text-gray-500 leading-relaxed text-[15px]">{{ field(selectedProject,'description') || selectedProject.description }}</p>
-              <div class="mt-7 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-3">
-                <Link href="/iletisim"
-                  class="flex-1 flex items-center justify-center gap-2 bg-[#1B3163] hover:bg-[#0E7A8C] text-white font-bold py-3.5 rounded-xl transition-colors text-sm">
-                  {{ trans('projects.quote') }}
-                </Link>
-                <button @click="closeModal"
-                  class="flex-1 border border-gray-200 hover:border-gray-300 text-gray-500 font-bold py-3.5 rounded-xl transition-colors text-sm">
-                  {{ trans('projects.close') }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
 
   </AppLayout>
 </template>

@@ -90,6 +90,8 @@ return array (
   'projects.empty_p' => 'Voltooide projecten worden hier binnenkort gepubliceerd.',
   'projects.req_similar' => 'Een soortgelijk project aanvragen',
   'projects.close' => 'Sluiten',
+  'projects.other_projects' => 'Andere Projecten',
+  'projects.gallery' => 'Projectgalerij',
   'projects.location' => 'Locatie van het project',
   'projects.cta_h' => 'Ben je van plan een nieuw project te starten?',
   'projects.cta_p' => 'Op basis van specifieke eisen worden technische projectplannen op maat opgesteld; het gehele proces, van de selectie van de apparatuur tot en met de installatie, wordt begeleid. Neem contact met ons op om uw project te bespreken.',

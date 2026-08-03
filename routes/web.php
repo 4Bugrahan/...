@@ -20,6 +20,7 @@ Route::get('/urunler/{category:slug}', [ProductController::class, 'category'])->
 Route::get('/urunler/{category:slug}/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/projeler', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projeler/{project:slug}', [ProjectController::class, 'show'])->name('projects.show');
 
 Route::get('/uretim', [PageController::class, 'production'])->name('production');
 

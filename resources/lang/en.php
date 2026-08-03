@@ -109,6 +109,8 @@ return [
     'projects.empty_p'       => 'Completed projects will be published here shortly.',
     'projects.req_similar'   => 'Request Similar Project',
     'projects.close'         => 'Close',
+    'projects.other_projects' => 'Other Projects',
+    'projects.gallery'        => 'Project Gallery',
     'projects.location'      => 'Project Location',
     'projects.cta_h'         => 'Planning a New Project?',
     'projects.cta_p'         => 'Custom technical project plans are prepared based on specific requirements; the entire process from equipment selection to installation is managed. Contact us to discuss your project.',

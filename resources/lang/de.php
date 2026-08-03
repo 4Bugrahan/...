@@ -90,6 +90,8 @@ return array (
   'projects.empty_p' => 'Abgeschlossene Projekte werden in Kürze hier veröffentlicht.',
   'projects.req_similar' => 'Ähnliches Projekt anfragen',
   'projects.close' => 'Schließen',
+  'projects.other_projects' => 'Weitere Projekte',
+  'projects.gallery' => 'Projektgalerie',
   'projects.location' => 'Projektstandort',
   'projects.cta_h' => 'Planen Sie ein neues Projekt?',
   'projects.cta_p' => 'Auf der Grundlage spezifischer Anforderungen werden maßgeschneiderte technische Projektpläne erstellt; der gesamte Prozess von der Geräteauswahl bis zur Installation wird von uns betreut. Kontaktieren Sie uns, um Ihr Projekt zu besprechen.',
