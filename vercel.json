@@ -1,6 +1,7 @@
 {
   "version": 2,
   "framework": null,
+  "regions": ["fra1"],
   "buildCommand": "echo 'Skipping frontend build'",
   "installCommand": "echo 'Skipping npm install'",
   "functions": {
