@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -24,6 +26,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('projects', ProjectController::class)->except('show');
     Route::resource('partners', PartnerController::class)->except('show');
+    Route::resource('contacts', ContactController::class)->only(['index', 'show', 'destroy']);
+
+    Route::get('/about', [AboutController::class, 'edit'])->name('about.edit');
+    Route::post('/about', [AboutController::class, 'update'])->name('about.update');
 
     Route::post('/translate', [TranslateController::class, 'translate'])->name('translate');
     Route::post('/translate-batch', [TranslateController::class, 'translateBatch'])->name('translate.batch');

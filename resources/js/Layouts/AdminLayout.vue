@@ -4,6 +4,7 @@ import { computed } from 'vue'
 
 const page = usePage()
 const user = computed(() => page.props.auth?.user)
+const unreadContacts = computed(() => page.props.unreadContacts || 0)
 
 function logout() {
     router.post('/admin/logout')
@@ -28,6 +29,15 @@ function logout() {
         </Link>
         <Link href="/admin/partners" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
           Markalar / Tedarikçiler
+        </Link>
+        <Link href="/admin/about" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
+          Hakkımızda
+        </Link>
+        <Link href="/admin/contacts" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors flex items-center justify-between">
+          <span>İletişim Mesajları</span>
+          <span v-if="unreadContacts > 0" class="bg-[#0E7A8C] text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">
+            {{ unreadContacts }}
+          </span>
         </Link>
       </nav>
       <div class="px-5 py-4 border-t border-white/10 text-xs text-white/60">

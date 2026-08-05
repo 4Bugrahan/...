@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Partner;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,6 +30,12 @@ class PageController extends Controller
         $pageContent = collect($aboutKeys)
             ->mapWithKeys(fn ($k) => [$k => Setting::getValue($k, '', $locale)])
             ->toArray();
+
+        // Kurumsal profil görseli — relative path ise storage URL'ine çevir
+        $imagePath = Setting::getValue('about_profile_image', null, 'tr');
+        $pageContent['about_profile_image'] = $imagePath
+            ? (str_starts_with($imagePath, 'http') ? $imagePath : Storage::disk('public')->url(ltrim($imagePath, '/')))
+            : null;
 
         $seo = $this->pageSeo(
             'about',

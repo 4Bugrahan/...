@@ -58,6 +58,8 @@ const steps = computed(() => [
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div>
+                        <img v-if="c('about_profile_image')" :src="c('about_profile_image')" alt="4B Grup"
+                            class="w-full h-64 object-cover rounded-2xl mb-8 shadow-sm" />
                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('about.profile_label') }}</p>
                         <h2 class="text-3xl sm:text-4xl font-black text-[#1B3163] mb-6 leading-tight">
                             {{ c('about_profile_title', '15 Yıllık Sektör Deneyimi, Anahtar Teslim Mutfak Projeleri') }}
