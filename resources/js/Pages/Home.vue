@@ -470,9 +470,11 @@ function getInitials(name) {
 
         <!-- Project cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div
+          <component
+            :is="project.slug ? Link : 'div'"
             v-for="(project, i) in (recentProjects.length ? recentProjects : defaultProjects)"
             :key="project.id"
+            v-bind="project.slug ? { href: `/projeler/${project.slug}` } : {}"
             class="group relative rounded-2xl overflow-hidden bg-white border border-gray-100 hover:border-[#3DAFC4]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
             <!-- Image / gradient bg -->
             <div class="aspect-[4/3] relative overflow-hidden bg-[#f4f5f6]">
@@ -503,7 +505,7 @@ function getInitials(name) {
                 {{ field(project, 'description') || project.description }}
               </p>
             </div>
-          </div>
+          </component>
         </div>
       </div>
     </section>
