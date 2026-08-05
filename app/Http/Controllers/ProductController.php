@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -47,11 +48,14 @@ class ProductController extends Controller
         ])->values());
     }
 
+    /**
+     * Ürünler sayfası artık kategori kutucuklarıyla açılmıyor — doğrudan
+     * tüm aktif ürünleri (sayfalanmış) listeliyor; kategoriye göre daraltma
+     * arama çubuğunun yanındaki "Kategoriler" filtresiyle yapılıyor.
+     */
     public function index(): Response
     {
         $locale = app()->getLocale();
-
-        $categories = $this->topLevelCategoriesWithCounts();
 
         $pageContent = [
             'prod_page_title'  => Setting::getValue('prod_page_title',  'ÜRÜNLER', $locale),
@@ -60,15 +64,43 @@ class ProductController extends Controller
         ];
 
         return Inertia::render('Products/Index', [
-            'categories'  => $categories,
-            'pageContent' => $pageContent,
-            'seo'         => $this->pageSeo(
+            'products'     => $this->paginatedProducts(),
+            'categoryTree' => $this->categoryTree(),
+            'pageContent'  => $pageContent,
+            'seo'          => $this->pageSeo(
                 'products',
                 'Ürünler | Endüstriyel Mutfak Ekipmanları - 4B Grup',
                 '4B Grup\'un pişirme grupları, bulaşıkhane ekipmanları, soğuk muhafaza üniteleri ve nötr ekipmanlardan oluşan geniş endüstriyel mutfak ekipmanları kataloğunu inceleyin.',
                 'endüstriyel mutfak ekipmanları, pişirme grubu, bulaşık makinesi, paslanmaz çelik tezgah, soğuk hava deposu'
             ),
         ]);
+    }
+
+    /**
+     * Sidebar/mobil "Kategoriler" filtresinde kullanılan iç içe kategori
+     * ağacı (ana kategori + altındaki alt kategoriler). 1 saatliğine
+     * önbelleğe alınıyor (bkz. topLevelCategoriesWithCounts).
+     */
+    private function categoryTree()
+    {
+        return Cache::remember('products_category_tree', 3600, function () {
+            $all = Category::active()->ordered()->get(['id', 'name', 'slug', 'parent_id', 'translations']);
+
+            return $all->whereNull('parent_id')->map(function ($parent) use ($all) {
+                return [
+                    'id'           => $parent->id,
+                    'name'         => $parent->name,
+                    'slug'         => $parent->slug,
+                    'translations' => ['name' => $parent->translations['name'] ?? []],
+                    'children'     => $all->where('parent_id', $parent->id)->map(fn ($c) => [
+                        'id'           => $c->id,
+                        'name'         => $c->name,
+                        'slug'         => $c->slug,
+                        'translations' => ['name' => $c->translations['name'] ?? []],
+                    ])->values(),
+                ];
+            })->values();
+        });
     }
 
     /**
@@ -174,19 +206,23 @@ class ProductController extends Controller
     }
 
     /**
-     * Kategori ürün listesi — sayfalanmış, sadece kart görünümünde
-     * kullanılan kolonlarla ve çeviri verisi isimle sınırlandırılmış.
+     * Ürün listesi — sayfalanmış, sadece kart görünümünde kullanılan
+     * kolonlarla ve çeviri verisi isimle sınırlandırılmış. $categoryId
+     * verilmezse (Ürünler ana sayfası) tüm aktif ürünler döner; her ürünün
+     * kendi kategori slug'ı da eklenir (kart linki bunu kullanıyor).
      */
-    private function paginatedProducts(int $categoryId)
+    private function paginatedProducts(?int $categoryId = null)
     {
         return Product::active()
-            ->where('category_id', $categoryId)
+            ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
+            ->with('category:id,slug')
             ->ordered()
-            ->select(['id', 'name', 'slug', 'images', 'featured', 'translations'])
+            ->select(['id', 'name', 'slug', 'images', 'featured', 'translations', 'category_id'])
             ->paginate(24)
             ->withQueryString()
             ->through(function ($product) {
                 $product->translations = ['name' => $product->translations['name'] ?? []];
+                $product->category_slug = $product->category?->slug;
                 return $product;
             });
     }
