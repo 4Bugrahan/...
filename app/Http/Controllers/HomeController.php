@@ -65,8 +65,11 @@ class HomeController extends Controller
             /* Hakkımızda */
             'about_label'   => Setting::getValue('home_about_label',  'Hakkımızda',   $locale),
             'about_title'   => Setting::getValue('home_about_title',  '',             $locale),
-            'about_text1'   => Setting::getValue('home_about_text1',  '',             $locale),
-            'about_text2'   => Setting::getValue('home_about_text2',  '',             $locale),
+            // Not: bu iki paragraf bilinçli olarak Kurumsal sayfanın "Hakkımızda"
+            // panelindeki (about_profile_text1/2) ayarını kullanıyor, kendi ayrı
+            // anahtarı yok — panelden Kurumsal'ı güncelleyince anasayfa da değişsin diye.
+            'about_text1'   => Setting::getValue('about_profile_text1', '',           $locale),
+            'about_text2'   => Setting::getValue('about_profile_text2', '',           $locale),
             'about_image'   => $aboutImage,
             'about_bullet1' => Setting::getValue('home_about_bullet1', '',            $locale),
             'about_bullet2' => Setting::getValue('home_about_bullet2', '',            $locale),
