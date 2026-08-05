@@ -361,7 +361,8 @@ onUnmounted(() => {
         v-show="showBackToTop"
         @click="scrollToTop"
         :aria-label="trans('common.back_to_top_aria')"
-        class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[#1B3163] hover:bg-[#0E7A8C] text-white shadow-lg shadow-[#1B3163]/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
+        class="fixed right-6 z-50 w-12 h-12 rounded-full bg-[#1B3163] hover:bg-[#0E7A8C] text-white shadow-lg shadow-[#1B3163]/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
+        :class="hideFloatingCta ? 'bottom-24 lg:bottom-6' : 'bottom-6'"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
