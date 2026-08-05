@@ -133,7 +133,7 @@ const mobileFiltersOpen = ref(false)
                             <Link
                                 v-for="product in localizedProducts"
                                 :key="product.id"
-                                :href="`/urunler/${category.slug}/${product.slug}`"
+                                :href="`/urunler/${product.category_slug || category.slug}/${product.slug}`"
                                 class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                             >
                                 <!-- Product Image -->
