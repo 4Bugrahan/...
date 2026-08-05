@@ -10,8 +10,14 @@ class Partner extends Model
 {
     use HasTranslations;
 
+    /** Yetkili satış/servis ortağı olduğumuz markalar */
+    public const TYPE_PARTNER = 'partner';
+    /** Hizmet verdiğimiz kurum ve işletmeler (referans müşteriler) */
+    public const TYPE_CLIENT = 'client';
+
     protected $fillable = [
         'name',
+        'type',
         'logo',
         'website',
         'order',
@@ -29,7 +35,11 @@ class Partner extends Model
     public function getLogoUrlAttribute(): ?string
     {
         if (!$this->logo) return null;
-        if (str_starts_with($this->logo, 'http')) return $this->logo;
+        // http(s) tam URL veya /images/... gibi public/ altındaki statik bir
+        // dosya ise (örn. eski hardcoded referans görselleri) olduğu gibi kullan.
+        if (str_starts_with($this->logo, 'http') || str_starts_with($this->logo, '/')) {
+            return $this->logo;
+        }
         return Storage::disk('public')->url($this->logo);
     }
 
@@ -41,5 +51,10 @@ class Partner extends Model
     public function scopeOrdered($query)
     {
         return $query->orderBy('order')->orderBy('name');
+    }
+
+    public function scopeType($query, string $type)
+    {
+        return $query->where('type', $type);
     }
 }

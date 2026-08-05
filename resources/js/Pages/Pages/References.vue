@@ -5,6 +5,7 @@ import { useLocale } from '@/composables/useLocale.js'
 
 const props = defineProps({
     partners: { type: Array, default: () => [] },
+    clients:  { type: Array, default: () => [] },
 })
 
 const { field, trans } = useLocale()
@@ -13,23 +14,13 @@ const displayPartners = computed(() =>
     props.partners.map(p => ({ ...p, name: field(p, 'name') || p.name }))
 )
 
+const displayClients = computed(() =>
+    props.clients.map(c => ({ ...c, name: field(c, 'name') || c.name }))
+)
+
 function getInitials(name) {
     return name.split(' ').map(w => w[0]).join('').slice(0, 3).toUpperCase()
 }
-
-const references = [
-    { name: 'Coffee & Study', logo: '/images/references/coffee-study.jpg?v=2' },
-    { name: 'Colombia Coffee', logo: '/images/references/colombia-coffee.jpg?v=2' },
-    { name: "Gloria Jean's", logo: '/images/references/gloria-jeans.jpg?v=2' },
-    { name: 'T.C. Gençlik ve Spor Bakanlığı', logo: '/images/references/gsb.png?v=2' },
-    { name: 'T.C. Millî Eğitim Bakanlığı', logo: '/images/references/meb.png?v=2' },
-    { name: 'T.C. Millî Savunma Bakanlığı', logo: '/images/references/msb.png?v=2' },
-    { name: 'T.C. Sağlık Bakanlığı', logo: '/images/references/saglik-bakanligi.png?v=2' },
-    { name: 'Sivas Bilim ve Teknoloji Üniversitesi', logo: '/images/references/sivas-bilim-teknoloji.jpg?v=2' },
-    { name: 'Sivas Cumhuriyet Üniversitesi', logo: '/images/references/sivas-cumhuriyet.png?v=2' },
-    { name: 'TANAP', logo: '/images/references/tanap.png?v=2' },
-    { name: 'Turgut Fırat Proje İnşaat A.Ş.', logo: '/images/references/turgut-firat.png?v=2' },
-]
 </script>
 
 <template>
@@ -88,12 +79,23 @@ const references = [
                 </div>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                    <div v-for="(ref, i) in references" :key="i"
-                        class="flex items-center justify-center bg-white border border-gray-200 rounded-xl p-6 h-44 hover:border-[#0E7A8C]/60 hover:shadow-md transition-all duration-300"
+                    <component
+                        v-for="client in displayClients" :key="client.id"
+                        :is="client.website ? 'a' : 'div'"
+                        :href="client.website || undefined"
+                        :target="client.website ? '_blank' : undefined"
+                        :rel="client.website ? 'noopener noreferrer' : undefined"
+                        class="flex items-center justify-center bg-white border border-gray-200 rounded-xl p-6 h-44 hover:border-[#0E7A8C]/60 hover:shadow-md transition-all duration-300 cursor-default"
                     >
-                        <img :src="ref.logo" :alt="ref.name" loading="lazy"
+                        <img v-if="client.logo_url" :src="client.logo_url" :alt="client.name" loading="lazy"
                             class="w-full h-32 object-contain transition-all duration-300"/>
-                    </div>
+                        <div v-else class="text-center">
+                            <div class="w-12 h-12 bg-[#1B3163]/10 border border-[#1B3163]/20 rounded-lg flex items-center justify-center text-[#1B3163] font-extrabold text-sm mx-auto mb-1.5">
+                                {{ getInitials(client.name) }}
+                            </div>
+                            <span class="text-xs font-semibold text-[#1B3163]/60 leading-tight block">{{ client.name }}</span>
+                        </div>
+                    </component>
                 </div>
             </div>
         </section>

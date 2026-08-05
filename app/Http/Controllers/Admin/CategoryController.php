@@ -12,17 +12,39 @@ use Inertia\Response;
 
 class CategoryController extends Controller
 {
+    /**
+     * Kategoriler az sayıda (~40) olduğu için sayfalamak yerine hepsini
+     * çekip ana kategori + altındaki alt kategoriler şeklinde bir ağaç
+     * olarak gösteriyoruz — düz/karışık liste yerine gerçek hiyerarşiyi
+     * yansıtsın diye. Arama yapılırken hiyerarşi anlamlı olmadığından
+     * düz sonuç listesine dönülüyor.
+     */
     public function index(Request $request): Response
     {
-        $categories = Category::withCount('products')
-            ->with('parent')
+        $search = $request->search;
+
+        $all = Category::withCount('products')
+            ->with('parent:id,name')
             ->ordered()
-            ->when($request->search, fn ($q, $s) => $q->where('name', 'ilike', "%{$s}%"))
-            ->paginate(20)
-            ->withQueryString();
+            ->when($search, fn ($q, $s) => $q->where('name', 'ilike', "%{$s}%"))
+            ->get();
+
+        if ($search) {
+            return Inertia::render('Admin/Categories/Index', [
+                'tree' => null,
+                'flat' => $all->values(),
+                'filters' => $request->only(['search']),
+            ]);
+        }
+
+        $tree = $all->whereNull('parent_id')->map(function ($parent) use ($all) {
+            $parent->setRelation('children', $all->where('parent_id', $parent->id)->values());
+            return $parent;
+        })->values();
 
         return Inertia::render('Admin/Categories/Index', [
-            'categories' => $categories,
+            'tree' => $tree,
+            'flat' => null,
             'filters' => $request->only(['search']),
         ]);
     }

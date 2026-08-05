@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link, router } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import AdminLayout from '@/Layouts/AdminLayout.vue'
 
 const props = defineProps({
@@ -11,6 +11,21 @@ const props = defineProps({
 
 const search = ref(props.filters?.search || '')
 const categoryId = ref(props.filters?.category_id || '')
+
+// Filtre dropdown'ını "Ana Kategori > Alt Kategori" şeklinde grupla —
+// düz/karışık bir liste yerine gerçek hiyerarşiyi göstersin diye.
+const groupedCategories = computed(() => {
+  const parents = props.categories.filter(c => !c.parent_id)
+  return parents.map(parent => ({
+    ...parent,
+    children: props.categories.filter(c => c.parent_id === parent.id),
+  }))
+})
+
+function categoryPath(category) {
+  if (!category) return '—'
+  return category.parent ? `${category.parent.name} / ${category.name}` : category.name
+}
 
 function applyFilters() {
   router.get('/admin/products', { search: search.value, category_id: categoryId.value }, {
@@ -42,7 +57,12 @@ function destroy(product) {
         class="border border-gray-200 rounded-lg px-3 py-2 text-sm flex-1 max-w-xs focus:outline-none focus:ring-2 focus:ring-[#3DAFC4]" />
       <select v-model="categoryId" @change="applyFilters" class="border border-gray-200 rounded-lg px-3 py-2 text-sm">
         <option value="">Tüm Kategoriler</option>
-        <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+        <template v-for="parent in groupedCategories" :key="parent.id">
+          <optgroup :label="parent.name">
+            <option :value="parent.id">{{ parent.name }} (genel)</option>
+            <option v-for="child in parent.children" :key="child.id" :value="child.id">{{ child.name }}</option>
+          </optgroup>
+        </template>
       </select>
       <button @click="applyFilters" class="text-sm font-semibold text-[#0E7A8C]">Filtrele</button>
     </div>
@@ -66,7 +86,7 @@ function destroy(product) {
               <div v-else class="w-12 h-12 bg-gray-100 rounded-lg"></div>
             </td>
             <td class="px-4 py-3 font-semibold text-gray-800">{{ product.name }}</td>
-            <td class="px-4 py-3 text-gray-500">{{ product.category?.name }}</td>
+            <td class="px-4 py-3 text-gray-500">{{ categoryPath(product.category) }}</td>
             <td class="px-4 py-3">
               <span v-if="product.featured" class="text-xs font-bold text-[#0E7A8C]">Evet</span>
               <span v-else class="text-xs text-gray-400">—</span>

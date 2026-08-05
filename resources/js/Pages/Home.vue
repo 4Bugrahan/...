@@ -8,6 +8,7 @@ const props = defineProps({
     sliders:          { type: Array,  default: () => [] },
     categories:       { type: Array,  default: () => [] },
     partners:         { type: Array,  default: () => [] },
+    clients:          { type: Array,  default: () => [] },
     featuredProducts: { type: Array,  default: () => [] },
     recentProjects:   { type: Array,  default: () => [] },
     pageContent:      { type: Object, default: () => ({}) },
@@ -172,19 +173,9 @@ const displayPartners = computed(() =>
     }))
 )
 
-const references = [
-    { name: 'Coffee & Study', logo_url: '/images/references/coffee-study.jpg?v=2' },
-    { name: 'Colombia Coffee', logo_url: '/images/references/colombia-coffee.jpg?v=2' },
-    { name: "Gloria Jean's", logo_url: '/images/references/gloria-jeans.jpg?v=2' },
-    { name: 'T.C. Gençlik ve Spor Bakanlığı', logo_url: '/images/references/gsb.png?v=2' },
-    { name: 'T.C. Millî Eğitim Bakanlığı', logo_url: '/images/references/meb.png?v=2' },
-    { name: 'T.C. Millî Savunma Bakanlığı', logo_url: '/images/references/msb.png?v=2' },
-    { name: 'T.C. Sağlık Bakanlığı', logo_url: '/images/references/saglik-bakanligi.png?v=2' },
-    { name: 'Sivas Bilim ve Teknoloji Üniversitesi', logo_url: '/images/references/sivas-bilim-teknoloji.jpg?v=2' },
-    { name: 'Sivas Cumhuriyet Üniversitesi', logo_url: '/images/references/sivas-cumhuriyet.png?v=2' },
-    { name: 'TANAP', logo_url: '/images/references/tanap.png?v=2' },
-    { name: 'Turgut Fırat Proje İnşaat A.Ş.', logo_url: '/images/references/turgut-firat.png?v=2' },
-].map((r, i) => ({ ...r, id: `ref-${i}` }))
+const displayClients = computed(() =>
+    props.clients.map(c => ({ ...c, name: field(c, 'name') || c.name }))
+)
 
 const displayCategories = computed(() =>
     props.categories.map(c => ({ ...c, name: field(c, 'name') || c.name }))
@@ -540,7 +531,7 @@ function getInitials(name) {
           <!-- Items x2 for seamless loop -->
           <template v-for="n in 2" :key="n">
             <component
-              v-for="partner in references" :key="`${n}-${partner.id}`"
+              v-for="partner in displayClients" :key="`${n}-${partner.id}`"
               :is="partner.website ? 'a' : 'div'"
               :href="partner.website || undefined"
               :target="partner.website ? '_blank' : undefined"

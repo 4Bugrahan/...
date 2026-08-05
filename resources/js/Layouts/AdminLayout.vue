@@ -15,7 +15,9 @@ function logout() {
   <div class="min-h-screen bg-[#F4F6F9] flex">
     <aside class="w-60 bg-[#1B3163] text-white flex flex-col">
       <div class="px-5 py-5 border-b border-white/10">
-        <span class="font-bold text-lg">4B Grup Panel</span>
+        <div class="bg-white rounded-lg px-3 py-2.5 inline-block">
+          <img src="/images/logo.png" alt="4B Grup" class="h-8 w-auto" />
+        </div>
       </div>
       <nav class="flex-1 py-4 flex flex-col gap-1 px-3">
         <Link href="/admin/products" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">

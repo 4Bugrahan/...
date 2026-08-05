@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function index(Request $request): Response
     {
-        $products = Product::with('category')
+        $products = Product::with('category.parent')
             ->ordered()
             ->when($request->search, fn ($q, $s) => $q->where('name', 'ilike', "%{$s}%"))
             ->when($request->category_id, fn ($q, $c) => $q->where('category_id', $c))
@@ -24,7 +24,7 @@ class ProductController extends Controller
 
         return Inertia::render('Admin/Products/Index', [
             'products' => $products,
-            'categories' => Category::ordered()->get(['id', 'name']),
+            'categories' => Category::ordered()->get(['id', 'name', 'parent_id']),
             'filters' => $request->only(['search', 'category_id']),
         ]);
     }

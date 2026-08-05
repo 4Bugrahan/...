@@ -5,12 +5,19 @@ import AdminLayout from '@/Layouts/AdminLayout.vue'
 
 const props = defineProps({
   partner: Object,
+  defaultType: { type: String, default: 'partner' },
 })
 
 const isEdit = !!props.partner
 
+const typeOptions = [
+  { value: 'partner', label: 'Marka / Tedarikçi' },
+  { value: 'client', label: 'Hizmet Verdiğimiz Kurum' },
+]
+
 const form = useForm({
   name: props.partner?.name || '',
+  type: props.partner?.type || props.defaultType,
   website: props.partner?.website || '',
   order: props.partner?.order || 0,
   is_active: props.partner?.is_active ?? true,
@@ -34,14 +41,33 @@ function submit() {
 </script>
 
 <template>
-  <Head><title>{{ isEdit ? 'Marka Düzenle' : 'Yeni Marka' }} | Admin</title></Head>
+  <Head><title>{{ isEdit ? 'Kayıt Düzenle' : 'Yeni Kayıt' }} | Admin</title></Head>
 
   <AdminLayout>
-    <h1 class="text-xl font-bold text-[#1B3163] mb-6">{{ isEdit ? 'Marka Düzenle' : 'Yeni Marka' }}</h1>
+    <h1 class="text-xl font-bold text-[#1B3163] mb-6">{{ isEdit ? 'Kayıt Düzenle' : 'Yeni Kayıt' }}</h1>
 
     <form @submit.prevent="submit" class="bg-white rounded-xl shadow-sm p-6 space-y-5 max-w-lg">
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-1">Marka Adı</label>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Tür</label>
+        <div class="flex gap-2">
+          <button
+            v-for="opt in typeOptions"
+            :key="opt.value"
+            type="button"
+            @click="form.type = opt.value"
+            class="flex-1 px-3 py-2 rounded-lg text-sm font-semibold border transition-colors"
+            :class="form.type === opt.value
+              ? 'bg-[#0E7A8C] text-white border-[#0E7A8C]'
+              : 'bg-white text-gray-500 border-gray-200 hover:border-[#0E7A8C]/50'"
+          >
+            {{ opt.label }}
+          </button>
+        </div>
+        <p v-if="form.errors.type" class="text-red-600 text-xs mt-1">{{ form.errors.type }}</p>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-1">Ad</label>
         <input v-model="form.name" type="text" required
           class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#3DAFC4]" />
         <p v-if="form.errors.name" class="text-red-600 text-xs mt-1">{{ form.errors.name }}</p>

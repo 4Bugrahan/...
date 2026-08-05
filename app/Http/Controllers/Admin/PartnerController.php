@@ -13,7 +13,10 @@ class PartnerController extends Controller
 {
     public function index(Request $request): Response
     {
+        $type = $request->type === Partner::TYPE_CLIENT ? Partner::TYPE_CLIENT : Partner::TYPE_PARTNER;
+
         $partners = Partner::ordered()
+            ->type($type)
             ->when($request->search, fn ($q, $s) => $q->where('name', 'ilike', "%{$s}%"))
             ->paginate(30)
             ->withQueryString();
@@ -21,13 +24,15 @@ class PartnerController extends Controller
         return Inertia::render('Admin/Partners/Index', [
             'partners' => $partners,
             'filters'  => $request->only(['search']),
+            'type'     => $type,
         ]);
     }
 
-    public function create(): Response
+    public function create(Request $request): Response
     {
         return Inertia::render('Admin/Partners/Form', [
             'partner' => null,
+            'defaultType' => $request->type === Partner::TYPE_CLIENT ? Partner::TYPE_CLIENT : Partner::TYPE_PARTNER,
         ]);
     }
 
@@ -38,13 +43,14 @@ class PartnerController extends Controller
 
         Partner::create($data);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Marka eklendi.');
+        return redirect()->route('admin.partners.index', ['type' => $data['type']])->with('success', 'Kayıt eklendi.');
     }
 
     public function edit(Partner $partner): Response
     {
         return Inertia::render('Admin/Partners/Form', [
             'partner' => $partner,
+            'defaultType' => $partner->type,
         ]);
     }
 
@@ -62,21 +68,23 @@ class PartnerController extends Controller
 
         $partner->update($data);
 
-        return redirect()->route('admin.partners.index')->with('success', 'Marka güncellendi.');
+        return redirect()->route('admin.partners.index', ['type' => $data['type']])->with('success', 'Kayıt güncellendi.');
     }
 
     public function destroy(Partner $partner): \Illuminate\Http\RedirectResponse
     {
+        $type = $partner->type;
         ImageService::delete($partner->logo);
         $partner->delete();
 
-        return redirect()->route('admin.partners.index')->with('success', 'Marka silindi.');
+        return redirect()->route('admin.partners.index', ['type' => $type])->with('success', 'Kayıt silindi.');
     }
 
     private function validated(Request $request): array
     {
         return $request->validate([
             'name'      => ['required', 'string', 'max:255'],
+            'type'      => ['required', 'in:'.Partner::TYPE_PARTNER.','.Partner::TYPE_CLIENT],
             'website'   => ['nullable', 'string', 'max:255'],
             'order'     => ['integer'],
             'is_active' => ['boolean'],

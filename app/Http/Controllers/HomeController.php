@@ -38,8 +38,12 @@ class HomeController extends Controller
                 ->get();
         });
 
-        $partners = Cache::remember('home_partners', 3600, function () {
-            return Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
+        $partners = Cache::remember('home_partners_v2', 3600, function () {
+            return Partner::active()->type(Partner::TYPE_PARTNER)->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
+        });
+
+        $clients = Cache::remember('home_clients_v2', 3600, function () {
+            return Partner::active()->type(Partner::TYPE_CLIENT)->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
         });
 
         $recentProjects = Cache::remember('home_recent_projects', 3600, function () {
@@ -104,6 +108,7 @@ class HomeController extends Controller
             'featuredProducts' => $featuredProducts,
             'recentProjects'   => $recentProjects,
             'partners'         => $partners,
+            'clients'          => $clients,
             'pageContent'      => $pageContent,
             'seo'              => $this->pageSeo(
                 'home',

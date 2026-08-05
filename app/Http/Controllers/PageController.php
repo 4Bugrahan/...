@@ -82,7 +82,9 @@ class PageController extends Controller
 
     public function references(): Response
     {
-        $partners = Partner::active()->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
+        $columns = ['id', 'name', 'translations', 'logo', 'website', 'order'];
+        $partners = Partner::active()->type(Partner::TYPE_PARTNER)->ordered()->get($columns);
+        $clients  = Partner::active()->type(Partner::TYPE_CLIENT)->ordered()->get($columns);
 
         $seo = $this->pageSeo(
             'references',
@@ -91,6 +93,6 @@ class PageController extends Controller
             '4b grup referanslar, iş ortakları, müşteri referansları'
         );
 
-        return Inertia::render('Pages/References', ['partners' => $partners, 'seo' => $seo]);
+        return Inertia::render('Pages/References', ['partners' => $partners, 'clients' => $clients, 'seo' => $seo]);
     }
 }

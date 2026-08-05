@@ -26,8 +26,10 @@ class ImageService
 
     public static function delete(?string $path): void
     {
-        if ($path && ! str_starts_with($path, 'http')) {
-            Storage::disk('public')->delete(ltrim($path, '/'));
+        // http(s) tam URL veya /images/... gibi public/ altındaki statik bir
+        // dosyaysa (storage disk'inde hiç yok) silme denemesine gerek yok.
+        if ($path && ! str_starts_with($path, 'http') && ! str_starts_with($path, '/')) {
+            Storage::disk('public')->delete($path);
         }
     }
 }
