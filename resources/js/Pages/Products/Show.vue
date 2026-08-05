@@ -46,6 +46,18 @@ const localizedRelated = computed(() =>
 
 <template>
     <AppLayout>
+        <!-- ═══════════════════════════════════════
+             ÜST ÇUBUK — geri dönüş linki (kategoriye)
+        ═══════════════════════════════════════ -->
+        <section class="bg-white py-6 border-b border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Link :href="`/urunler/${category.slug}`" class="flex items-center gap-1.5 w-fit text-[#666] hover:text-[#0E7A8C] text-sm font-semibold transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    {{ trans('common.back') }}
+                </Link>
+            </div>
+        </section>
+
         <!-- Product Detail -->
         <section class="py-12 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
