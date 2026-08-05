@@ -103,7 +103,7 @@ const localizedRelated = computed(() =>
                         <div class="flex items-center gap-3 mb-4">
                             <Link
                                 :href="`/urunler/${category.slug}`"
-                                class="text-xs font-semibold text-[#0E7A8C] bg-[#0E7A8C]/10 px-3 py-1.5 rounded-full hover:bg-[#0E7A8C]/20 transition-colors"
+                                class="inline-flex items-center text-xs sm:text-sm font-bold text-white bg-[#0E7A8C] hover:bg-[#0B6575] px-4 py-2 rounded-full shadow-sm transition-colors"
                             >
                                 {{ localizedCategory.name }}
                             </Link>
