@@ -498,8 +498,8 @@ function getInitials(name) {
               <!-- Dark gradient bottom -->
               <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               <!-- Location badge -->
-              <div v-if="project.location" class="absolute top-4 right-4 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm border border-white/20 rounded-full px-3 py-1.5">
-                <svg class="w-3 h-3 text-[#3DAFC4]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <div v-if="project.location" class="absolute top-4 right-4 flex items-center gap-1.5 bg-[#0E7A8C] rounded-full px-3 py-1.5 shadow-sm">
+                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                 <span class="text-white text-[10px] font-bold tracking-wide">{{ field(project, 'location') || project.location }}</span>
               </div>
             </div>
