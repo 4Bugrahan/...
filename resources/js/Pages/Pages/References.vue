@@ -92,7 +92,7 @@ const references = [
                         class="flex items-center justify-center bg-white border border-gray-200 rounded-xl p-6 h-44 hover:border-[#0E7A8C]/60 hover:shadow-md transition-all duration-300"
                     >
                         <img :src="ref.logo" :alt="ref.name" loading="lazy"
-                            class="max-h-32 max-w-full object-contain transition-all duration-300"/>
+                            class="w-full h-32 object-contain transition-all duration-300"/>
                     </div>
                 </div>
             </div>
