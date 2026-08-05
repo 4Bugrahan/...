@@ -100,11 +100,11 @@ class ProductController extends Controller
             'parent_id' => $category->parent_id,
         ];
 
-        // Ana kategori ise alt kategorilerini göster
+        // Ana kategori ve alt kategorileri varsa: ilk alt kategoriye otomatik
+        // yönlendirmek yerine, kullanıcının hangi alt kategoriyi istediğini
+        // seçebileceği bir kart görünümü göster.
         if ($category->parent_id === null) {
-            $children = $sidebarChildren;
-
-            if ($children->isEmpty()) {
+            if ($sidebarChildren->isEmpty()) {
                 return Inertia::render('Products/Category', [
                     'category'        => $categoryPayload,
                     'products'        => $this->paginatedProducts($category->id),
@@ -115,8 +115,14 @@ class ProductController extends Controller
                 ]);
             }
 
-            // Ana kategoriye tıklanınca ilk alt kategoriye yönlendir
-            return redirect('/urunler/' . $children->first()->slug);
+            return Inertia::render('Products/Category', [
+                'category'        => $categoryPayload,
+                'products'        => ['data' => [], 'links' => [], 'total' => 0],
+                'subcategories'   => $this->subcategoriesWithCounts($category->id),
+                'sidebarChildren' => [],
+                'categories'      => $allCategories,
+                'seo'             => $this->categorySeo($category),
+            ]);
         }
 
         // Alt kategori ise ürünleri göster
@@ -128,6 +134,27 @@ class ProductController extends Controller
             'categories'      => $allCategories,
             'seo'             => $this->categorySeo($category),
         ]);
+    }
+
+    /**
+     * Ana kategori seçim kartlarında (alt kategorisi olan bir kategoriye
+     * girildiğinde) gösterilen alt kategori listesi — isim/açıklama
+     * çevirileri ve ürün sayılarıyla birlikte.
+     */
+    private function subcategoriesWithCounts(int $parentId)
+    {
+        return Category::active()
+            ->where('parent_id', $parentId)
+            ->ordered()
+            ->withCount(['products' => fn ($q) => $q->active()])
+            ->get(['id', 'name', 'slug', 'description', 'translations'])
+            ->map(function ($cat) {
+                $cat->translations = [
+                    'name'        => $cat->translations['name'] ?? [],
+                    'description' => $cat->translations['description'] ?? [],
+                ];
+                return $cat;
+            });
     }
 
     /**
