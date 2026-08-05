@@ -133,61 +133,29 @@ class ProductController extends Controller
             'parent_id' => $category->parent_id,
         ];
 
-        // Ana kategori ve alt kategorileri varsa: ilk alt kategoriye otomatik
-        // yönlendirmek yerine, kullanıcının hangi alt kategoriyi istediğini
-        // seçebileceği bir kart görünümü göster.
-        if ($category->parent_id === null) {
-            if ($sidebarChildren->isEmpty()) {
-                return Inertia::render('Products/Category', [
-                    'category'        => $categoryPayload,
-                    'products'        => $this->paginatedProducts($category->id),
-                    'subcategories'   => [],
-                    'sidebarChildren' => [],
-                    'categories'      => $allCategories,
-                    'seo'             => $this->categorySeo($category),
-                ]);
-            }
+        // Ana kategorinin alt kategorileri varsa: bir seçim kartı ekranında
+        // durdurmak yerine, o alt kategorilerin TÜMÜNÜN ürünlerini doğrudan
+        // listele — alt kategoriler sidebar'da filtre olarak duruyor.
+        if ($category->parent_id === null && $sidebarChildren->isNotEmpty()) {
+            $categoryIds = $sidebarChildren->pluck('id')->push($category->id)->all();
 
             return Inertia::render('Products/Category', [
                 'category'        => $categoryPayload,
-                'products'        => ['data' => [], 'links' => [], 'total' => 0],
-                'subcategories'   => $this->subcategoriesWithCounts($category->id),
-                'sidebarChildren' => [],
+                'products'        => $this->paginatedProducts($categoryIds),
+                'sidebarChildren' => $sidebarChildren,
                 'categories'      => $allCategories,
                 'seo'             => $this->categorySeo($category),
             ]);
         }
 
-        // Alt kategori ise ürünleri göster
+        // Alt kategorisi olmayan (yaprak) kategori: doğrudan kendi ürünlerini göster
         return Inertia::render('Products/Category', [
             'category'        => $categoryPayload,
             'products'        => $this->paginatedProducts($category->id),
-            'subcategories'   => [],
-            'sidebarChildren' => $sidebarChildren,
+            'sidebarChildren' => $category->parent_id === null ? [] : $sidebarChildren,
             'categories'      => $allCategories,
             'seo'             => $this->categorySeo($category),
         ]);
-    }
-
-    /**
-     * Ana kategori seçim kartlarında (alt kategorisi olan bir kategoriye
-     * girildiğinde) gösterilen alt kategori listesi — isim/açıklama
-     * çevirileri ve ürün sayılarıyla birlikte.
-     */
-    private function subcategoriesWithCounts(int $parentId)
-    {
-        return Category::active()
-            ->where('parent_id', $parentId)
-            ->ordered()
-            ->withCount(['products' => fn ($q) => $q->active()])
-            ->get(['id', 'name', 'slug', 'description', 'translations'])
-            ->map(function ($cat) {
-                $cat->translations = [
-                    'name'        => $cat->translations['name'] ?? [],
-                    'description' => $cat->translations['description'] ?? [],
-                ];
-                return $cat;
-            });
     }
 
     /**
@@ -209,13 +177,15 @@ class ProductController extends Controller
     /**
      * Ürün listesi — sayfalanmış, sadece kart görünümünde kullanılan
      * kolonlarla ve çeviri verisi isimle sınırlandırılmış. $categoryId
-     * verilmezse (Ürünler ana sayfası) tüm aktif ürünler döner; her ürünün
-     * kendi kategori slug'ı da eklenir (kart linki bunu kullanıyor).
+     * verilmezse (Ürünler ana sayfası) tüm aktif ürünler döner; bir dizi
+     * verilirse (alt kategorileri olan bir ana kategori) o kategorilerin
+     * tümündeki ürünler döner. Her ürünün kendi kategori slug'ı da
+     * eklenir (kart linki bunu kullanıyor).
      */
-    private function paginatedProducts(?int $categoryId = null)
+    private function paginatedProducts(int|array|null $categoryId = null)
     {
         return Product::active()
-            ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
+            ->when($categoryId, fn ($q, $cid) => is_array($cid) ? $q->whereIn('category_id', $cid) : $q->where('category_id', $cid))
             ->with('category:id,slug')
             ->ordered()
             ->select(['id', 'name', 'slug', 'images', 'featured', 'translations', 'category_id'])

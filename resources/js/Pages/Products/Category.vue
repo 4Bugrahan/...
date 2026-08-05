@@ -10,7 +10,6 @@ const { locale, trans, field } = useLocale()
 const props = defineProps({
     category:        { type: Object, required: true },
     products:        { type: Object,  default: () => ({ data: [], links: [], total: 0 }) },
-    subcategories:   { type: Array,  default: () => [] },
     sidebarChildren: { type: Array,  default: () => [] },
     categories:      { type: Array,  default: () => [] },
 })
@@ -25,12 +24,6 @@ const localizedProducts = computed(() =>
 const localizedCategories = computed(() =>
     props.categories.map(c => ({ ...c, name: field(c, 'name') || c.name }))
 )
-
-const localizedSubcategories = computed(() =>
-    props.subcategories.map(c => ({ ...c, name: field(c, 'name') || c.name, description: field(c, 'description') || c.description }))
-)
-
-const hasSubcategories = computed(() => props.subcategories.length > 0)
 
 // Aktif ana kategori id'si (sidebar'da hangi kategorinin altı açık)
 const activeParentId = computed(() => props.category.parent_id ?? props.category.id)
@@ -127,37 +120,6 @@ const mobileFiltersOpen = ref(false)
                     <!-- Ana içerik -->
                     <div class="flex-1">
 
-                        <!-- ALT KATEGORİLER GÖRÜNÜMÜ -->
-                        <div v-if="hasSubcategories" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-                            <Link
-                                v-for="sub in localizedSubcategories"
-                                :key="sub.id"
-                                :href="`/urunler/${sub.slug}`"
-                                class="group cursor-pointer block"
-                            >
-                                <div class="relative bg-white transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-2xl"
-                                     style="border:2px solid #1B3163;box-shadow:4px 4px 0 #1B3163;">
-                                    <div class="flex items-center justify-center py-3 px-4" style="background:#1B3163">
-                                        <h3 class="text-white font-bold text-sm tracking-wide uppercase text-center">{{ sub.name }}</h3>
-                                    </div>
-                                    <div class="p-5 flex items-center justify-between">
-                                        <p class="text-sm text-gray-500 flex-1 mr-3">{{ sub.description }}</p>
-                                        <div class="flex flex-col items-end gap-1 flex-shrink-0">
-                                            <span class="text-xs font-bold text-[#1B3163]">{{ sub.products_count }} {{ trans('common.product_unit') }}</span>
-                                            <span class="text-xs font-bold text-[#0E7A8C] flex items-center gap-1 group-hover:gap-2 transition-all">
-                                                {{ trans('common.explore') }}
-                                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-
-                        <!-- ÜRÜNLER GÖRÜNÜMÜ -->
-                        <template v-else>
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                             <p class="text-[#666] text-sm">
                                 <span class="font-bold text-[#1B3163]">{{ products.total ?? localizedProducts.length }}</span> {{ trans('products.product_count') }}
@@ -228,7 +190,6 @@ const mobileFiltersOpen = ref(false)
                                 {{ trans('common.contact_us') }}
                             </Link>
                         </div>
-                        </template>
                     </div>
                 </div>
             </div>
