@@ -266,13 +266,15 @@ onUnmounted(() => {
               {{ trans('nav.references') }}
             </Link>
             <div>
-              <button @click="mobileUrunOpen = !mobileUrunOpen" class="w-full flex justify-between items-center py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all">
-                <span class="flex items-center gap-3">
+              <div class="flex items-center">
+                <Link href="/urunler" class="flex-1 flex items-center gap-3 py-3 px-3 text-sm font-semibold text-gray-700 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
                   <svg class="w-4 h-4 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
                   {{ trans('nav.products') }}
-                </span>
-                <svg class="w-4 h-4 transition-transform" :class="mobileUrunOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-              </button>
+                </Link>
+                <button @click="mobileUrunOpen = !mobileUrunOpen" :aria-label="trans('nav.product_cats')" :aria-expanded="mobileUrunOpen" class="p-3 text-gray-400 hover:text-[#0E7A8C] flex-shrink-0">
+                  <svg class="w-4 h-4 transition-transform" :class="mobileUrunOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+              </div>
               <div v-show="mobileUrunOpen" class="pl-10 mt-1 space-y-0.5">
                 <Link v-for="cat in categories" :key="cat.slug" :href="`/urunler/${cat.slug}`"
                   class="flex items-center py-2 pl-3 pr-3 text-sm text-gray-500 hover:text-[#0E7A8C] hover:bg-[#F4F6F9] rounded-lg transition-all" @click="mobileOpen=false">
