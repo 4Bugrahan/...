@@ -3,6 +3,13 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Head, Link, usePage } from '@inertiajs/vue3'
 import { useLocale } from '@/composables/useLocale.js'
 
+// Ürün detay gibi kendi sabit alt aksiyon çubuğu olan sayfalarda, mobilde
+// aynı işi yapan sol-alt yüzen WhatsApp/Ara pilllarıyla çakışmaması için
+// bu bayrak true geçilir (sadece mobilde gizlenir, masaüstünde değişmez).
+const props = defineProps({
+  hideFloatingCta: { type: Boolean, default: false },
+})
+
 const mobileOpen = ref(false)
 const kurumOpen  = ref(false)
 const urunOpen   = ref(false)
@@ -319,7 +326,7 @@ onUnmounted(() => {
       leave-from-class="opacity-100 translate-x-0"
       leave-to-class="opacity-0 -translate-x-4"
     >
-      <div v-show="showBackToTop" class="fixed left-0 bottom-6 z-50 flex flex-col items-start gap-2.5">
+      <div v-show="showBackToTop" class="fixed left-0 bottom-6 z-50 flex-col items-start gap-2.5" :class="hideFloatingCta ? 'max-lg:hidden flex' : 'flex'">
         <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
           :aria-label="trans('common.whatsapp_aria')"
           class="flex items-center gap-2.5 bg-[#1B3163] hover:bg-[#0E7A8C] hover:pl-5 hover:translate-x-1 text-white pl-4 pr-1.5 py-1.5 rounded-r-full shadow-lg shadow-black/10 transition-all duration-300">
