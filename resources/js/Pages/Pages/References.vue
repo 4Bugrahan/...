@@ -67,7 +67,7 @@ const references = [
                     >
                         <img v-if="partner.logo_url" :src="partner.logo_url" :alt="partner.name"
                             loading="lazy"
-                            class="max-h-14 max-w-full object-contain opacity-70 hover:opacity-100 transition-all duration-300"/>
+                            class="w-full h-14 object-contain opacity-70 hover:opacity-100 transition-all duration-300"/>
                         <div v-else class="text-center">
                             <div class="w-12 h-12 bg-[#1B3163]/10 border border-[#1B3163]/20 rounded-lg flex items-center justify-center text-[#1B3163] font-extrabold text-sm mx-auto mb-1.5">
                                 {{ getInitials(partner.name) }}

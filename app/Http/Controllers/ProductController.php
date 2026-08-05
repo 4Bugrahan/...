@@ -49,9 +49,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Ürünler sayfası artık kategori kutucuklarıyla açılmıyor — doğrudan
-     * tüm aktif ürünleri (sayfalanmış) listeliyor; kategoriye göre daraltma
-     * arama çubuğunun yanındaki "Kategoriler" filtresiyle yapılıyor.
+     * Ürünler sayfası: masaüstünde klasik 9 kategori kartı görünümü,
+     * mobilde ise doğrudan tüm aktif ürünlerin (sayfalanmış) listesi +
+     * arama çubuğu + "Kategoriler" filtresi (bkz. Products/Index.vue).
      */
     public function index(): Response
     {
@@ -64,6 +64,7 @@ class ProductController extends Controller
         ];
 
         return Inertia::render('Products/Index', [
+            'categories'   => $this->topLevelCategoriesWithCounts(),
             'products'     => $this->paginatedProducts(),
             'categoryTree' => $this->categoryTree(),
             'pageContent'  => $pageContent,
