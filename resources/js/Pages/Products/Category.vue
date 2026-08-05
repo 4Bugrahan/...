@@ -1,8 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import { useLocale } from '@/composables/useLocale.js'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import ProductSearch from '@/Components/ProductSearch.vue'
 
 const { locale, trans, field } = useLocale()
 
@@ -37,6 +38,9 @@ const activeParentId = computed(() => props.category.parent_id ?? props.category
 const localizedSidebarChildren = computed(() =>
     props.sidebarChildren.map(c => ({ ...c, name: field(c, 'name') || c.name }))
 )
+
+// Mobilde kategori/alt kategori listesi varsayılan kapalı, "Kategoriler" butonuyla açılır
+const mobileFiltersOpen = ref(false)
 </script>
 
 <template>
@@ -50,10 +54,28 @@ const localizedSidebarChildren = computed(() =>
 
         <div class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- Mobil: arama + kategori filtre butonu -->
+                <div class="flex lg:hidden items-center gap-3 mb-6">
+                    <div class="flex-1">
+                        <ProductSearch />
+                    </div>
+                    <button
+                        type="button"
+                        @click="mobileFiltersOpen = !mobileFiltersOpen"
+                        class="flex items-center gap-2 bg-[#0E7A8C] hover:bg-[#0B6575] text-white text-sm font-bold px-4 py-2.5 rounded-full transition-colors flex-shrink-0"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h18M6 12h12M10 20h4"/>
+                        </svg>
+                        {{ trans('products.categories') }}
+                    </button>
+                </div>
+
                 <div class="flex flex-col lg:flex-row gap-8">
                     <!-- Sidebar -->
-                    <aside class="lg:w-64 flex-shrink-0">
-                        <div class="bg-white rounded-2xl shadow-sm overflow-hidden sticky top-28">
+                    <aside :class="mobileFiltersOpen ? 'block' : 'hidden'" class="lg:block lg:w-64 flex-shrink-0">
+                        <div class="bg-white rounded-2xl shadow-sm overflow-hidden lg:sticky lg:top-28">
                             <div class="bg-[#1B3163] px-5 py-4">
                                 <h3 class="font-bold text-white text-sm tracking-widest uppercase">{{ trans('products.categories') }}</h3>
                             </div>
@@ -136,10 +158,13 @@ const localizedSidebarChildren = computed(() =>
 
                         <!-- ÜRÜNLER GÖRÜNÜMÜ -->
                         <template v-else>
-                        <div class="flex items-center justify-between mb-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
                             <p class="text-[#666] text-sm">
                                 <span class="font-bold text-[#1B3163]">{{ products.total ?? localizedProducts.length }}</span> {{ trans('products.product_count') }}
                             </p>
+                            <div class="hidden lg:block w-72">
+                                <ProductSearch />
+                            </div>
                         </div>
 
                         <div v-if="localizedProducts.length > 0" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">

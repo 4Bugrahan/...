@@ -5,11 +5,48 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Setting;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class ProductController extends Controller
 {
+    /**
+     * Canlı ürün arama — header/ürünler sayfasındaki arama çubuğu için.
+     * En az 2 karakterden itibaren tetiklenir, isim (TR + çeviriler) üzerinden arar.
+     */
+    public function search(Request $request): JsonResponse
+    {
+        $q = trim((string) $request->get('q', ''));
+        $locale = app()->getLocale();
+
+        if (mb_strlen($q) < 2) {
+            return response()->json([]);
+        }
+
+        $products = Product::query()
+            ->active()
+            ->with('category:id,slug')
+            ->where(function ($query) use ($q, $locale) {
+                $query->where('name', 'ilike', "%{$q}%");
+                if ($locale !== 'tr') {
+                    $query->orWhereRaw("translations->'name'->>? ilike ?", [$locale, "%{$q}%"]);
+                }
+            })
+            ->orderBy('name')
+            ->limit(8)
+            ->get(['id', 'name', 'slug', 'category_id', 'images', 'translations']);
+
+        return response()->json($products->map(fn (Product $p) => [
+            'id'            => $p->id,
+            'name'          => $p->getTranslated('name', $locale),
+            'slug'          => $p->slug,
+            'category_slug' => $p->category?->slug,
+            'image'         => $p->image_urls[0] ?? null,
+        ])->values());
+    }
+
     public function index(): Response
     {
         $locale = app()->getLocale();

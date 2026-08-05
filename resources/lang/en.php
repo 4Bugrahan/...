@@ -239,6 +239,9 @@ return [
 
     // Products — Extra
     'products.categories'    => 'Categories',
+    'products.search_placeholder' => 'Search products...',
+    'products.search_no_results'  => 'No results found.',
+    'products.search_hint'        => 'Type at least 2 letters to search.',
     'products.product_count' => 'products found',
     'products.page_h1'       => 'Industrial Kitchen Equipment',
     'products.view_details'  => 'View Details',

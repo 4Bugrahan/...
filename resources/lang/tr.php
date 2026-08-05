@@ -239,6 +239,9 @@ return [
 
     // Products — Extra
     'products.categories'    => 'Kategoriler',
+    'products.search_placeholder' => 'Ürün ara...',
+    'products.search_no_results'  => 'Sonuç bulunamadı.',
+    'products.search_hint'        => 'Aramak için en az 2 harf yazın.',
     'products.product_count' => 'ürün bulundu',
     'products.page_h1'       => 'Endüstriyel Mutfak Ekipmanları',
     'products.view_details'  => 'Detayları Gör',

@@ -303,7 +303,8 @@ function getInitials(name) {
       </div>
 
       <!-- Bottom shape: flat band + narrow ^ spike at center (mygastro style) -->
-      <div class="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+      <!-- Mobilde dikey stack'te son panelin butonuyla çakıştığı için sadece desktop'ta gösteriliyor -->
+      <div class="absolute bottom-0 left-0 right-0 z-20 pointer-events-none hidden lg:block">
         <svg viewBox="0 0 1440 57" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block; width:100%; height:57px;">
           <path d="M0,57 L0,34 L693,34 C708,34 714,3 720,0 C726,3 732,34 747,34 L1440,34 L1440,57 Z" fill="#ffffff"/>
         </svg>

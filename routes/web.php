@@ -15,6 +15,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/urun-ara', [ProductController::class, 'search'])->name('products.search');
 Route::get('/urunler', [ProductController::class, 'index'])->name('products.index');
 Route::get('/urunler/{category:slug}', [ProductController::class, 'category'])->name('products.category');
 Route::get('/urunler/{category:slug}/{product:slug}', [ProductController::class, 'show'])->name('products.show');
