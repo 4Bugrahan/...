@@ -78,10 +78,13 @@ function toggleExpand(id) {
         ═══════════════════════════════════════ -->
         <section class="hidden lg:block" style="background:#f0f2f5;padding:60px 0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="mb-10">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
                     <p class="text-sm" style="color:#666">
                         {{ c('prod_subtitle', 'Endüstriyel mutfak ekipmanlarını kategorilere göre inceleyin.') }}
                     </p>
+                    <div class="w-full sm:w-80 flex-shrink-0">
+                        <ProductSearch />
+                    </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
