@@ -395,7 +395,7 @@ return [
     // Production page
     'production.hero_eyebrow'   => 'ÜRETİM SÜRECİMİZ',
     'production.hero_title'     => 'Hassasiyetle Üretiyor, Kaliteyle Teslim Ediyoruz',
-    'production.hero_desc'      => 'Lazer kesimden büküme, tasarımdan son ürüne kadar tüm üretim sürecimizi kendi tesisimizde titizlikle yönetiyoruz.',
+    'production.hero_desc'      => 'Lazer kesimden büküme, tasarımdan son ürüne kadar tüm üretim sürecimizi titizlikle yönetiyoruz.',
     'production.laser_label'    => 'LAZER KESİM',
     'production.laser_title'    => 'Milimetrik Hassasiyette Kesim',
     'production.section1_label' => 'HASSASİYET VE KALİTE',

@@ -342,7 +342,7 @@ Gestion de projet',
 
   'production.hero_eyebrow' => 'NOTRE PROCESSUS DE PRODUCTION',
   'production.hero_title' => 'Précision dans la Fabrication, Qualité dans la Livraison',
-  'production.hero_desc' => 'De la découpe laser au pliage, de la conception au produit final, nous gérons soigneusement tout notre processus de production dans notre propre usine.',
+  'production.hero_desc' => 'De la découpe laser au pliage, de la conception au produit final, nous gérons soigneusement tout notre processus de production.',
   'production.laser_label' => 'DÉCOUPE LASER',
   'production.laser_title' => 'Découpe de Précision Millimétrique',
   'production.section1_label' => 'PRÉCISION ET QUALITÉ',
