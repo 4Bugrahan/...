@@ -321,6 +321,7 @@ Projektmanagement',
   'common.call_us_aria' => 'Rufen Sie uns an',
   'common.call_us' => 'Rufen Sie Uns An',
   'common.back_to_top_aria' => 'Nach oben',
+  'common.search_aria' => 'Produkte suchen',
   'common.product_unit' => 'Produkte',
   'common.explore' => 'Entdecken',
 

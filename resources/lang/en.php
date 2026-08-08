@@ -369,6 +369,7 @@ return [
     'common.call_us_aria'       => 'Call us',
     'common.call_us'            => 'Call Us',
     'common.back_to_top_aria'   => 'Back to top',
+    'common.search_aria'        => 'Search products',
     'common.product_unit'       => 'products',
     'common.explore'            => 'Explore',
 

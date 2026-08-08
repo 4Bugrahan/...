@@ -370,6 +370,7 @@ return [
     'common.call_us_aria'       => 'Bizi arayın',
     'common.call_us'            => 'Bizi Arayın',
     'common.back_to_top_aria'   => 'Sayfanın başına dön',
+    'common.search_aria'        => 'Ürün ara',
     'common.product_unit'       => 'ürün',
     'common.explore'            => 'İncele',
 

@@ -321,6 +321,7 @@ Projectmanagement',
   'common.call_us_aria' => 'Bel ons',
   'common.call_us' => 'Bel Ons',
   'common.back_to_top_aria' => 'Terug naar boven',
+  'common.search_aria' => 'Producten zoeken',
   'common.product_unit' => 'producten',
   'common.explore' => 'Ontdekken',
 

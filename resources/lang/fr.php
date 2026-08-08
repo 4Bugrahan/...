@@ -321,6 +321,7 @@ Gestion de projet',
   'common.call_us_aria' => 'Appelez-nous',
   'common.call_us' => 'Appelez-nous',
   'common.back_to_top_aria' => 'Retour en haut',
+  'common.search_aria' => 'Rechercher un produit',
   'common.product_unit' => 'produits',
   'common.explore' => 'Découvrir',
 
