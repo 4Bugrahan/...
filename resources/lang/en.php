@@ -379,7 +379,6 @@ return [
     'about.profile_label' => 'Corporate Profile',
     'about.default_text1' => 'As 4B Grup Endüstriyel Ticaret, since 2009 we have been supplying industrial kitchen equipment and providing turnkey project services to hotels, restaurants, hospitals, educational institutions and mass catering facilities across Türkiye.',
     'about.default_text2' => 'With our experienced project engineers and product portfolio, we manage the entire process — from on-site needs analysis and architectural planning to CE-certified equipment supply, professional installation and commissioning, through to after-sales technical service.',
-    'about.default_text3' => 'As the authorized sales and service partner of more than 50 global brands, we serve individual and corporate kitchen projects with original equipment, manufacturer warranty and priority technical service assurance.',
 
     'references.title'            => 'Our References',
     'references.hero_desc'        => 'Our reference customers, whom we proudly serve alongside the brands we are the authorized sales and service partner for in the field of industrial kitchen equipment.',

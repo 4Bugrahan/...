@@ -331,7 +331,6 @@ Projektmanagement',
   'about.profile_label' => 'Unternehmensprofil',
   'about.default_text1' => 'Als 4B Grup Endüstriyel Ticaret beliefern wir seit 2009 landesweit Hotels, Restaurants, Krankenhäuser, Bildungseinrichtungen und Gemeinschaftsverpflegungsbetriebe in der Türkei mit Großküchengeräten und schlüsselfertigen Projektdienstleistungen.',
   'about.default_text2' => 'Mit unseren erfahrenen Projektingenieuren und unserem Produktportfolio steuern wir den gesamten Prozess – von der Vor-Ort-Bedarfsanalyse und architektonischen Planung über die Lieferung CE-zertifizierter Geräte und professionelle Installation und Inbetriebnahme bis hin zum technischen Kundendienst nach dem Verkauf.',
-  'about.default_text3' => 'Als autorisierter Vertriebs- und Servicepartner von mehr als 50 globalen Marken bedienen wir private und gewerbliche Küchenprojekte mit Originalgeräten, Herstellergarantie und bevorzugtem technischem Service.',
 
   'references.title' => 'Unsere Referenzen',
   'references.hero_desc' => 'Unsere Referenzkunden, die wir gemeinsam mit den Marken, deren autorisierter Vertriebs- und Servicepartner wir im Bereich Großküchengeräte sind, zuverlässig betreuen.',

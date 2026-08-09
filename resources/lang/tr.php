@@ -382,7 +382,6 @@ return [
     'about.profile_label' => 'Kurumsal Profil',
     'about.default_text1' => '4B Grup Endüstriyel Ticaret olarak 2009 yılından bu yana Türkiye genelinde otel, restoran, hastane, eğitim kurumu ve toplu yemek tesislerine endüstriyel mutfak ekipmanları tedariki ve anahtar teslim proje hizmetleri sunuyoruz.',
     'about.default_text2' => 'Deneyimli proje mühendislerimiz ve ürün portföyümüzle; yerinde ihtiyaç analizinden mimari planlama, CE belgeli ekipman temini, profesyonel montaj ve devreye almadan satış sonrası teknik servise kadar tüm süreci yönetiyoruz.',
-    'about.default_text3' => "50'yi aşkın küresel markanın yetkili satış ve servis ortağı olarak orijinal ekipman, üretici garantisi ve öncelikli teknik servis güvencesiyle bireysel ve kurumsal projelere hizmet veriyoruz.",
 
     // References page
     'references.title'            => 'Referanslarımız',

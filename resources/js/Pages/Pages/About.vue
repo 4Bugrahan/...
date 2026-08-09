@@ -70,7 +70,6 @@ const steps = computed(() => [
                             <p v-if="c('about_profile_text2')">{{ c('about_profile_text2') }}</p>
                             <p v-else>{{ trans('about.default_text2') }}</p>
                             <p v-if="c('about_profile_text3')">{{ c('about_profile_text3') }}</p>
-                            <p v-else>{{ trans('about.default_text3') }}</p>
                         </div>
                         <Link href="/iletisim" class="inline-flex items-center gap-2 mt-8 bg-[#0E7A8C] hover:bg-[#0B6575] text-white font-bold px-6 py-3 rounded-lg transition-colors">
                             {{ c('about_profile_btn', 'Proje Teklifi Alın') }}

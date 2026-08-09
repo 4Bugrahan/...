@@ -331,7 +331,6 @@ Gestion de projet',
   'about.profile_label' => "Profil de l'Entreprise",
   'about.default_text1' => "En tant que 4B Grup Endüstriyel Ticaret, depuis 2009, nous fournissons des équipements de cuisine industrielle et des services de projets clé en main aux hôtels, restaurants, hôpitaux, établissements d'enseignement et structures de restauration collective à travers la Turquie.",
   'about.default_text2' => "Avec nos ingénieurs de projet expérimentés et notre large portefeuille de produits, nous gérons l'ensemble du processus — de l'analyse des besoins sur site et la planification architecturale à la fourniture d'équipements certifiés CE, en passant par l'installation professionnelle et la mise en service, jusqu'au service technique après-vente.",
-  'about.default_text3' => "En tant que partenaire de vente et de service autorisé de plus de 50 marques mondiales, nous servons des projets de cuisine individuels et professionnels avec des équipements d'origine, une garantie du fabricant et un service technique prioritaire.",
 
   'references.title' => 'Nos Références',
   'references.hero_desc' => 'Nos clients de référence, que nous servons en toute confiance aux côtés des marques dont nous sommes le partenaire de vente et de service autorisé dans le domaine des équipements de cuisine industrielle.',

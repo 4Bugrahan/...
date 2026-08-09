@@ -331,7 +331,6 @@ Projectmanagement',
   'about.profile_label' => 'Bedrijfsprofiel',
   'about.default_text1' => 'Als 4B Grup Endüstriyel Ticaret leveren wij sinds 2009 in heel Turkije industriële keukenapparatuur en kant-en-klare projectdiensten aan hotels, restaurants, ziekenhuizen, onderwijsinstellingen en grootkeukens.',
   'about.default_text2' => 'Met onze ervaren projectingenieurs en ons productportfolio beheren wij het volledige proces – van behoefteanalyse ter plaatse en architecturale planning tot de levering van CE-gecertificeerde apparatuur, professionele installatie en inbedrijfstelling, tot technische service na verkoop.',
-  'about.default_text3' => 'Als geautoriseerd verkoop- en servicepartner van meer dan 50 wereldwijde merken bedienen wij particuliere en zakelijke keukenprojecten met originele apparatuur, fabrieksgarantie en voorrang bij technische service.',
 
   'references.title' => 'Onze Referenties',
   'references.hero_desc' => 'Onze referentieklanten, die wij met vertrouwen bedienen naast de merken waarvan wij de geautoriseerde verkoop- en servicepartner zijn op het gebied van industriële keukenapparatuur.',
