@@ -50,8 +50,11 @@ class HomeController extends Controller
             return Project::where('is_active', true)->latest()->take(3)->get();
         });
 
-        // Hakkımızda görseli — relative URL (aynı siteden yüklensin); yoksa placeholder
-        $imagePath = Setting::getValue('home_about_image', null);
+        // Hakkımızda görseli — bilinçli olarak Kurumsal sayfanın panelindeki
+        // (about_profile_image) ayarını kullanıyor, kendi ayrı anahtarı yok —
+        // panelden Kurumsal'ı güncelleyince anasayfa da değişsin diye (bkz. text1/2).
+        // Relative URL ise aynı siteden yüklensin; hiç ayarlanmamışsa placeholder.
+        $imagePath = Setting::getValue('about_profile_image', null, 'tr');
         if (is_array($imagePath)) {
             $imagePath = $imagePath[0] ?? null;
         }
