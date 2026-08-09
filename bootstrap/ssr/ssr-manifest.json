@@ -1,0 +1,105 @@
+{
+  "\u0000plugin-vue:export-helper": [
+    "/build/assets/_plugin-vue_export-helper-1tPrXgE0.js"
+  ],
+  "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
+  "resources/js/Components/ProductSearch.vue": [
+    "/build/assets/AppLayout-CAQypwC2.js"
+  ],
+  "resources/js/Layouts/AdminLayout.vue": [
+    "/build/assets/AdminLayout-DpQUlKjn.js"
+  ],
+  "resources/js/Layouts/AppLayout.vue": [
+    "/build/assets/AppLayout-CAQypwC2.js"
+  ],
+  "resources/js/Pages/Admin/About/Edit.vue": [
+    "/build/assets/Edit-DZpmnGGM.js"
+  ],
+  "resources/js/Pages/Admin/Categories/Form.vue": [
+    "/build/assets/Form-BGIkVzZ0.js"
+  ],
+  "resources/js/Pages/Admin/Categories/Index.vue": [
+    "/build/assets/Index-pFBmHpG-.js"
+  ],
+  "resources/js/Pages/Admin/Contacts/Index.vue": [
+    "/build/assets/Index-DdaElBaV.js"
+  ],
+  "resources/js/Pages/Admin/Contacts/Show.vue": [
+    "/build/assets/Show-CxCN4nyN.js"
+  ],
+  "resources/js/Pages/Admin/Login.vue": [
+    "/build/assets/Login-Dh5A-d2B.js"
+  ],
+  "resources/js/Pages/Admin/Partners/Form.vue": [
+    "/build/assets/Form-kKAQMlqT.js"
+  ],
+  "resources/js/Pages/Admin/Partners/Index.vue": [
+    "/build/assets/Index-B0uO2owH.js"
+  ],
+  "resources/js/Pages/Admin/Products/Form.vue": [
+    "/build/assets/Form-Bw0xK1i9.js"
+  ],
+  "resources/js/Pages/Admin/Products/Index.vue": [
+    "/build/assets/Index-CFDGe00i.js"
+  ],
+  "resources/js/Pages/Admin/Projects/Form.vue": [
+    "/build/assets/Form-ghRszbR2.js"
+  ],
+  "resources/js/Pages/Admin/Projects/Index.vue": [
+    "/build/assets/Index-CxD6I5MW.js"
+  ],
+  "resources/js/Pages/Contact/Index.vue": [
+    "/build/assets/Index-CQjXl4bx.js"
+  ],
+  "resources/js/Pages/Error.vue": [
+    "/build/assets/Error-D_f-tHTm.js"
+  ],
+  "resources/js/Pages/Home.vue": [
+    "/build/assets/Home-DrxBv2vo.js",
+    "/build/assets/Home-BfqowtAu.css"
+  ],
+  "resources/js/Pages/Home.vue?vue&type=style&index=0&scoped=18adc7fd&lang.css": [
+    "/build/assets/Home-DrxBv2vo.js",
+    "/build/assets/Home-BfqowtAu.css"
+  ],
+  "resources/js/Pages/Pages/About.vue": [
+    "/build/assets/About-DMZyUPzK.js"
+  ],
+  "resources/js/Pages/Pages/Kvkk.vue": [
+    "/build/assets/Kvkk-xWykFbhP.js"
+  ],
+  "resources/js/Pages/Pages/Production.vue": [
+    "/build/assets/Production-CuXcRDlt.js",
+    "/build/assets/Production-DR-U4Kkt.css"
+  ],
+  "resources/js/Pages/Pages/Production.vue?vue&type=style&index=0&scoped=49f14da3&lang.css": [
+    "/build/assets/Production-CuXcRDlt.js",
+    "/build/assets/Production-DR-U4Kkt.css"
+  ],
+  "resources/js/Pages/Pages/References.vue": [
+    "/build/assets/References-K-VoRAue.js"
+  ],
+  "resources/js/Pages/Products/Category.vue": [
+    "/build/assets/Category-BWZftQXX.js"
+  ],
+  "resources/js/Pages/Products/Index.vue": [
+    "/build/assets/Index-DbGiBTiC.js"
+  ],
+  "resources/js/Pages/Products/Show.vue": [
+    "/build/assets/Show-Bv3TKdym.js"
+  ],
+  "resources/js/Pages/Projects/Index.vue": [
+    "/build/assets/Index-CBJ-WXuN.js"
+  ],
+  "resources/js/Pages/Projects/Show.vue": [
+    "/build/assets/Show-Cd8UjaD4.js"
+  ],
+  "resources/js/composables/useLocale.js": [
+    "/build/assets/useLocale-14nRWKiE.js"
+  ],
+  "resources/js/composables/useTranslation.js": [
+    "/build/assets/useTranslation-C3vX6H3M.js"
+  ],
+  "resources/js/ssr.js": [],
+  "vendor/tightenco/ziggy/dist/index.js": []
+}
