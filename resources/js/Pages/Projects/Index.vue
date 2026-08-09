@@ -60,25 +60,35 @@ const sectors = computed(() => [
     { label: trans('home.sector_catering'),    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01' },
     { label: trans('home.sector_corporate'),   icon: 'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z' },
 ])
+
+// Kart başına dönen vurgu renkleri — markanın lacivert/turkuaz kimliğine
+// yakın ama tekdüze olmayan, ölçülü bir palet.
+const sectorColors = ['#1B3163', '#0E7A8C', '#C2793D', '#3DAFC4', '#6B5CA5', '#4E8C6B']
 </script>
 
 <template>
   <AppLayout>
 
     <!-- ═══════════════════════════════════════
-         SEKTÖRLER STRIP — sayfa doğrudan bununla açılıyor
+         SEKTÖRLER — sayfa doğrudan bununla açılıyor
     ═══════════════════════════════════════ -->
-    <section class="bg-white border-b border-gray-100 py-10">
+    <section class="bg-white border-b border-gray-100 py-12">
       <div class="max-w-7xl mx-auto px-6">
-        <p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4">{{ trans('projects.sectors_label') }}</p>
-        <div class="flex flex-wrap gap-2">
-          <span v-for="s in sectors" :key="s.label"
-            class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap">
-            <svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" :d="s.icon"/>
-            </svg>
-            {{ s.label }}
-          </span>
+        <p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-6">{{ trans('projects.sectors_label') }}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div v-for="(s, i) in sectors" :key="s.label"
+            class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(15,23,42,0.2)] transition-all duration-300">
+            <div class="h-[3px]" :style="{ background: sectorColors[i % sectorColors.length] }"></div>
+            <div class="p-5 flex flex-col items-center text-center gap-3">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                :style="{ background: sectorColors[i % sectorColors.length] + '18', color: sectorColors[i % sectorColors.length] }">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" :d="s.icon"/>
+                </svg>
+              </div>
+              <span class="text-sm font-bold text-[#1B3163] leading-snug">{{ s.label }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

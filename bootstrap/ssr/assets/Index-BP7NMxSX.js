@@ -1,5 +1,5 @@
 import { computed, withCtx, unref, createVNode, resolveDynamicComponent, openBlock, createBlock, createTextVNode, toDisplayString, createCommentVNode, Fragment, renderList, useSSRContext } from "vue";
-import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderVNode, ssrRenderStyle } from "vue/server-renderer";
+import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderStyle, ssrRenderAttr, ssrRenderVNode } from "vue/server-renderer";
 import { Link } from "@inertiajs/vue3";
 import { u as useLocale } from "./useLocale-14nRWKiE.js";
 import { _ as _sfc_main$1 } from "./AppLayout-CAQypwC2.js";
@@ -53,13 +53,14 @@ const _sfc_main = {
       { label: trans("home.sector_catering"), icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" },
       { label: trans("home.sector_corporate"), icon: "M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" }
     ]);
+    const sectorColors = ["#1B3163", "#0E7A8C", "#C2793D", "#3DAFC4", "#6B5CA5", "#4E8C6B"];
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(_sfc_main$1, _attrs, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<section class="bg-white border-b border-gray-100 py-10"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4"${_scopeId}>${ssrInterpolate(unref(trans)("projects.sectors_label"))}</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
-            ssrRenderList(sectors.value, (s) => {
-              _push2(`<span class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap"${_scopeId}><svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"${ssrRenderAttr("d", s.icon)}${_scopeId}></path></svg> ${ssrInterpolate(s.label)}</span>`);
+            _push2(`<section class="bg-white border-b border-gray-100 py-12"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-6"${_scopeId}>${ssrInterpolate(unref(trans)("projects.sectors_label"))}</p><div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"${_scopeId}><!--[-->`);
+            ssrRenderList(sectors.value, (s, i) => {
+              _push2(`<div class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(15,23,42,0.2)] transition-all duration-300"${_scopeId}><div class="h-[3px]" style="${ssrRenderStyle({ background: sectorColors[i % sectorColors.length] })}"${_scopeId}></div><div class="p-5 flex flex-col items-center text-center gap-3"${_scopeId}><div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="${ssrRenderStyle({ background: sectorColors[i % sectorColors.length] + "18", color: sectorColors[i % sectorColors.length] })}"${_scopeId}><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"${ssrRenderAttr("d", s.icon)}${_scopeId}></path></svg></div><span class="text-sm font-bold text-[#1B3163] leading-snug"${_scopeId}>${ssrInterpolate(s.label)}</span></div></div>`);
             });
             _push2(`<!--]--></div></div></section><section class="py-20 bg-[#f4f5f6]"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><div class="text-center mb-14"${_scopeId}><p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3"${_scopeId}>${ssrInterpolate(unref(trans)("projects.completed_label"))}</p><h1 class="text-4xl font-extrabold text-[#0e1e3d]"${_scopeId}>${ssrInterpolate(c("proj_grid_title", "Projeler"))}</h1>`);
             if (c("proj_grid_desc")) {
@@ -212,29 +213,40 @@ const _sfc_main = {
             _push2(`</div></section>`);
           } else {
             return [
-              createVNode("section", { class: "bg-white border-b border-gray-100 py-10" }, [
+              createVNode("section", { class: "bg-white border-b border-gray-100 py-12" }, [
                 createVNode("div", { class: "max-w-7xl mx-auto px-6" }, [
-                  createVNode("p", { class: "text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4" }, toDisplayString(unref(trans)("projects.sectors_label")), 1),
-                  createVNode("div", { class: "flex flex-wrap gap-2" }, [
-                    (openBlock(true), createBlock(Fragment, null, renderList(sectors.value, (s) => {
-                      return openBlock(), createBlock("span", {
+                  createVNode("p", { class: "text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-6" }, toDisplayString(unref(trans)("projects.sectors_label")), 1),
+                  createVNode("div", { class: "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4" }, [
+                    (openBlock(true), createBlock(Fragment, null, renderList(sectors.value, (s, i) => {
+                      return openBlock(), createBlock("div", {
                         key: s.label,
-                        class: "flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap"
+                        class: "group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(15,23,42,0.2)] transition-all duration-300"
                       }, [
-                        (openBlock(), createBlock("svg", {
-                          class: "w-3.5 h-3.5 text-[#0E7A8C]",
-                          fill: "none",
-                          stroke: "currentColor",
-                          viewBox: "0 0 24 24"
-                        }, [
-                          createVNode("path", {
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            "stroke-width": "1.75",
-                            d: s.icon
-                          }, null, 8, ["d"])
-                        ])),
-                        createTextVNode(" " + toDisplayString(s.label), 1)
+                        createVNode("div", {
+                          class: "h-[3px]",
+                          style: { background: sectorColors[i % sectorColors.length] }
+                        }, null, 4),
+                        createVNode("div", { class: "p-5 flex flex-col items-center text-center gap-3" }, [
+                          createVNode("div", {
+                            class: "w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0",
+                            style: { background: sectorColors[i % sectorColors.length] + "18", color: sectorColors[i % sectorColors.length] }
+                          }, [
+                            (openBlock(), createBlock("svg", {
+                              class: "w-6 h-6",
+                              fill: "none",
+                              stroke: "currentColor",
+                              viewBox: "0 0 24 24"
+                            }, [
+                              createVNode("path", {
+                                "stroke-linecap": "round",
+                                "stroke-linejoin": "round",
+                                "stroke-width": "1.75",
+                                d: s.icon
+                              }, null, 8, ["d"])
+                            ]))
+                          ], 4),
+                          createVNode("span", { class: "text-sm font-bold text-[#1B3163] leading-snug" }, toDisplayString(s.label), 1)
+                        ])
                       ]);
                     }), 128))
                   ])
