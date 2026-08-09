@@ -1,5 +1,5 @@
 import { computed, withCtx, unref, createVNode, resolveDynamicComponent, openBlock, createBlock, createTextVNode, toDisplayString, createCommentVNode, Fragment, renderList, useSSRContext } from "vue";
-import { ssrRenderComponent, ssrRenderStyle, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderVNode } from "vue/server-renderer";
+import { ssrRenderComponent, ssrInterpolate, ssrRenderList, ssrRenderAttr, ssrRenderVNode, ssrRenderStyle } from "vue/server-renderer";
 import { Link } from "@inertiajs/vue3";
 import { u as useLocale } from "./useLocale-14nRWKiE.js";
 import { _ as _sfc_main$1 } from "./AppLayout-CAQypwC2.js";
@@ -57,11 +57,11 @@ const _sfc_main = {
       _push(ssrRenderComponent(_sfc_main$1, _attrs, {
         default: withCtx((_, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(`<section class="relative overflow-hidden bg-[#1B3163] py-20"${_scopeId}><div class="absolute inset-0 opacity-[0.03]" style="${ssrRenderStyle({ "background-image": "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", "background-size": "50px 50px" })}"${_scopeId}></div><div class="absolute right-0 top-0 w-1/2 h-full opacity-10" style="${ssrRenderStyle({ "background": "radial-gradient(circle at 70% 50%, #3DAFC4 0%, transparent 60%)" })}"${_scopeId}></div><div class="relative max-w-7xl mx-auto px-6"${_scopeId}><div class="max-w-3xl"${_scopeId}><h1 class="text-white font-extrabold leading-tight mb-5" style="${ssrRenderStyle({ "font-size": "clamp(2rem, 4.5vw, 3rem)" })}"${_scopeId}>${ssrInterpolate(c("proj_hero_title", "Anahtar Teslim Endüstriyel Mutfak Projeleri"))}</h1><p class="text-white/60 text-lg leading-relaxed max-w-2xl"${_scopeId}>${ssrInterpolate(c("proj_hero_desc", "Restoran, otel, hastane ve catering işletmelerine özel endüstriyel mutfak tasarımı ve kurulumu. İhtiyaç analizinden teslimata kadar anahtar teslim çözümler."))}</p></div></div></section><section class="bg-white border-b border-gray-100 py-5"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><div class="flex items-center gap-2 overflow-x-auto"${_scopeId}><span class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase whitespace-nowrap flex-shrink-0 hidden sm:inline"${_scopeId}>${ssrInterpolate(unref(trans)("projects.sectors_label"))}</span><!--[-->`);
+            _push2(`<section class="bg-white border-b border-gray-100 py-10"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4"${_scopeId}>${ssrInterpolate(unref(trans)("projects.sectors_label"))}</p><div class="flex flex-wrap gap-2"${_scopeId}><!--[-->`);
             ssrRenderList(sectors.value, (s) => {
-              _push2(`<span class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0"${_scopeId}><svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"${ssrRenderAttr("d", s.icon)}${_scopeId}></path></svg> ${ssrInterpolate(s.label)}</span>`);
+              _push2(`<span class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap"${_scopeId}><svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24"${_scopeId}><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"${ssrRenderAttr("d", s.icon)}${_scopeId}></path></svg> ${ssrInterpolate(s.label)}</span>`);
             });
-            _push2(`<!--]--></div></div></section><section class="py-20 bg-[#f4f5f6]"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><div class="text-center mb-14"${_scopeId}><p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3"${_scopeId}>${ssrInterpolate(unref(trans)("projects.completed_label"))}</p><h2 class="text-4xl font-extrabold text-[#0e1e3d]"${_scopeId}>${ssrInterpolate(c("proj_grid_title", "Projeler"))}</h2>`);
+            _push2(`<!--]--></div></div></section><section class="py-20 bg-[#f4f5f6]"${_scopeId}><div class="max-w-7xl mx-auto px-6"${_scopeId}><div class="text-center mb-14"${_scopeId}><p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3"${_scopeId}>${ssrInterpolate(unref(trans)("projects.completed_label"))}</p><h1 class="text-4xl font-extrabold text-[#0e1e3d]"${_scopeId}>${ssrInterpolate(c("proj_grid_title", "Projeler"))}</h1>`);
             if (c("proj_grid_desc")) {
               _push2(`<p class="text-gray-500 mt-4 text-[15px]"${_scopeId}>${ssrInterpolate(c("proj_grid_desc"))}</p>`);
             } else {
@@ -212,33 +212,14 @@ const _sfc_main = {
             _push2(`</div></section>`);
           } else {
             return [
-              createVNode("section", { class: "relative overflow-hidden bg-[#1B3163] py-20" }, [
-                createVNode("div", {
-                  class: "absolute inset-0 opacity-[0.03]",
-                  style: { "background-image": "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)", "background-size": "50px 50px" }
-                }),
-                createVNode("div", {
-                  class: "absolute right-0 top-0 w-1/2 h-full opacity-10",
-                  style: { "background": "radial-gradient(circle at 70% 50%, #3DAFC4 0%, transparent 60%)" }
-                }),
-                createVNode("div", { class: "relative max-w-7xl mx-auto px-6" }, [
-                  createVNode("div", { class: "max-w-3xl" }, [
-                    createVNode("h1", {
-                      class: "text-white font-extrabold leading-tight mb-5",
-                      style: { "font-size": "clamp(2rem, 4.5vw, 3rem)" }
-                    }, toDisplayString(c("proj_hero_title", "Anahtar Teslim Endüstriyel Mutfak Projeleri")), 1),
-                    createVNode("p", { class: "text-white/60 text-lg leading-relaxed max-w-2xl" }, toDisplayString(c("proj_hero_desc", "Restoran, otel, hastane ve catering işletmelerine özel endüstriyel mutfak tasarımı ve kurulumu. İhtiyaç analizinden teslimata kadar anahtar teslim çözümler.")), 1)
-                  ])
-                ])
-              ]),
-              createVNode("section", { class: "bg-white border-b border-gray-100 py-5" }, [
+              createVNode("section", { class: "bg-white border-b border-gray-100 py-10" }, [
                 createVNode("div", { class: "max-w-7xl mx-auto px-6" }, [
-                  createVNode("div", { class: "flex items-center gap-2 overflow-x-auto" }, [
-                    createVNode("span", { class: "text-[10px] font-black text-gray-500 tracking-[3px] uppercase whitespace-nowrap flex-shrink-0 hidden sm:inline" }, toDisplayString(unref(trans)("projects.sectors_label")), 1),
+                  createVNode("p", { class: "text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4" }, toDisplayString(unref(trans)("projects.sectors_label")), 1),
+                  createVNode("div", { class: "flex flex-wrap gap-2" }, [
                     (openBlock(true), createBlock(Fragment, null, renderList(sectors.value, (s) => {
                       return openBlock(), createBlock("span", {
                         key: s.label,
-                        class: "flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0"
+                        class: "flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap"
                       }, [
                         (openBlock(), createBlock("svg", {
                           class: "w-3.5 h-3.5 text-[#0E7A8C]",
@@ -263,7 +244,7 @@ const _sfc_main = {
                 createVNode("div", { class: "max-w-7xl mx-auto px-6" }, [
                   createVNode("div", { class: "text-center mb-14" }, [
                     createVNode("p", { class: "text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3" }, toDisplayString(unref(trans)("projects.completed_label")), 1),
-                    createVNode("h2", { class: "text-4xl font-extrabold text-[#0e1e3d]" }, toDisplayString(c("proj_grid_title", "Projeler")), 1),
+                    createVNode("h1", { class: "text-4xl font-extrabold text-[#0e1e3d]" }, toDisplayString(c("proj_grid_title", "Projeler")), 1),
                     c("proj_grid_desc") ? (openBlock(), createBlock("p", {
                       key: 0,
                       class: "text-gray-500 mt-4 text-[15px]"

@@ -66,34 +66,14 @@ const sectors = computed(() => [
   <AppLayout>
 
     <!-- ═══════════════════════════════════════
-         HERO
+         SEKTÖRLER STRIP — sayfa doğrudan bununla açılıyor
     ═══════════════════════════════════════ -->
-    <section class="relative overflow-hidden bg-[#1B3163] py-20">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
-      <div class="absolute right-0 top-0 w-1/2 h-full opacity-10" style="background: radial-gradient(circle at 70% 50%, #3DAFC4 0%, transparent 60%);"></div>
-
-      <div class="relative max-w-7xl mx-auto px-6">
-        <div class="max-w-3xl">
-          <h1 class="text-white font-extrabold leading-tight mb-5" style="font-size: clamp(2rem, 4.5vw, 3rem);">
-            {{ c('proj_hero_title', 'Anahtar Teslim Endüstriyel Mutfak Projeleri') }}
-          </h1>
-          <p class="text-white/60 text-lg leading-relaxed max-w-2xl">
-            {{ c('proj_hero_desc', 'Restoran, otel, hastane ve catering işletmelerine özel endüstriyel mutfak tasarımı ve kurulumu. İhtiyaç analizinden teslimata kadar anahtar teslim çözümler.') }}
-          </p>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ═══════════════════════════════════════
-         SEKTÖRLER STRIP
-    ═══════════════════════════════════════ -->
-    <section class="bg-white border-b border-gray-100 py-5">
+    <section class="bg-white border-b border-gray-100 py-10">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="flex items-center gap-2 overflow-x-auto">
-          <span class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase whitespace-nowrap flex-shrink-0 hidden sm:inline">{{ trans('projects.sectors_label') }}</span>
+        <p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-4">{{ trans('projects.sectors_label') }}</p>
+        <div class="flex flex-wrap gap-2">
           <span v-for="s in sectors" :key="s.label"
-            class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0">
+            class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap">
             <svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" :d="s.icon"/>
             </svg>
@@ -111,7 +91,7 @@ const sectors = computed(() => [
 
         <div class="text-center mb-14">
           <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('projects.completed_label') }}</p>
-          <h2 class="text-4xl font-extrabold text-[#0e1e3d]">{{ c('proj_grid_title', 'Projeler') }}</h2>
+          <h1 class="text-4xl font-extrabold text-[#0e1e3d]">{{ c('proj_grid_title', 'Projeler') }}</h1>
           <p v-if="c('proj_grid_desc')" class="text-gray-500 mt-4 text-[15px]">{{ c('proj_grid_desc') }}</p>
           <p v-else class="text-gray-500 mt-4 text-[15px]">{{ trans('projects.default_desc') }}</p>
         </div>
