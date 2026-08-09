@@ -119,7 +119,7 @@ return [
 
     // Contact
     'contact.title'          => 'Contact',
-    'contact.reach_h'        => 'Get in Touch',
+    'contact.reach_h'        => 'Contact',
     'contact.reach_p'        => 'The right address for industrial kitchen projects, equipment quotations and technical support requests. The project team will respond promptly.',
     'contact.phone'          => 'Phone',
     'contact.whatsapp_q'     => 'Send a quick message',
@@ -253,7 +253,7 @@ return [
 
     // Projects — Extra
     'projects.inspect'       => 'View Project',
-    'projects.sectors_label' => 'Sectors Served:',
+    'projects.sectors_label' => 'Sectors Served',
     'projects.quote'         => 'Request Project Quote',
     'projects.quote_request' => 'Request Project Quote',
     'projects.view_catalog'  => 'Browse Product Catalog',
@@ -374,7 +374,7 @@ return [
     'common.explore'            => 'Explore',
 
     'projects.completed_label' => 'Completed Projects',
-    'projects.default_desc'    => 'From hotel and resort facilities to hospital central kitchens, from catering production plants to corporate cafeterias — industrial kitchen projects we have completed across different sectors and scales.',
+    'projects.default_desc'    => 'Industrial kitchen projects we have completed across different sectors and scales, both domestically and abroad.',
 
     'about.profile_label' => 'Corporate Profile',
     'about.default_text1' => 'As 4B Grup Endüstriyel Ticaret, since 2009 we have been supplying industrial kitchen equipment and providing turnkey project services to hotels, restaurants, hospitals, educational institutions and mass catering facilities across Türkiye.',

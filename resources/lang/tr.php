@@ -119,7 +119,7 @@ return [
 
     // Contact
     'contact.title'          => 'İletişim',
-    'contact.reach_h'        => 'İletişime Geçin',
+    'contact.reach_h'        => 'İletişim',
     'contact.reach_p'        => 'Endüstriyel mutfak projeleri, ekipman teklifi ve teknik destek talepleri için doğru adres. Proje ekibi en kısa sürede geri dönüş sağlar.',
     'contact.phone'          => 'Telefon',
     'contact.whatsapp_q'     => 'Hızlı mesaj gönderin',
@@ -253,7 +253,7 @@ return [
 
     // Projects — Extra
     'projects.inspect'       => 'Projeyi İncele',
-    'projects.sectors_label' => 'Hizmet Sunulan Sektörler:',
+    'projects.sectors_label' => 'Hizmet Sunulan Sektörler',
     'projects.quote'         => 'Proje Teklifi Alın',
     'projects.quote_request' => 'Proje Teklifi İsteyin',
     'projects.view_catalog'  => 'Ürün Kataloğunu İnceleyin',
@@ -376,7 +376,7 @@ return [
 
     // Projects — additional
     'projects.completed_label' => 'Tamamlanan Projeler',
-    'projects.default_desc'    => 'Otel ve resort tesislerinden hastane merkezi mutfaklarına, catering üretim tesislerinden kurumsal yemekhanelere — farklı sektör ve ölçeklerde tamamlanan endüstriyel mutfak projeleri.',
+    'projects.default_desc'    => 'Farklı sektör ve ölçeklerde, yurt içi ve yurt dışında tamamladığımız endüstriyel mutfak projeleri.',
 
     // About — additional
     'about.profile_label' => 'Kurumsal Profil',

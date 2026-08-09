@@ -61,9 +61,8 @@ const sectors = computed(() => [
     { label: trans('home.sector_corporate'),   icon: 'M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z' },
 ])
 
-// Kart başına dönen vurgu renkleri — markanın lacivert/turkuaz kimliğine
-// yakın ama tekdüze olmayan, ölçülü bir palet.
-const sectorColors = ['#1B3163', '#0E7A8C', '#C2793D', '#3DAFC4', '#6B5CA5', '#4E8C6B']
+// Kart başına dönen vurgu renkleri — markanın kendi kurumsal paleti.
+const sectorColors = ['#1B3163', '#0E7A8C', '#3DAFC4']
 </script>
 
 <template>
@@ -74,7 +73,7 @@ const sectorColors = ['#1B3163', '#0E7A8C', '#C2793D', '#3DAFC4', '#6B5CA5', '#4
     ═══════════════════════════════════════ -->
     <section class="bg-white border-b border-gray-100 py-12">
       <div class="max-w-7xl mx-auto px-6">
-        <p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-6">{{ trans('projects.sectors_label') }}</p>
+        <p class="text-base sm:text-lg font-black text-[#0e1e3d] text-center mb-6">{{ trans('projects.sectors_label') }}</p>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           <div v-for="(s, i) in sectors" :key="s.label"
             class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(15,23,42,0.2)] transition-all duration-300">
