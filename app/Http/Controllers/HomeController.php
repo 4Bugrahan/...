@@ -76,9 +76,9 @@ class HomeController extends Controller
 
             /* Kategoriler */
             'cats_label'    => Setting::getValue('home_cats_label',   '',             $locale),
-            'cats_title'    => Setting::getValue('home_cats_title',   '',             $locale),
-            'cats_sub'      => Setting::getValue('home_cats_sub',     '',             $locale),
-            'cats_btn'      => Setting::getValue('home_cats_btn',     '',             $locale),
+            'cats_title'    => Setting::getValue('home_cats_title',   null,           $locale),
+            'cats_sub'      => Setting::getValue('home_cats_sub',     null,           $locale),
+            'cats_btn'      => Setting::getValue('home_cats_btn',     null,           $locale),
 
             /* Son Projeler */
             'projects_label' => Setting::getValue('home_projects_label', '',          $locale),

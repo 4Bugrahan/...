@@ -7,7 +7,9 @@ use App\Models\Product;
 use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -53,7 +55,7 @@ class ProductController extends Controller
      * mobilde ise doğrudan tüm aktif ürünlerin (sayfalanmış) listesi +
      * arama çubuğu + "Kategoriler" filtresi (bkz. Products/Index.vue).
      */
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $locale = app()->getLocale();
 
@@ -65,7 +67,7 @@ class ProductController extends Controller
 
         return Inertia::render('Products/Index', [
             'categories'   => $this->topLevelCategoriesWithCounts(),
-            'products'     => $this->paginatedProducts(),
+            'products'     => $request->filled('page') ? $this->paginatedProducts() : $this->randomMixProducts(),
             'categoryTree' => $this->categoryTree(),
             'pageContent'  => $pageContent,
             'seo'          => $this->pageSeo(
@@ -179,11 +181,48 @@ class ProductController extends Controller
             ->select(['id', 'name', 'slug', 'images', 'featured', 'translations', 'category_id'])
             ->paginate(24)
             ->withQueryString()
-            ->through(function ($product) {
-                $product->translations = ['name' => $product->translations['name'] ?? []];
-                $product->category_slug = $product->category?->slug;
-                return $product;
-            });
+            ->through(fn ($product) => $this->cardPayload($product));
+    }
+
+    /**
+     * Ürünler ana sayfasının filtresiz ilk girişi: "ordered()" alfabetik
+     * sıralaması yüzünden ilk 24 ürün hep aynı birkaç kategoriden geliyordu
+     * (her ziyarette aynı görünüm). Bunun yerine her kategoriden rastgele
+     * birer ürün seçip karıştırarak gösteriyoruz — sayfa her açıldığında
+     * farklı, kategorilerin genelini yansıtan bir seçki çıkıyor. Sayfalama
+     * linklerine (2., 3. sayfa) tıklanınca normal alfabetik sıralamaya
+     * dönülüyor (bkz. index()).
+     */
+    private function randomMixProducts()
+    {
+        $ids = DB::table('products')
+            ->selectRaw('DISTINCT ON (category_id) id')
+            ->where('is_active', true)
+            ->orderByRaw('category_id, random()')
+            ->pluck('id')
+            ->shuffle()
+            ->take(24);
+
+        $products = Product::whereIn('id', $ids)
+            ->with('category:id,slug')
+            ->select(['id', 'name', 'slug', 'images', 'featured', 'translations', 'category_id'])
+            ->get()
+            ->sortBy(fn ($product) => $ids->search($product->id))
+            ->values()
+            ->map(fn ($product) => $this->cardPayload($product));
+
+        return new LengthAwarePaginator($products, Product::active()->count(), 24, 1);
+    }
+
+    /**
+     * Ürün kartı görünümünde kullanılan alanlarla sınırlı, kategori slug'ı
+     * eklenmiş ürün payload'ı (bkz. paginatedProducts(), randomMixProducts()).
+     */
+    private function cardPayload(Product $product): Product
+    {
+        $product->translations = ['name' => $product->translations['name'] ?? []];
+        $product->category_slug = $product->category?->slug;
+        return $product;
     }
 
     private function categorySeo(Category $category): array
