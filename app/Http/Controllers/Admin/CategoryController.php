@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -70,6 +71,8 @@ class CategoryController extends Controller
 
         Category::create($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.categories.index')->with('success', 'Kategori eklendi.');
     }
 
@@ -98,6 +101,8 @@ class CategoryController extends Controller
 
         $category->update($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.categories.index')->with('success', 'Kategori güncellendi.');
     }
 
@@ -109,6 +114,8 @@ class CategoryController extends Controller
 
         ImageService::delete($category->image);
         $category->delete();
+
+        $this->clearHomeCache();
 
         return redirect()->route('admin.categories.index')->with('success', 'Kategori silindi.');
     }
@@ -151,5 +158,14 @@ class CategoryController extends Controller
         }
 
         return $slug;
+    }
+
+    private function clearHomeCache(): void
+    {
+        Cache::forget('home_categories_with_counts');
+        Cache::forget('products_category_tree');
+        foreach (['tr', 'en', 'fr', 'de', 'nl'] as $locale) {
+            Cache::forget("nav_categories_{$locale}");
+        }
     }
 }

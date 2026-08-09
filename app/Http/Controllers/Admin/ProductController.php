@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -47,6 +48,8 @@ class ProductController extends Controller
 
         Product::create($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.products.index')->with('success', 'Ürün eklendi.');
     }
 
@@ -79,6 +82,8 @@ class ProductController extends Controller
 
         $product->update($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.products.index')->with('success', 'Ürün güncellendi.');
     }
 
@@ -89,6 +94,8 @@ class ProductController extends Controller
         }
 
         $product->delete();
+
+        $this->clearHomeCache();
 
         return redirect()->route('admin.products.index')->with('success', 'Ürün silindi.');
     }
@@ -145,5 +152,11 @@ class ProductController extends Controller
         }
 
         return $slug;
+    }
+
+    private function clearHomeCache(): void
+    {
+        Cache::forget('home_featured_products');
+        Cache::forget('home_categories_with_counts');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -43,6 +44,8 @@ class PartnerController extends Controller
 
         Partner::create($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.partners.index', ['type' => $data['type']])->with('success', 'Kayıt eklendi.');
     }
 
@@ -68,6 +71,8 @@ class PartnerController extends Controller
 
         $partner->update($data);
 
+        $this->clearHomeCache();
+
         return redirect()->route('admin.partners.index', ['type' => $data['type']])->with('success', 'Kayıt güncellendi.');
     }
 
@@ -76,6 +81,8 @@ class PartnerController extends Controller
         $type = $partner->type;
         ImageService::delete($partner->logo);
         $partner->delete();
+
+        $this->clearHomeCache();
 
         return redirect()->route('admin.partners.index', ['type' => $type])->with('success', 'Kayıt silindi.');
     }
@@ -96,5 +103,11 @@ class PartnerController extends Controller
     {
         $file = $request->file('logo');
         return $file ? ImageService::store($file, 'partners') : null;
+    }
+
+    private function clearHomeCache(): void
+    {
+        Cache::forget('home_partners_v2');
+        Cache::forget('home_clients_v2');
     }
 }

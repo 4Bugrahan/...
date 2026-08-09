@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -42,6 +43,8 @@ class ProjectController extends Controller
 
         Project::create($data);
 
+        Cache::forget('home_recent_projects');
+
         return redirect()->route('admin.projects.index')->with('success', 'Proje eklendi.');
     }
 
@@ -73,6 +76,8 @@ class ProjectController extends Controller
 
         $project->update($data);
 
+        Cache::forget('home_recent_projects');
+
         return redirect()->route('admin.projects.index')->with('success', 'Proje güncellendi.');
     }
 
@@ -83,6 +88,8 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+
+        Cache::forget('home_recent_projects');
 
         return redirect()->route('admin.projects.index')->with('success', 'Proje silindi.');
     }
