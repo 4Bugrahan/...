@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 abstract class Controller
 {
@@ -70,5 +72,52 @@ abstract class Controller
             'desc'     => Setting::getValue("seo_{$prefix}_desc",     $defDesc,     $locale) ?: $defDesc,
             'keywords' => Setting::getValue("seo_{$prefix}_keywords", $defKeywords, $locale) ?: $defKeywords,
         ]);
+    }
+
+    /**
+     * Açıklama metnini meta description için kısaltır (madde işaretleri/satır sonları temizlenir).
+     */
+    protected function metaDescFrom(?string $text, string $fallback): string
+    {
+        $text = trim(preg_replace('/\s+/', ' ', str_replace(['•', "\n", "\r"], ' ', (string) $text)));
+        if ($text === '') {
+            return $fallback;
+        }
+        return mb_strlen($text) > 160 ? mb_substr($text, 0, 157) . '...' : $text;
+    }
+
+    /**
+     * Admin CRUD controller'larında ortak slug üretimi — verilen model sınıfının
+     * `slug` kolonunda çakışma varsa `-2`, `-3` ... ekleyerek benzersizleştirir.
+     */
+    protected function uniqueSlug(string $modelClass, string $value, ?int $ignoreId = null): string
+    {
+        $base = Str::slug($value);
+        $slug = $base;
+        $i = 1;
+
+        while ($modelClass::where('slug', $slug)->when($ignoreId, fn ($q, $id) => $q->where('id', '!=', $id))->exists()) {
+            $slug = $base.'-'.(++$i);
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Admin CRUD controller'larında ortak çoklu dil (translations JSON) payload'ı —
+     * `$allowedFields` içindeki alanlar için dolu gelen çevirileri mevcut kayıtla birleştirir.
+     */
+    protected function translationsPayload(Request $request, array $allowedFields, ?array $existingTranslations = null): ?array
+    {
+        $translations = $existingTranslations ?? [];
+        foreach ((array) $request->input('translations', []) as $locale => $fields) {
+            foreach ((array) $fields as $field => $value) {
+                if (in_array($field, $allowedFields, true) && filled($value)) {
+                    $translations[$field][$locale] = $value;
+                }
+            }
+        }
+
+        return empty($translations) ? null : $translations;
     }
 }

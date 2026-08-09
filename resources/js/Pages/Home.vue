@@ -9,7 +9,6 @@ const props = defineProps({
     categories:       { type: Array,  default: () => [] },
     partners:         { type: Array,  default: () => [] },
     clients:          { type: Array,  default: () => [] },
-    featuredProducts: { type: Array,  default: () => [] },
     recentProjects:   { type: Array,  default: () => [] },
     pageContent:      { type: Object, default: () => ({}) },
 })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import { useLocale } from '@/composables/useLocale.js'
 import AppLayout from '@/Layouts/AppLayout.vue'

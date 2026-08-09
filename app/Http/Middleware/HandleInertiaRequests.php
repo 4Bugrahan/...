@@ -80,7 +80,7 @@ class HandleInertiaRequests extends Middleware
             ];
         });
 
-        $unreadContacts = fn () => auth()->check() ? Contact::whereNull('read_at')->count() : 0;
+        $unreadContacts = fn () => auth()->check() ? Contact::unread()->count() : 0;
 
         return [
             ...parent::share($request),

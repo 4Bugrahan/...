@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -62,8 +61,8 @@ class CategoryController extends Controller
     {
         $data = $this->validated($request);
 
-        $data['slug'] = $this->uniqueSlug($data['name']);
-        $data['translations'] = $this->translationsPayload($request);
+        $data['slug'] = $this->uniqueSlug(Category::class, $data['name']);
+        $data['translations'] = $this->translationsPayload($request, ['name', 'description']);
 
         if ($request->hasFile('image')) {
             $data['image'] = ImageService::store($request->file('image'), 'categories');
@@ -89,10 +88,10 @@ class CategoryController extends Controller
         $data = $this->validated($request);
 
         if ($data['name'] !== $category->name) {
-            $data['slug'] = $this->uniqueSlug($data['name'], $category->id);
+            $data['slug'] = $this->uniqueSlug(Category::class, $data['name'], $category->id);
         }
 
-        $data['translations'] = $this->translationsPayload($request, $category);
+        $data['translations'] = $this->translationsPayload($request, ['name', 'description'], $category->translations);
 
         if ($request->hasFile('image')) {
             ImageService::delete($category->image);
@@ -131,33 +130,6 @@ class CategoryController extends Controller
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'translations.*.*' => ['nullable', 'string'],
         ]);
-    }
-
-    private function translationsPayload(Request $request, ?Category $category = null): ?array
-    {
-        $translations = $category?->translations ?? [];
-        foreach ((array) $request->input('translations', []) as $locale => $fields) {
-            foreach ((array) $fields as $field => $value) {
-                if (in_array($field, ['name', 'description'], true) && filled($value)) {
-                    $translations[$field][$locale] = $value;
-                }
-            }
-        }
-
-        return empty($translations) ? null : $translations;
-    }
-
-    private function uniqueSlug(string $name, ?int $ignoreId = null): string
-    {
-        $base = Str::slug($name);
-        $slug = $base;
-        $i = 1;
-
-        while (Category::where('slug', $slug)->when($ignoreId, fn ($q, $id) => $q->where('id', '!=', $id))->exists()) {
-            $slug = $base.'-'.(++$i);
-        }
-
-        return $slug;
     }
 
     private function clearHomeCache(): void

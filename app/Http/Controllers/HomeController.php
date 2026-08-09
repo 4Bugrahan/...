@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Partner;
-use App\Models\Product;
 use App\Models\Project;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -28,15 +27,6 @@ class HomeController extends Controller
         });
 
         $categories = $this->topLevelCategoriesWithCounts()->take(6)->values();
-
-        $featuredProducts = Cache::remember('home_featured_products', 3600, function () {
-            return Product::active()
-                ->featured()
-                ->with('category')
-                ->ordered()
-                ->take(8)
-                ->get();
-        });
 
         $partners = Cache::remember('home_partners_v2', 3600, function () {
             return Partner::active()->type(Partner::TYPE_PARTNER)->ordered()->get(['id', 'name', 'translations', 'logo', 'website', 'order']);
@@ -108,7 +98,6 @@ class HomeController extends Controller
         return Inertia::render('Home', [
             'sliders'          => $sliders,
             'categories'       => $categories,
-            'featuredProducts' => $featuredProducts,
             'recentProjects'   => $recentProjects,
             'partners'         => $partners,
             'clients'          => $clients,

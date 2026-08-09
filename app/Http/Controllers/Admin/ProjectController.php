@@ -7,7 +7,6 @@ use App\Models\Project;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -37,9 +36,9 @@ class ProjectController extends Controller
     {
         $data = $this->validated($request);
 
-        $data['slug'] = $this->uniqueSlug($data['title']);
+        $data['slug'] = $this->uniqueSlug(Project::class, $data['title']);
         $data['images'] = $this->uploadImages($request);
-        $data['translations'] = $this->translationsPayload($request);
+        $data['translations'] = $this->translationsPayload($request, ['title', 'description', 'location']);
 
         Project::create($data);
 
@@ -60,7 +59,7 @@ class ProjectController extends Controller
         $data = $this->validated($request);
 
         if ($data['title'] !== $project->title) {
-            $data['slug'] = $this->uniqueSlug($data['title'], $project->id);
+            $data['slug'] = $this->uniqueSlug(Project::class, $data['title'], $project->id);
         }
 
         $existingImages = $request->input('existing_images', []);
@@ -72,7 +71,7 @@ class ProjectController extends Controller
         }
 
         $data['images'] = $finalImages;
-        $data['translations'] = $this->translationsPayload($request, $project);
+        $data['translations'] = $this->translationsPayload($request, ['title', 'description', 'location'], $project->translations);
 
         $project->update($data);
 
@@ -119,30 +118,4 @@ class ProjectController extends Controller
         return $paths;
     }
 
-    private function translationsPayload(Request $request, ?Project $project = null): ?array
-    {
-        $translations = $project?->translations ?? [];
-        foreach ((array) $request->input('translations', []) as $locale => $fields) {
-            foreach ((array) $fields as $field => $value) {
-                if (in_array($field, ['title', 'description', 'location'], true) && filled($value)) {
-                    $translations[$field][$locale] = $value;
-                }
-            }
-        }
-
-        return empty($translations) ? null : $translations;
-    }
-
-    private function uniqueSlug(string $title, ?int $ignoreId = null): string
-    {
-        $base = Str::slug($title);
-        $slug = $base;
-        $i = 1;
-
-        while (Project::where('slug', $slug)->when($ignoreId, fn ($q, $id) => $q->where('id', '!=', $id))->exists()) {
-            $slug = $base.'-'.(++$i);
-        }
-
-        return $slug;
-    }
 }

@@ -46,7 +46,7 @@ class AboutController extends Controller
             'about_profile_text2' => ['nullable', 'string', 'max:2000'],
             'about_profile_text3' => ['nullable', 'string', 'max:2000'],
             'about_profile_btn'   => ['nullable', 'string', 'max:100'],
-            'image'               => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'image'               => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'remove_image'        => ['nullable', 'boolean'],
         ]);
 

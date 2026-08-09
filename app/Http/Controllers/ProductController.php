@@ -104,18 +104,6 @@ class ProductController extends Controller
         });
     }
 
-    /**
-     * Açıklama metnini meta description için kısaltır (madde işaretleri/satır sonları temizlenir).
-     */
-    private function metaDescFrom(?string $text, string $fallback): string
-    {
-        $text = trim(preg_replace('/\s+/', ' ', str_replace(['•', "\n", "\r"], ' ', (string) $text)));
-        if ($text === '') {
-            return $fallback;
-        }
-        return mb_strlen($text) > 160 ? mb_substr($text, 0, 157) . '...' : $text;
-    }
-
     public function category(Category $category): Response|\Illuminate\Http\RedirectResponse
     {
         $category->load('parent');
