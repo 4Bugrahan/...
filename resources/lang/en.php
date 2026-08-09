@@ -21,7 +21,7 @@ return [
     'footer.quick_links'    => 'Corporate',
     'footer.product_cats'   => 'Product Categories',
     'footer.contact'        => 'Contact',
-    'footer.about_text'     => 'A trusted solution partner with over 15 years of industry experience in industrial kitchen equipment supply, project design and turnkey installation services.',
+    'footer.about_text'     => 'A trusted solution partner with over 45 years of industry experience in industrial kitchen equipment supply, project design and turnkey installation services.',
     'footer.rights'         => 'All rights reserved.',
     'footer.tagline'        => 'Industrial Kitchen Equipment · Sivas',
 

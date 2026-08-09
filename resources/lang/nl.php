@@ -18,7 +18,7 @@ return array (
   'footer.quick_links' => 'Bedrijf',
   'footer.product_cats' => 'Productcategorieën',
   'footer.contact' => 'Contact',
-  'footer.about_text' => 'Een betrouwbare oplossingspartner met meer dan 15 jaar ervaring in de sector op het gebied van de levering van industriële keukenapparatuur, projectontwerp en kant-en-klare installatiediensten.',
+  'footer.about_text' => 'Een betrouwbare oplossingspartner met meer dan 45 jaar ervaring in de sector op het gebied van de levering van industriële keukenapparatuur, projectontwerp en kant-en-klare installatiediensten.',
   'footer.rights' => 'Alle rechten voorbehouden.',
   'footer.tagline' => 'Industriële keukenapparatuur · Sivas',
   'home.feat_quality' => 'Levering van CE-gecertificeerde apparatuur',

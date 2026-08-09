@@ -18,7 +18,7 @@ return array (
   'footer.quick_links' => 'Entreprise',
   'footer.product_cats' => 'Catégories de produits',
   'footer.contact' => 'Contact',
-  'footer.about_text' => 'Un partenaire de confiance fort de plus de 15 ans d\'expérience dans le secteur de la fourniture d\'équipements de cuisine industrielle, de la conception de projets et des services d\'installation clé en main.',
+  'footer.about_text' => 'Un partenaire de confiance fort de plus de 45 ans d\'expérience dans le secteur de la fourniture d\'équipements de cuisine industrielle, de la conception de projets et des services d\'installation clé en main.',
   'footer.rights' => 'Tous droits réservés.',
   'footer.tagline' => 'Équipements de cuisine industrielle · Sivas',
   'home.feat_quality' => 'Fourniture d\'équipements certifiés CE',

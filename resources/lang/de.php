@@ -18,7 +18,7 @@ return array (
   'footer.quick_links' => 'Unternehmen',
   'footer.product_cats' => 'Produktkategorien',
   'footer.contact' => 'Kontakt',
-  'footer.about_text' => 'Ein zuverlässiger Lösungspartner mit über 15 Jahren Branchenerfahrung in den Bereichen Lieferung von Großküchenausstattung, Projektplanung und schlüsselfertige Installation.',
+  'footer.about_text' => 'Ein zuverlässiger Lösungspartner mit über 45 Jahren Branchenerfahrung in den Bereichen Lieferung von Großküchenausstattung, Projektplanung und schlüsselfertige Installation.',
   'footer.rights' => 'Alle Rechte vorbehalten.',
   'footer.tagline' => 'Gewerbliche Küchenausstattung · Sivas',
   'home.feat_quality' => 'Lieferung von CE-zertifizierten Geräten',

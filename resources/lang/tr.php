@@ -21,7 +21,7 @@ return [
     'footer.quick_links'    => 'Kurumsal',
     'footer.product_cats'   => 'Ürün Kategorileri',
     'footer.contact'        => 'İletişim',
-    'footer.about_text'     => 'Endüstriyel mutfak ekipmanları tedariki, proje tasarımı ve anahtar teslim kurulum alanında 15 yılı aşkın sektör deneyimine sahip güvenilir çözüm ortağı.',
+    'footer.about_text'     => 'Endüstriyel mutfak ekipmanları tedariki, proje tasarımı ve anahtar teslim kurulum alanında 45 yılı aşkın sektör deneyimine sahip güvenilir çözüm ortağı.',
     'footer.rights'         => 'Tüm hakları saklıdır.',
     'footer.tagline'        => 'Endüstriyel Mutfak Ekipmanları · Sivas',
 
