@@ -253,7 +253,7 @@ return [
 
     // Projects — Extra
     'projects.inspect'       => 'View Project',
-    'projects.sectors_label' => 'Sectors Served',
+    'projects.sectors_label' => 'Sectors Served:',
     'projects.quote'         => 'Request Project Quote',
     'projects.quote_request' => 'Request Project Quote',
     'projects.view_catalog'  => 'Browse Product Catalog',

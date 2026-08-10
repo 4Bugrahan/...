@@ -253,7 +253,7 @@ return [
 
     // Projects — Extra
     'projects.inspect'       => 'Projeyi İncele',
-    'projects.sectors_label' => 'Hizmet Sunulan Sektörler',
+    'projects.sectors_label' => 'Hizmet Sunulan Sektörler:',
     'projects.quote'         => 'Proje Teklifi Alın',
     'projects.quote_request' => 'Proje Teklifi İsteyin',
     'projects.view_catalog'  => 'Ürün Kataloğunu İnceleyin',
