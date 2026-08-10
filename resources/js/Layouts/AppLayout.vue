@@ -238,6 +238,19 @@ onUnmounted(() => {
 
           <!-- CTA + Hamburger -->
           <div class="flex items-center gap-3">
+            <a :href="phone1Tel"
+              class="hidden lg:flex items-center gap-3 bg-[#1B3163] hover:bg-[#0E7A8C] text-white pl-3 pr-5 py-2 rounded-xl transition-all duration-300 group border border-[#0E7A8C]/25 hover:border-[#0E7A8C]">
+              <div class="relative flex-shrink-0">
+                <div class="w-9 h-9 rounded-lg bg-[#0E7A8C] group-hover:bg-white/25 flex items-center justify-center transition-colors duration-300">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </div>
+                <span class="absolute inset-0 rounded-lg border-2 border-[#0E7A8C] animate-ping opacity-30 group-hover:opacity-0 transition-opacity"></span>
+              </div>
+              <div class="leading-tight">
+                <div class="text-[10px] text-white/50 group-hover:text-white/80 font-semibold tracking-[2px] uppercase transition-colors">{{ trans('nav.call_now') }}</div>
+                <div class="text-sm font-bold tracking-tight">{{ phone1 }}</div>
+              </div>
+            </a>
             <!-- Header Search -->
             <div class="relative" data-header-search>
               <button
@@ -256,19 +269,6 @@ onUnmounted(() => {
                 </div>
               </Transition>
             </div>
-            <a :href="phone1Tel"
-              class="hidden lg:flex items-center gap-3 bg-[#1B3163] hover:bg-[#0E7A8C] text-white pl-3 pr-5 py-2 rounded-xl transition-all duration-300 group border border-[#0E7A8C]/25 hover:border-[#0E7A8C]">
-              <div class="relative flex-shrink-0">
-                <div class="w-9 h-9 rounded-lg bg-[#0E7A8C] group-hover:bg-white/25 flex items-center justify-center transition-colors duration-300">
-                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                </div>
-                <span class="absolute inset-0 rounded-lg border-2 border-[#0E7A8C] animate-ping opacity-30 group-hover:opacity-0 transition-opacity"></span>
-              </div>
-              <div class="leading-tight">
-                <div class="text-[10px] text-white/50 group-hover:text-white/80 font-semibold tracking-[2px] uppercase transition-colors">{{ trans('nav.call_now') }}</div>
-                <div class="text-sm font-bold tracking-tight">{{ phone1 }}</div>
-              </div>
-            </a>
             <button @click="mobileOpen = !mobileOpen"
               :aria-label="mobileOpen ? trans('common.menu_close') : trans('common.menu_open')"
               :aria-expanded="mobileOpen"
