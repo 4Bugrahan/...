@@ -73,7 +73,7 @@ class ProductController extends Controller
             'seo'          => $this->pageSeo(
                 'products',
                 'Ürünler | Endüstriyel Mutfak Ekipmanları - 4B Grup',
-                '4B Grup\'un pişirme grupları, bulaşıkhane ekipmanları, soğuk muhafaza üniteleri ve nötr ekipmanlardan oluşan geniş endüstriyel mutfak ekipmanları kataloğunu inceleyin.',
+                '4B Grup\'un pişirme grupları, bulaşıkhane ekipmanları, soğuk muhafaza üniteleri ve nötr ekipmanlardan oluşan geniş ürün kataloğunu inceleyin.',
                 'endüstriyel mutfak ekipmanları, pişirme grubu, bulaşık makinesi, paslanmaz çelik tezgah, soğuk hava deposu'
             ),
         ]);

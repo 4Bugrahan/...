@@ -105,8 +105,8 @@ class HomeController extends Controller
             'seo'              => $this->pageSeo(
                 'home',
                 '4B Grup | Endüstriyel Mutfak Ekipmanları Üreticisi - Sivas',
-                '4B Grup; pişirme grupları, bulaşıkhane ekipmanları, soğuk muhafaza üniteleri ve paslanmaz çelik mutfak ekipmanları üretir. Otel, restoran ve kurumsal mutfaklara anahtar teslim çözümler.',
-                'endüstriyel mutfak ekipmanları, paslanmaz çelik mutfak ekipmanları, otel mutfak ekipmanları, 4b grup, sivas'
+                '4B Grup; pişirme grupları, bulaşıkhane ekipmanları ve soğuk muhafaza üniteleriyle otel, restoran ve kurumsal mutfaklara anahtar teslim çözümler sunar.',
+                'endüstriyel mutfak ekipmanları, paslanmaz çelik mutfak ekipmanları, otel mutfak ekipmanları, sivas mutfak ekipmanları, 4b grup'
             ),
         ]);
     }
