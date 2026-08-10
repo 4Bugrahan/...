@@ -340,7 +340,7 @@ Projektmanagement',
   'references.clients_heading' => 'Einrichtungen und Unternehmen, Die Wir Betreuen',
 
   'production.hero_eyebrow' => 'UNSER PRODUKTIONSPROZESS',
-  'production.hero_title' => 'Präzision in der Fertigung, Qualität in der Lieferung',
+  'production.hero_title' => 'Produktion',
   'production.hero_desc' => 'Vom Laserschneiden bis zum Biegen, vom Design bis zum fertigen Produkt – wir steuern unseren gesamten Produktionsprozess sorgfältig.',
   'production.laser_label' => 'LASERSCHNEIDEN',
   'production.laser_title' => 'Millimetergenauer Zuschnitt',

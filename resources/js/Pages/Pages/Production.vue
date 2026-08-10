@@ -29,20 +29,26 @@ const gallerySlides = ref([
 <template>
     <AppLayout>
         <!-- ═══════════════════════════════════════
-             HERO — Lazer kesim gif/görseli
+             HERO
         ═══════════════════════════════════════ -->
-        <section class="bg-white py-20">
+        <section class="bg-gradient-to-br from-[#1B3163] to-[#1B3163] py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-3xl mb-12">
-                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-3">{{ trans('production.hero_eyebrow') }}</p>
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#1B3163] mb-6 leading-tight">
+                <div class="max-w-3xl">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-tight">
                         {{ trans('production.hero_title') }}
                     </h1>
-                    <p class="text-[#666] text-lg leading-relaxed">
+                    <p class="text-white/70 text-lg leading-relaxed">
                         {{ trans('production.hero_desc') }}
                     </p>
                 </div>
+            </div>
+        </section>
 
+        <!-- ═══════════════════════════════════════
+             Lazer kesim gif/görseli
+        ═══════════════════════════════════════ -->
+        <section class="bg-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Lazer kesim medya alanı -->
                 <div class="relative w-full aspect-[16/8] rounded-2xl overflow-hidden border border-gray-100">
                     <video v-if="laserMedia.video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>

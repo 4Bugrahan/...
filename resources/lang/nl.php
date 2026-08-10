@@ -340,7 +340,7 @@ Projectmanagement',
   'references.clients_heading' => 'Instellingen en Bedrijven Die Wij Bedienen',
 
   'production.hero_eyebrow' => 'ONS PRODUCTIEPROCES',
-  'production.hero_title' => 'Precisie in Productie, Kwaliteit in Levering',
+  'production.hero_title' => 'Productie',
   'production.hero_desc' => 'Van lasersnijden tot buigen, van ontwerp tot eindproduct, we beheren ons volledige productieproces zorgvuldig.',
   'production.laser_label' => 'LASERSNIJDEN',
   'production.laser_title' => 'Millimeterprecisie Snijden',

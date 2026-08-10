@@ -340,7 +340,7 @@ Gestion de projet',
   'references.clients_heading' => 'Institutions et Entreprises Que Nous Servons',
 
   'production.hero_eyebrow' => 'NOTRE PROCESSUS DE PRODUCTION',
-  'production.hero_title' => 'Précision dans la Fabrication, Qualité dans la Livraison',
+  'production.hero_title' => 'Production',
   'production.hero_desc' => 'De la découpe laser au pliage, de la conception au produit final, nous gérons soigneusement tout notre processus de production.',
   'production.laser_label' => 'DÉCOUPE LASER',
   'production.laser_title' => 'Découpe de Précision Millimétrique',

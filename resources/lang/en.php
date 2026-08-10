@@ -389,7 +389,7 @@ return [
 
     // Production page
     'production.hero_eyebrow'   => 'OUR PRODUCTION PROCESS',
-    'production.hero_title'     => 'Precision in Manufacturing, Quality in Delivery',
+    'production.hero_title'     => 'Production',
     'production.hero_desc'      => 'From laser cutting to bending, from design to the final product, we carefully manage our entire production process.',
     'production.laser_label'    => 'LASER CUTTING',
     'production.laser_title'    => 'Millimeter-Precision Cutting',
