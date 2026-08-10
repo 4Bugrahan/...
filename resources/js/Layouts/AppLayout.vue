@@ -164,7 +164,7 @@ onUnmounted(() => {
 
           <!-- Logo -->
           <Link href="/" class="flex-shrink-0">
-            <img src="/images/logo.png" alt="4B Grup Endüstriyel Ticaret" class="h-12 w-auto">
+            <img src="/images/logo.png" alt="4B Grup Endüstriyel Ticaret" class="h-14 w-auto">
           </Link>
 
           <!-- Desktop Nav -->
@@ -412,7 +412,7 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto px-6 pt-16 pb-10 grid grid-cols-1 md:grid-cols-4 gap-10">
         <!-- Col 1: Company -->
         <div class="md:col-span-1">
-          <img src="/images/logo-dark.png" alt="4B Grup" class="h-10 w-auto mb-5 opacity-90">
+          <img src="/images/logo-dark.png" alt="4B Grup" class="h-14 w-auto mb-5 opacity-90">
           <p class="text-white/45 text-sm leading-relaxed mb-6">{{ footerText || trans('footer.about_text') }}</p>
           <!-- Sosyal Medya -->
           <div class="flex items-center gap-2">
