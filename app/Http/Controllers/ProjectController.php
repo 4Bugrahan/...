@@ -22,7 +22,7 @@ class ProjectController extends Controller
             'proj_hero_title'  => Setting::getValue('proj_hero_title',  'Anahtar Teslim Endüstriyel Mutfak Projeleri', $locale),
             'proj_hero_desc'   => Setting::getValue('proj_hero_desc',   '', $locale),
             'proj_grid_label'  => Setting::getValue('proj_grid_label',  'Referans Projeler', $locale),
-            'proj_grid_title'  => Setting::getValue('proj_grid_title',  'Proje Referanslarımız', $locale),
+            'proj_grid_title'  => Setting::getValue('proj_grid_title',  'Proje Referansları', $locale),
             'proj_grid_desc'   => Setting::getValue('proj_grid_desc',   '', $locale),
             'proj_cta_label'   => Setting::getValue('proj_cta_label',   'Proje Hizmetleri', $locale),
             'proj_cta_title'   => Setting::getValue('proj_cta_title',   'Projeniz İçin Profesyonel Keşif ve Teknik Danışmanlık', $locale),
