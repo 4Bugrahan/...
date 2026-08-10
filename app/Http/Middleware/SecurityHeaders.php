@@ -25,11 +25,11 @@ class SecurityHeaders
         // frame-ancestors kısıtlamaları gerçek koruma sağlıyor.
         $response->headers->set('Content-Security-Policy', implode('; ', [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline'",
+            "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "font-src 'self' https://fonts.gstatic.com",
-            "img-src 'self' data: https://oaruhqbjuqgcnocxiopt.supabase.co",
-            "connect-src 'self'",
+            "img-src 'self' data: https://oaruhqbjuqgcnocxiopt.supabase.co https://www.googletagmanager.com",
+            "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
             "frame-src https://www.google.com",
             "object-src 'none'",
             "base-uri 'self'",
