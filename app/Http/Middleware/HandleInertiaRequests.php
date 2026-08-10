@@ -74,7 +74,7 @@ class HandleInertiaRequests extends Middleware
                 'whatsapp'    => Setting::getValue('whatsapp',   '905356600060'),
                 'address'     => Setting::getValue('address',    'Sivas, Türkiye', $locale),
                 'footer_text' => Setting::getValue('footer_text', '', $locale),
-                'facebook'    => Setting::getValue('facebook',  'https://www.facebook.com/4bgrup/?locale=tr_TR'),
+                'facebook'    => Setting::getValue('facebook',  ''),
                 'instagram'   => Setting::getValue('instagram', ''),
                 'linkedin'    => Setting::getValue('linkedin',  ''),
             ];
