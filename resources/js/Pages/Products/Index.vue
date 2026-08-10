@@ -34,7 +34,6 @@ const displayCategories = computed(() =>
     }))
 )
 
-const FRAME_IMAGE = '/images/category-frame.jpeg?v=2'
 const getCoverImage = (slug) => `/images/categories-transparent/${slug}.png?v=2`
 
 // Mobil — düz ürün listesi
@@ -95,13 +94,11 @@ function toggleExpand(id) {
                         class="group cursor-pointer block rounded-2xl bg-white overflow-hidden transition-all duration-300 hover:-translate-y-1 shadow-[0_1px_3px_rgba(15,23,42,0.08)] hover:shadow-[0_20px_40px_-12px_rgba(27,49,99,0.25)]"
                         style="border: 1px solid #ececec; outline: none; -webkit-tap-highlight-color: transparent;"
                     >
-                        <!-- Kapak görseli: sabit çerçeve + üzerinde büyüyen ürün görseli -->
+                        <!-- Kapak görseli -->
                         <div class="relative overflow-hidden aspect-square">
-                            <img :src="FRAME_IMAGE" alt="" draggable="false"
-                                 class="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
                             <img :src="getCoverImage(category.slug)" :alt="category.name" draggable="false"
                                  @error="$event.target.style.display = 'none'"
-                                 class="absolute inset-[7%] w-[86%] h-[86%] object-contain outline-none transition-transform duration-500 group-hover:scale-105" />
+                                 class="absolute inset-[5%] w-[90%] h-[90%] object-contain outline-none transition-transform duration-500 group-hover:scale-105" />
                         </div>
 
                         <!-- İçerik -->

@@ -366,7 +366,7 @@ onUnmounted(() => {
       <div v-show="showBackToTop" class="fixed left-0 bottom-6 z-50 flex-col items-start gap-2.5" :class="hideFloatingCta ? 'max-lg:hidden flex' : 'flex'">
         <a :href="whatsappUrl" target="_blank" rel="noopener noreferrer"
           :aria-label="trans('common.whatsapp_aria')"
-          class="flex items-center gap-2.5 bg-[#1B3163] hover:bg-[#0E7A8C] hover:pl-5 hover:translate-x-1 text-white pl-4 pr-1.5 py-1.5 rounded-r-full shadow-lg shadow-black/10 transition-all duration-300">
+          class="flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1DA851] hover:pl-5 hover:translate-x-1 text-white pl-4 pr-1.5 py-1.5 rounded-r-full shadow-lg shadow-black/10 transition-all duration-300">
           <span class="text-sm font-bold whitespace-nowrap">WhatsApp</span>
           <span class="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center flex-shrink-0">
             <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">

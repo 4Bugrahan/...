@@ -86,19 +86,22 @@ const sectors = computed(() => [
     </section>
 
     <!-- ═══════════════════════════════════════
-         SEKTÖRLER STRIP
+         SEKTÖRLER
     ═══════════════════════════════════════ -->
-    <section class="bg-white border-b border-gray-100 py-5">
+    <section class="bg-white border-b border-gray-100 py-12">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="flex items-center gap-2 overflow-x-auto">
-          <span class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase whitespace-nowrap flex-shrink-0 hidden sm:inline">{{ trans('projects.sectors_label') }}</span>
-          <span v-for="s in sectors" :key="s.label"
-            class="flex items-center gap-1.5 bg-[#f4f5f6] border border-gray-100 text-gray-600 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap flex-shrink-0">
-            <svg class="w-3.5 h-3.5 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" :d="s.icon"/>
-            </svg>
-            {{ s.label }}
-          </span>
+        <p class="text-[10px] font-black text-gray-500 tracking-[3px] uppercase mb-6">{{ trans('projects.sectors_label') }}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+          <div v-for="s in sectors" :key="s.label"
+            class="flex flex-col items-center text-center gap-3 bg-white rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(15,23,42,0.2)]"
+            style="border: 1px solid #ececec;">
+            <div class="w-12 h-12 rounded-xl bg-[#0E7A8C]/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[#0E7A8C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" :d="s.icon"/>
+              </svg>
+            </div>
+            <span class="text-sm font-bold text-[#1B3163] leading-snug">{{ s.label }}</span>
+          </div>
         </div>
       </div>
     </section>
