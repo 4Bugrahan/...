@@ -95,6 +95,16 @@ return [
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),
+            // Supabase'in bağlantı havuzu (PgBouncer, "transaction" modu, port 6543)
+            // her sorguyu farklı bir arka uç bağlantısına yönlendirebiliyor. PDO'nun
+            // varsayılan sunucu taraflı ("native") prepared statement'ları bu yüzden
+            // "prepared statement ... does not exist" hatasıyla rastgele patlıyordu
+            // (loglarda binlerce kayıt vardı). EMULATE_PREPARES ile PDO, statement'ı
+            // sunucuda hazırlamak yerine istemci tarafında taklit ediyor — havuzlanmış
+            // bağlantılarla uyumlu hale geliyor.
+            'options' => extension_loaded('pdo_pgsql') ? [
+                \PDO::ATTR_EMULATE_PREPARES => true,
+            ] : [],
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
