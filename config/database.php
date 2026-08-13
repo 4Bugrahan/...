@@ -95,16 +95,19 @@ return [
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', ''),
             'charset' => env('DB_CHARSET', 'utf8'),
-            // Supabase'in bağlantı havuzu (PgBouncer, "transaction" modu, port 6543)
-            // her sorguyu farklı bir arka uç bağlantısına yönlendirebiliyor. PDO'nun
-            // varsayılan sunucu taraflı ("native") prepared statement'ları bu yüzden
-            // "prepared statement ... does not exist" hatasıyla rastgele patlıyordu
-            // (loglarda binlerce kayıt vardı). EMULATE_PREPARES ile PDO, statement'ı
-            // sunucuda hazırlamak yerine istemci tarafında taklit ediyor — havuzlanmış
-            // bağlantılarla uyumlu hale geliyor.
-            'options' => extension_loaded('pdo_pgsql') ? [
-                \PDO::ATTR_EMULATE_PREPARES => true,
-            ] : [],
+            // ÖNEMLİ: DB_PORT mutlaka 5432 (Supabase "Session" pooler) olmalı, 6543
+            // ("Transaction" pooler) DEĞİL. Transaction modunda PgBouncer her sorguyu
+            // farklı bir arka uç bağlantısına yönlendirebiliyor; PDO'nun sunucu taraflı
+            // ("native") prepared statement'ları bu yüzden "prepared statement ... does
+            // not exist" hatasıyla rastgele patlıyordu (loglarda 5.600+ kayıt vardı).
+            //
+            // Çözüm olarak önce PDO::ATTR_EMULATE_PREPARES=>true denendi ama bu sefer
+            // PDO, "is_active"=1 gibi boolean karşılaştırmalarını ham SQL literaline
+            // gömdüğü için Postgres "operator does not exist: boolean = integer"
+            // hatası verdi (Referanslar/Projeler sayfaları 500 döndü). Doğru çözüm:
+            // EMULATE_PREPARES'i varsayılanında (false/native) bırakıp DB_PORT'u
+            // 5432'ye çekmek — session modunda her bağlantı isteğin ömrü boyunca aynı
+            // arka uca sabitlendiği için native prepared statement'lar sorunsuz çalışır.
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
