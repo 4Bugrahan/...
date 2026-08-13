@@ -21,6 +21,7 @@ return array (
   'footer.about_text' => 'Un partenaire de confiance fort de plus de 45 ans d\'expérience dans le secteur de la fourniture d\'équipements de cuisine industrielle, de la conception de projets et des services d\'installation clé en main.',
   'footer.rights' => 'Tous droits réservés.',
   'footer.tagline' => 'Équipements de cuisine industrielle · Sivas',
+  'home.h1' => 'Fabricant d\'Équipements de Cuisine Industrielle | 4B Grup',
   'home.feat_quality' => 'Fourniture d\'équipements certifiés CE',
   'home.feat_quality_d' => 'Tous les produits fournis sont certifiés CE et respectent les normes internationales de qualité et d\'hygiène. Point de vente et de service agréé pour plus de 500 marques internationales.',
   'home.feat_setup' => 'Gestion de projet « clé en main »',

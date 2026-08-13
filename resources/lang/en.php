@@ -25,6 +25,9 @@ return [
     'footer.rights'         => 'All rights reserved.',
     'footer.tagline'        => 'Industrial Kitchen Equipment · Sivas',
 
+    // Home — SEO (hidden H1)
+    'home.h1'               => 'Industrial Kitchen Equipment Manufacturer | 4B Grup',
+
     // Home — Why Us
     'home.feat_quality'     => 'CE-Certified Equipment Supply',
     'home.feat_quality_d'   => 'All products supplied are CE-certified and comply with international quality and hygiene standards. Authorized sales and service point for over 500 global brands.',

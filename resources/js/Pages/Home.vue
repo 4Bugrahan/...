@@ -191,6 +191,11 @@ function getInitials(name) {
 <template>
   <AppLayout>
 
+    <!-- SEO: sayfanın tek H1'i — görsel tasarımı etkilememesi için ekran okuyucu/arama
+         motorları için görünmez (sr-only), hero slider'ındaki başlıklar (h2) ise
+         görsel olarak kalıyor. -->
+    <h1 class="sr-only">{{ trans('home.h1') }}</h1>
+
     <!-- ═══════════════════════════════════════
          HERO — ACCORDION PANELS (mygastro style)
     ═══════════════════════════════════════ -->

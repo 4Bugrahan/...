@@ -104,7 +104,7 @@ class HomeController extends Controller
             'pageContent'      => $pageContent,
             'seo'              => $this->pageSeo(
                 'home',
-                '4B Grup | Endüstriyel Mutfak Ekipmanları Üreticisi - Sivas',
+                '4B Grup | Endüstriyel Mutfak Ekipmanları Üreticisi - Türkiye',
                 '4B Grup; pişirme grupları, bulaşıkhane ekipmanları ve soğuk muhafaza üniteleriyle otel, restoran ve kurumsal mutfaklara anahtar teslim çözümler sunar.',
                 'endüstriyel mutfak ekipmanları, paslanmaz çelik mutfak ekipmanları, otel mutfak ekipmanları, sivas mutfak ekipmanları, 4b grup'
             ),

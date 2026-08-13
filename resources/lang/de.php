@@ -21,6 +21,7 @@ return array (
   'footer.about_text' => 'Ein zuverlässiger Lösungspartner mit über 45 Jahren Branchenerfahrung in den Bereichen Lieferung von Großküchenausstattung, Projektplanung und schlüsselfertige Installation.',
   'footer.rights' => 'Alle Rechte vorbehalten.',
   'footer.tagline' => 'Gewerbliche Küchenausstattung · Sivas',
+  'home.h1' => 'Hersteller von Großküchengeräten | 4B Grup',
   'home.feat_quality' => 'Lieferung von CE-zertifizierten Geräten',
   'home.feat_quality_d' => 'Alle gelieferten Produkte sind CE-zertifiziert und entsprechen internationalen Qualitäts- und Hygienestandards. Autorisierte Vertriebs- und Servicestelle für über 500 weltweite Marken.',
   'home.feat_setup' => 'Schlüsselfertiges Projektmanagement',

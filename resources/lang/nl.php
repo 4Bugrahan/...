@@ -21,6 +21,7 @@ return array (
   'footer.about_text' => 'Een betrouwbare oplossingspartner met meer dan 45 jaar ervaring in de sector op het gebied van de levering van industriële keukenapparatuur, projectontwerp en kant-en-klare installatiediensten.',
   'footer.rights' => 'Alle rechten voorbehouden.',
   'footer.tagline' => 'Industriële keukenapparatuur · Sivas',
+  'home.h1' => 'Fabrikant van Industriële Keukenapparatuur | 4B Grup',
   'home.feat_quality' => 'Levering van CE-gecertificeerde apparatuur',
   'home.feat_quality_d' => 'Alle geleverde producten zijn CE-gecertificeerd en voldoen aan internationale kwaliteits- en hygiënenormen. Erkend verkoop- en servicepunt voor meer dan 500 wereldwijde merken.',
   'home.feat_setup' => 'Kant-en-klaar projectmanagement',

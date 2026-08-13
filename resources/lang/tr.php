@@ -25,6 +25,9 @@ return [
     'footer.rights'         => 'Tüm hakları saklıdır.',
     'footer.tagline'        => 'Endüstriyel Mutfak Ekipmanları · Sivas',
 
+    // Home — SEO (görünmez H1)
+    'home.h1'               => 'Endüstriyel Mutfak Ekipmanları Üreticisi | 4B Grup',
+
     // Home — Neden Biz
     'home.feat_quality'     => 'CE Belgeli Ekipmanlar',
     'home.feat_quality_d'   => 'Tüm ürünler CE belgeli olup uluslararası kalite standartlarına uygundur.',
