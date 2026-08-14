@@ -1,12 +1,24 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import { useLocale } from '@/composables/useLocale.js'
 
 const { trans } = useLocale()
 
-const laserMedia = ref({ image: null, video: '/videos/production/laser-cutting.mp4' })
-const bendMedia = ref({ image: null, video: '/videos/production/bending-machine.mp4' })
+const props = defineProps({
+    media: { type: Object, default: () => ({}) },
+})
+
+// Admin panelden (Üretim sayfası medyası) yüklenmişse onu kullan, yoksa
+// demo video'lara düş — video varsa görsele önceliklidir.
+const laserMedia = computed(() => ({
+    image: props.media.laser_image || null,
+    video: props.media.laser_video || '/videos/production/laser-cutting.mp4',
+}))
+const bendMedia = computed(() => ({
+    image: props.media.bend_image || null,
+    video: props.media.bend_video || '/videos/production/bending-machine.mp4',
+}))
 
 const productionCards = [
     { key: 1, titleKey: 'production.card1_title', descKey: 'production.card1_desc', image: '/images/production/card1-design.jpg', icon: 'M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125' },

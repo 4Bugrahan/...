@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductionController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TranslateController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/about', [AboutController::class, 'edit'])->name('about.edit');
     Route::post('/about', [AboutController::class, 'update'])->name('about.update');
+
+    Route::get('/production', [ProductionController::class, 'edit'])->name('production.edit');
+    Route::post('/production', [ProductionController::class, 'update'])->name('production.update');
 
     Route::post('/translate', [TranslateController::class, 'translate'])->name('translate');
     Route::post('/translate-batch', [TranslateController::class, 'translateBatch'])->name('translate.batch');

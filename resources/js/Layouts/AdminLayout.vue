@@ -35,6 +35,9 @@ function logout() {
         <Link href="/admin/about" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
           Hakkımızda
         </Link>
+        <Link href="/admin/production" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors">
+          Üretim
+        </Link>
         <Link href="/admin/contacts" class="px-3 py-2 rounded-lg text-sm font-semibold hover:bg-white/10 transition-colors flex items-center justify-between">
           <span>İletişim Mesajları</span>
           <span v-if="unreadContacts > 0" class="bg-[#0E7A8C] text-white text-[10px] font-bold rounded-full min-w-[18px] h-[18px] px-1 flex items-center justify-center">

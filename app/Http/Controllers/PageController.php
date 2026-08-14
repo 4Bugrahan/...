@@ -72,12 +72,26 @@ class PageController extends Controller
     {
         $seo = $this->pageSeo(
             'production',
-            'Üretim | 4B Grup Endüstriyel Ticaret',
+            'Üretim Sürecimiz: Lazer Kesim ve İmalat | 4B Grup',
             '4B Grup üretim sürecimiz: lazer kesim, tasarım, imalat ve büküm aşamalarıyla kaliteli ve dayanıklı endüstriyel mutfak ekipmanları üretiyoruz.',
             '4b grup üretim, lazer kesim, büküm, imalat süreci, endüstriyel mutfak ekipmanı üretimi'
         );
 
-        return Inertia::render('Pages/Production', compact('seo'));
+        // Admin panelden (Üretim medyası) yüklenmişse onu, yoksa varsayılan
+        // demo video/görselleri kullan — bkz. Admin\ProductionController.
+        $media = [];
+        foreach (['laser' => 'production_laser', 'bend' => 'production_bend'] as $slot => $prefix) {
+            $imagePath = Setting::getValue("{$prefix}_image", null, 'tr');
+            $videoPath = Setting::getValue("{$prefix}_video", null, 'tr');
+            $media["{$slot}_image"] = $imagePath
+                ? (str_starts_with($imagePath, 'http') ? $imagePath : Storage::disk('public')->url(ltrim($imagePath, '/')))
+                : null;
+            $media["{$slot}_video"] = $videoPath
+                ? (str_starts_with($videoPath, 'http') ? $videoPath : Storage::disk('public')->url(ltrim($videoPath, '/')))
+                : null;
+        }
+
+        return Inertia::render('Pages/Production', compact('seo', 'media'));
     }
 
     public function references(): Response
