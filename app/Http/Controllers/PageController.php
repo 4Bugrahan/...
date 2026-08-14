@@ -77,21 +77,25 @@ class PageController extends Controller
             '4b grup üretim, lazer kesim, büküm, imalat süreci, endüstriyel mutfak ekipmanı üretimi'
         );
 
-        // Admin panelden (Üretim medyası) yüklenmişse onu, yoksa varsayılan
-        // demo video/görselleri kullan — bkz. Admin\ProductionController.
+        // Admin panelden (Üretim sayfası medyası) yüklenmişse onu, yoksa
+        // varsayılan demo video/görselleri kullan — bkz. Admin\ProductionController.
         $media = [];
         foreach (['laser' => 'production_laser', 'bend' => 'production_bend'] as $slot => $prefix) {
-            $imagePath = Setting::getValue("{$prefix}_image", null, 'tr');
-            $videoPath = Setting::getValue("{$prefix}_video", null, 'tr');
-            $media["{$slot}_image"] = $imagePath
-                ? (str_starts_with($imagePath, 'http') ? $imagePath : Storage::disk('public')->url(ltrim($imagePath, '/')))
-                : null;
-            $media["{$slot}_video"] = $videoPath
-                ? (str_starts_with($videoPath, 'http') ? $videoPath : Storage::disk('public')->url(ltrim($videoPath, '/')))
-                : null;
+            $media["{$slot}_image"] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("{$prefix}_image", null, 'tr'));
+            $media["{$slot}_video"] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("{$prefix}_video", null, 'tr'));
         }
 
-        return Inertia::render('Pages/Production', compact('seo', 'media'));
+        $cards = [];
+        foreach (['card1', 'card2', 'card3'] as $slot) {
+            $cards[$slot] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("production_{$slot}_image", null, 'tr'));
+        }
+
+        $gallery = [];
+        foreach (range(1, 7) as $n) {
+            $gallery[] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("production_gallery{$n}_image", null, 'tr'));
+        }
+
+        return Inertia::render('Pages/Production', compact('seo', 'media', 'cards', 'gallery'));
     }
 
     public function references(): Response
