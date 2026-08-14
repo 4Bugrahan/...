@@ -15,11 +15,12 @@ use Inertia\Response;
 class ProductionController extends Controller
 {
     /**
-     * Görsel VEYA video kabul eden alanlar (Production.vue video'yu önceliklendirir).
+     * Sadece video kabul eden alanlar (lazer kesim / büküm — görsel seçeneği yok,
+     * video yoksa Production.vue placeholder ikon gösterir).
      */
-    private const MEDIA_SLOTS = [
-        'laser' => ['image' => 'production_laser_image', 'video' => 'production_laser_video'],
-        'bend'  => ['image' => 'production_bend_image',  'video' => 'production_bend_video'],
+    private const VIDEO_SLOTS = [
+        'laser' => 'production_laser_video',
+        'bend'  => 'production_bend_video',
     ];
 
     /**
@@ -43,10 +44,8 @@ class ProductionController extends Controller
     {
         $values = [];
 
-        foreach (self::MEDIA_SLOTS as $slot => $keys) {
-            foreach ($keys as $type => $settingKey) {
-                $values["{$slot}_{$type}_url"] = self::resolveUrl(Setting::getValue($settingKey, null, 'tr'));
-            }
+        foreach (self::VIDEO_SLOTS as $slot => $settingKey) {
+            $values["{$slot}_video_url"] = self::resolveUrl(Setting::getValue($settingKey, null, 'tr'));
         }
 
         foreach (self::IMAGE_SLOTS as $slot => $settingKey) {
@@ -61,10 +60,8 @@ class ProductionController extends Controller
     public function update(Request $request): RedirectResponse
     {
         $rules = [];
-        foreach (array_keys(self::MEDIA_SLOTS) as $slot) {
-            $rules["{$slot}_image"] = ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'];
+        foreach (array_keys(self::VIDEO_SLOTS) as $slot) {
             $rules["{$slot}_video"] = ['nullable', 'file', 'mimes:mp4,webm,mov', 'max:51200'];
-            $rules["{$slot}_remove_image"] = ['nullable', 'boolean'];
             $rules["{$slot}_remove_video"] = ['nullable', 'boolean'];
         }
         foreach (array_keys(self::IMAGE_SLOTS) as $slot) {
@@ -74,9 +71,8 @@ class ProductionController extends Controller
 
         $request->validate($rules);
 
-        foreach (self::MEDIA_SLOTS as $slot => $keys) {
-            $this->saveImage($request, $slot, $keys['image']);
-            $this->saveVideo($request, $slot, $keys['video']);
+        foreach (self::VIDEO_SLOTS as $slot => $settingKey) {
+            $this->saveVideo($request, $slot, $settingKey);
         }
 
         foreach (self::IMAGE_SLOTS as $slot => $settingKey) {

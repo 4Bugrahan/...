@@ -7,14 +7,12 @@ const props = defineProps({
   values: Object,
 })
 
-const mediaSlots = ['laser', 'bend']
+const videoSlots = ['laser', 'bend']
 const imageSlots = ['card1', 'card2', 'card3', 'gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5', 'gallery6', 'gallery7']
 
 const formData = {}
-mediaSlots.forEach(slot => {
-  formData[`${slot}_image`] = null
+videoSlots.forEach(slot => {
   formData[`${slot}_video`] = null
-  formData[`${slot}_remove_image`] = false
   formData[`${slot}_remove_video`] = false
 })
 imageSlots.forEach(slot => {
@@ -26,13 +24,13 @@ const form = useForm(formData)
 
 const previews = reactive({})
 const current = reactive({})
-;[...mediaSlots, ...imageSlots].forEach(slot => {
+videoSlots.forEach(slot => {
+  previews[`${slot}_video`] = null
+  current[`${slot}_video`] = props.values[`${slot}_video_url`] ?? null
+})
+imageSlots.forEach(slot => {
   previews[`${slot}_image`] = null
   current[`${slot}_image`] = props.values[`${slot}_image_url`] ?? null
-  if (mediaSlots.includes(slot)) {
-    previews[`${slot}_video`] = null
-    current[`${slot}_video`] = props.values[`${slot}_video_url`] ?? null
-  }
 })
 
 function onFileSelected(slot, type, e) {
@@ -68,10 +66,8 @@ function submit() {
     <form @submit.prevent="submit" class="space-y-6 max-w-3xl">
       <!-- Lazer Kesim -->
       <div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
-        <h2 class="text-base font-bold text-[#1B3163]">Lazer Kesim Bölümü</h2>
-
+        <h2 class="text-base font-bold text-[#1B3163]">Lazer Kesim Bölümü — Video</h2>
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Video (varsa görselden önce gösterilir)</label>
           <div class="flex items-center gap-4 mb-2">
             <video v-if="previews.laser_video || current.laser_video" :src="previews.laser_video || current.laser_video"
               class="w-48 h-28 object-cover bg-black rounded-lg border border-gray-200" muted autoplay loop playsinline />
@@ -82,27 +78,12 @@ function submit() {
           <input type="file" accept="video/mp4,video/webm,video/quicktime" @change="onFileSelected('laser', 'video', $event)" class="text-sm" />
           <p v-if="form.errors.laser_video" class="text-red-600 text-xs mt-1">{{ form.errors.laser_video }}</p>
         </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Görsel (video yoksa gösterilir)</label>
-          <div class="flex items-center gap-4 mb-2">
-            <img v-if="previews.laser_image || current.laser_image" :src="previews.laser_image || current.laser_image"
-              class="w-48 h-28 object-cover bg-gray-50 rounded-lg border border-gray-200" />
-            <div v-else class="w-48 h-28 bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-400">Görsel yok</div>
-            <button v-if="previews.laser_image || current.laser_image" type="button" @click="removeMedia('laser', 'image')"
-              class="text-red-500 text-xs font-semibold hover:underline">Görseli Kaldır</button>
-          </div>
-          <input type="file" accept="image/*" @change="onFileSelected('laser', 'image', $event)" class="text-sm" />
-          <p v-if="form.errors.laser_image" class="text-red-600 text-xs mt-1">{{ form.errors.laser_image }}</p>
-        </div>
       </div>
 
       <!-- Büküm -->
       <div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
-        <h2 class="text-base font-bold text-[#1B3163]">Büküm Bölümü</h2>
-
+        <h2 class="text-base font-bold text-[#1B3163]">Büküm Bölümü — Video</h2>
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Video (varsa görselden önce gösterilir)</label>
           <div class="flex items-center gap-4 mb-2">
             <video v-if="previews.bend_video || current.bend_video" :src="previews.bend_video || current.bend_video"
               class="w-48 h-28 object-cover bg-black rounded-lg border border-gray-200" muted autoplay loop playsinline />
@@ -112,19 +93,6 @@ function submit() {
           </div>
           <input type="file" accept="video/mp4,video/webm,video/quicktime" @change="onFileSelected('bend', 'video', $event)" class="text-sm" />
           <p v-if="form.errors.bend_video" class="text-red-600 text-xs mt-1">{{ form.errors.bend_video }}</p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">Görsel (video yoksa gösterilir)</label>
-          <div class="flex items-center gap-4 mb-2">
-            <img v-if="previews.bend_image || current.bend_image" :src="previews.bend_image || current.bend_image"
-              class="w-48 h-28 object-cover bg-gray-50 rounded-lg border border-gray-200" />
-            <div v-else class="w-48 h-28 bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-400">Görsel yok</div>
-            <button v-if="previews.bend_image || current.bend_image" type="button" @click="removeMedia('bend', 'image')"
-              class="text-red-500 text-xs font-semibold hover:underline">Görseli Kaldır</button>
-          </div>
-          <input type="file" accept="image/*" @change="onFileSelected('bend', 'image', $event)" class="text-sm" />
-          <p v-if="form.errors.bend_image" class="text-red-600 text-xs mt-1">{{ form.errors.bend_image }}</p>
         </div>
       </div>
 

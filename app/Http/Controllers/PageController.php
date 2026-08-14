@@ -78,11 +78,10 @@ class PageController extends Controller
         );
 
         // Admin panelden (Üretim sayfası medyası) yüklenmişse onu, yoksa
-        // varsayılan demo video/görselleri kullan — bkz. Admin\ProductionController.
+        // varsayılan demo videoları kullan — bkz. Admin\ProductionController.
         $media = [];
-        foreach (['laser' => 'production_laser', 'bend' => 'production_bend'] as $slot => $prefix) {
-            $media["{$slot}_image"] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("{$prefix}_image", null, 'tr'));
-            $media["{$slot}_video"] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue("{$prefix}_video", null, 'tr'));
+        foreach (['laser' => 'production_laser_video', 'bend' => 'production_bend_video'] as $slot => $settingKey) {
+            $media["{$slot}_video"] = \App\Http\Controllers\Admin\ProductionController::resolveUrl(Setting::getValue($settingKey, null, 'tr'));
         }
 
         $cards = [];

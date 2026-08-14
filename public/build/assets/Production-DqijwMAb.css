@@ -1,0 +1,1 @@
+.marquee-container[data-v-54c9bcca]{overflow:hidden;position:relative}.marquee-track[data-v-54c9bcca]{display:flex;width:max-content;animation:marquee-left-54c9bcca 30s linear infinite}.marquee-container:hover .marquee-track[data-v-54c9bcca]{animation-play-state:paused}@keyframes marquee-left-54c9bcca{0%{transform:translate(0)}to{transform:translate(-50%)}}

@@ -11,14 +11,11 @@ const props = defineProps({
     gallery: { type: Array, default: () => [] },
 })
 
-// Admin panelden (Üretim sayfası medyası) yüklenmişse onu kullan, yoksa
-// demo video'lara düş — video varsa görsele önceliklidir.
+// Admin panelden (Üretim sayfası medyası) yüklenmişse onu kullan, yoksa demo video'ya düş.
 const laserMedia = computed(() => ({
-    image: props.media.laser_image || null,
     video: props.media.laser_video || '/videos/production/laser-cutting.mp4',
 }))
 const bendMedia = computed(() => ({
-    image: props.media.bend_image || null,
     video: props.media.bend_video || '/videos/production/bending-machine.mp4',
 }))
 
@@ -71,7 +68,6 @@ const gallerySlides = computed(() =>
                     <video v-if="laserMedia.video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
                         <source :src="laserMedia.video" type="video/mp4">
                     </video>
-                    <img v-else-if="laserMedia.image" :src="laserMedia.image" :alt="trans('production.laser_title')" class="absolute inset-0 w-full h-full object-cover"/>
                     <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1B3163]/5 to-[#0E7A8C]/10">
                         <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
                             <div class="w-20 h-20 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm">
@@ -155,7 +151,6 @@ const gallerySlides = computed(() =>
                     <video v-if="bendMedia.video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
                         <source :src="bendMedia.video" type="video/mp4">
                     </video>
-                    <img v-else-if="bendMedia.image" :src="bendMedia.image" :alt="trans('production.bend_title')" class="absolute inset-0 w-full h-full object-cover"/>
                     <div v-else class="absolute inset-0 bg-gradient-to-br from-[#1B3163]/5 to-[#0E7A8C]/10">
                         <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
                             <div class="w-20 h-20 rounded-2xl bg-white border border-gray-200 flex items-center justify-center shadow-sm">
