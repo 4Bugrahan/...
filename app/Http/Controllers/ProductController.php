@@ -211,7 +211,9 @@ class ProductController extends Controller
             ->values()
             ->map(fn ($product) => $this->cardPayload($product));
 
-        return new LengthAwarePaginator($products, Product::active()->count(), 24, 1);
+        return new LengthAwarePaginator($products, Product::active()->count(), 24, 1, [
+            'path' => LengthAwarePaginator::resolveCurrentPath(),
+        ]);
     }
 
     /**
